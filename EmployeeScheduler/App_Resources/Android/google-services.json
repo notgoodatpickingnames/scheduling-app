@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "461804962181",
+    "firebase_url": "https://scheduler-2102b.firebaseio.com",
+    "project_id": "scheduler-2102b",
+    "storage_bucket": "scheduler-2102b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:461804962181:android:be33de23e06b5e3ce2c4ec",
+        "android_client_info": {
+          "package_name": "com.jacob.brennecke.EmployeeScheduler"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "461804962181-ueop0otj545a7lqidi7j16a4dmjhagu3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTTaWbftUyGqjZ1mGsAeDdPXFJ2HhVcyg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "461804962181-ueop0otj545a7lqidi7j16a4dmjhagu3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
