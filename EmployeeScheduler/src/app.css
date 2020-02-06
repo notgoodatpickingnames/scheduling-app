@@ -33,7 +33,8 @@ The following CSS rule changes the font size of all Buttons that have the
     --secondary-dark-color: #ca9b52;
     --primary-text-color: #000000;
     --secondary-text-color: #000000;
-    --icon-color: #ffffff;
+    --icon-color: #000000;
+    --main-bg-color: #e0e0e0;
 }
 
 /*

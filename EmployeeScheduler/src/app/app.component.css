@@ -28,6 +28,7 @@
 
 .sidedrawer-header {
     background-color: var(--primary-dark-color);
+    height: 80;
 }
 
 
