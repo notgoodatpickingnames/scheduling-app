@@ -1,17 +1,11 @@
 .left-item {
     text-align: left;
-    margin-left: -40px;
-    /* text-align: center; */
 }
 
 .center-item {
     text-align: center;
-    /* margin-left: -40px; */
-    /* text-align: center; */
 }
 
 .right-item {
     text-align: right;
-    /* margin-left: -40px; */
-    /* text-align: center; */
 }
