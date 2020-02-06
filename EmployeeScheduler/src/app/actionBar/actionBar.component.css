@@ -1,18 +1,26 @@
 .left-item {
     text-align: center;
-    background-color: transparent;
-    border-color: transparent;
-    box-shadow: transparent;
-    border: none;
+    color: var(--primary-text-color);
+    font-size: 20px;
 }
 
 .center-item {
     text-align: center;
+    color: var(--primary-text-color);
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .right-item {
     text-align: center;
-    background-color: transparent;
-    border-color: transparent;
-    box-shadow: unset;
+    color: var(--primary-text-color);
+    font-size: 20px;
+}
+
+.action-bar {
+    background-color: var(--primary-dark-color);
+}
+
+.button {
+    background-color: var(--primary-dark-color);
 }

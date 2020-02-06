@@ -25,15 +25,20 @@ The following CSS rule changes the font size of all Buttons that have the
 */
 
 .ns-root {
-    --primary-color: #aa00ff;
-    --primary-light-color: #e254ff;
-    --primary-dark-color: #7200ca;
-    --secondary-color: #76ff03;
-    --secondary-light-color: #b0ff57;
-    --secondary-dark-color: #32cb00;
-    --primary-text-color: #ffffff;
+    --primary-color: #8c9eff;
+    --primary-light-color: #c0cfff;
+    --primary-dark-color: #5870cb;
+    --secondary-color: #ffcc80;
+    --secondary-light-color: #ffffb0;
+    --secondary-dark-color: #ca9b52;
+    --primary-text-color: #000000;
     --secondary-text-color: #000000;
+    --icon-color: #ffffff;
 }
+
+/*
+    End of the theme colors
+*/
 
 .far {
     font-family: Font Awesome 5 Free, fa-regular-400;

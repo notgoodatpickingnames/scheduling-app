@@ -6,12 +6,13 @@
 .menu-icon {
     width: 128px;
     margin-right: 24px;
+    margin-left: 24px;
     font-size: 24px;
-    color: blue;
+    color: var(--icon-color);
 }
 
 .sidedrawer-content {
-    background-color: whitesmoke;
+    background-color: var(--primary-light-color);
 }
 
 .account-icon {
@@ -26,7 +27,7 @@
 }
 
 .sidedrawer-header {
-    background-color: var(--primary-color);
+    background-color: var(--primary-dark-color);
 }
 
 
