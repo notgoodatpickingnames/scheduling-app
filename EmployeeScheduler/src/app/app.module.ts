@@ -13,6 +13,7 @@ import { NativeScriptUISideDrawerModule } from "nativescript-ui-sidedrawer/angul
 import { YourScheduleComponent } from './yourSchedule/yourSchedule.component';
 import { SettingsComponent } from "./settings/settings.component";
 import { ActionBarComponent } from "./actionBar/actionBar.component";
+import { CalanderComponent } from './calander/calander.component';
 
 @NgModule({
    bootstrap: [
@@ -28,7 +29,8 @@ import { ActionBarComponent } from "./actionBar/actionBar.component";
       AppComponent,
       YourScheduleComponent,
       SettingsComponent,
-      ActionBarComponent
+      ActionBarComponent,
+      CalanderComponent
    ],
    providers: [
       AccountService
