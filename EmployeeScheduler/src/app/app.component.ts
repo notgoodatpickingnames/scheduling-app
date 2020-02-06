@@ -20,7 +20,7 @@ export class AppComponent {
 
     private initialiseFirebaseAndAuthenticate() {
         firebase.init()
-            .then(() => console.log('we in bois'))
+            .then(() => console.log('Firebase initialised.'))
             .catch(error => console.log(error));
     }
 
@@ -28,6 +28,8 @@ export class AppComponent {
         this._sideDrawerTransition = new SlideInOnTopTransition();
         this.router.navigate(['yourSchedule'], {relativeTo: this.route});
     }
+
+    
 
 
 }

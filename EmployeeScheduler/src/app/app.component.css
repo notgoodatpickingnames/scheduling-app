@@ -14,17 +14,19 @@
     background-color: whitesmoke;
 }
 
-.sidedrawer-list-item {
-    background-color: green;
-}
-
-.sidedrawer-list-item :focus {
-    background-color: darkgreen;
-}
-
 .account-icon {
-    height: 160px;
-    font-size: 48px;
     text-align: center;
-    padding-top: 24px;
+    padding-top: 34px;
+    height: 70;
+    width: 60;
+    font-size: 40;
+    padding: 0;
+    margin-bottom: 5;
+    margin-top: 25;
 }
+
+.sidedrawer-header {
+    background-color: var(--primary-color);
+}
+
+

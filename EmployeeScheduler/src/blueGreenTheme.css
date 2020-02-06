@@ -1,4 +1,4 @@
-// <resources>
+/* // <resources>
 //   <color name="primaryColor">#aa00ff</color>
 //   <color name="primaryLightColor">#e254ff</color>
 //   <color name="primaryDarkColor">#7200ca</color>
@@ -7,6 +7,9 @@
 //   <color name="secondaryDarkColor">#32cb00</color>
 //   <color name="primaryTextColor">#ffffff</color>
 //   <color name="secondaryTextColor">#000000</color>
-// </resources>
+// </resources> */
 
-// $primary-color: 
+
+.primary {
+    --primary-color: #aa00ff;
+}

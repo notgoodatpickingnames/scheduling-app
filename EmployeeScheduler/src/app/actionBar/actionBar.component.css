@@ -1,5 +1,9 @@
 .left-item {
-    text-align: left;
+    text-align: center;
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: transparent;
+    border: none;
 }
 
 .center-item {
@@ -7,6 +11,8 @@
 }
 
 .right-item {
-    text-align: right;
-    /*test*/
+    text-align: center;
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: unset;
 }
