@@ -1,6 +1,7 @@
 import * as firebase from 'nativescript-plugin-firebase';
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-ui-sidedrawer";
+import { DrawerTransitionBase, SlideInOnTopTransition, RadSideDrawer } from "nativescript-ui-sidedrawer";
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: "ns-app",
@@ -10,7 +11,10 @@ import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-ui-si
 export class AppComponent {
     private _sideDrawerTransition: DrawerTransitionBase;
 
-    constructor() {
+    constructor(
+        private router: Router,
+        private route: ActivatedRoute
+    ) {
         this.initialiseFirebaseAndAuthenticate();
     }
 
@@ -22,9 +26,8 @@ export class AppComponent {
 
     ngOnInit(): void {
         this._sideDrawerTransition = new SlideInOnTopTransition();
+        this.router.navigate(['yourSchedule'], {relativeTo: this.route});
     }
 
-    get sideDrawerTransition(): DrawerTransitionBase {
-        return this._sideDrawerTransition;
-    }
+
 }

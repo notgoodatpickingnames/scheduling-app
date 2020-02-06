@@ -1,0 +1,30 @@
+.menu-label {
+    font-size: 24px;
+    color: black;
+}
+
+.menu-icon {
+    width: 128px;
+    margin-right: 24px;
+    font-size: 24px;
+    color: blue;
+}
+
+.sidedrawer-content {
+    background-color: whitesmoke;
+}
+
+.sidedrawer-list-item {
+    background-color: green;
+}
+
+.sidedrawer-list-item :focus {
+    background-color: darkgreen;
+}
+
+.account-icon {
+    height: 160px;
+    font-size: 48px;
+    text-align: center;
+    padding-top: 24px;
+}

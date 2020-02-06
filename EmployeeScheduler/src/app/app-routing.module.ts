@@ -1,12 +1,14 @@
 import { NgModule } from "@angular/core";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
 import { Routes } from "@angular/router";
-import { HomeComponent } from "./home/home.component";
+import { YourScheduleComponent } from "./yourSchedule/yourSchedule.component";
+import { SettingsComponent } from "./settings/settings.component";
 
 
 const routes: Routes = [
-    { path: "", redirectTo: "/home", pathMatch: "full" },
-    { path: "home", component: HomeComponent },
+    { path: "", redirectTo: "/yourSchedule", pathMatch: "full" },
+    { path: 'yourSchedule', component: YourScheduleComponent},
+    { path: 'settings', component: SettingsComponent }
 ];
 
 @NgModule({

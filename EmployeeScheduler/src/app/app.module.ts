@@ -6,12 +6,13 @@ import { AppComponent } from "./app.component";
 // Uncomment and add to NgModule imports if you need to use two-way binding
 import { NativeScriptFormsModule } from "nativescript-angular/forms";
 import { AccountService } from "./services/account.service";
-import { ActionBarService } from "./services/actionBar.service";
 
 // Uncomment and add to NgModule imports if you need to use the HttpClient wrapper
 // import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
-import { HomeComponent } from './home/home.component';
 import { NativeScriptUISideDrawerModule } from "nativescript-ui-sidedrawer/angular";
+import { YourScheduleComponent } from './yourSchedule/yourSchedule.component';
+import { SettingsComponent } from "./settings/settings.component";
+import { ActionBarComponent } from "./actionBar/actionBar.component";
 
 @NgModule({
    bootstrap: [
@@ -25,11 +26,12 @@ import { NativeScriptUISideDrawerModule } from "nativescript-ui-sidedrawer/angul
    ],
    declarations: [
       AppComponent,
-      HomeComponent
+      YourScheduleComponent,
+      SettingsComponent,
+      ActionBarComponent
    ],
    providers: [
-      AccountService,
-      ActionBarService
+      AccountService
    ],
    schemas: [
       NO_ERRORS_SCHEMA

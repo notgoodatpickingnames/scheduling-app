@@ -34,7 +34,7 @@ The following CSS rule changes the font size of all Buttons that have the
     font-weight: 900;
 }
 
-Button.-primary {
+/* Button.-primary {
     font-size: 18;
 }
 
@@ -99,4 +99,5 @@ Button.-primary {
 }
 .sidedrawer .sidedrawer-content .sidedrawer-list-item.selected Label {
     color:#3A53FF;
-}
+} */
+
