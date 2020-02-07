@@ -14,6 +14,7 @@ import { YourScheduleComponent } from './yourSchedule/yourSchedule.component';
 import { SettingsComponent } from "./settings/settings.component";
 import { ActionBarComponent } from "./actionBar/actionBar.component";
 import { CalanderComponent } from './calander/calander.component';
+import { CalanderComponentModule } from "./calander/calanderComponent.module";
 
 @NgModule({
    bootstrap: [
@@ -23,14 +24,14 @@ import { CalanderComponent } from './calander/calander.component';
       NativeScriptModule,
       AppRoutingModule,
       NativeScriptFormsModule,
-      NativeScriptUISideDrawerModule
+      NativeScriptUISideDrawerModule,
+      CalanderComponentModule
    ],
    declarations: [
       AppComponent,
       YourScheduleComponent,
       SettingsComponent,
-      ActionBarComponent,
-      CalanderComponent
+      ActionBarComponent
    ],
    providers: [
       AccountService
