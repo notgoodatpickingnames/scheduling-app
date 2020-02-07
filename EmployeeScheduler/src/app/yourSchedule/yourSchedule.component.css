@@ -1,5 +1,4 @@
 .body {
     background-color: var(--main-bg-color);
     color: var(--primary-text-color);
-    padding: 24px;
 }

@@ -1,5 +1,6 @@
-import { Component, OnInit, Output, Input } from '@angular/core';
+import { Component, OnInit, Output, Input, ViewChild, EventEmitter } from '@angular/core';
 import { CalanderContext } from './calanderContext';
+import { MonthComponent } from './month/month.component';
 
 @Component({
     selector: 'ns-calander',
@@ -7,14 +8,27 @@ import { CalanderContext } from './calanderContext';
     styleUrls: ['./calander.component.css']
 })
 export class CalanderComponent implements OnInit {
-    private _defaultContext = CalanderContext.Year;
+    @ViewChild(MonthComponent, {read: MonthComponent, static: false}) public monthComponent: MonthComponent;
 
-    @Input() public context: CalanderContext = this._defaultContext;
-    
+    @Input() public context: CalanderContext = CalanderContext.Month;
+    @Input() public set date(date: Date) {
+        if (date!== this._date) {
+            this._date = date;
+            this.dateChange.emit(this._date);
+        }
+    }
+    @Output() public dateChange = new EventEmitter<Date>();
+
+    public get date(): Date {
+        return this._date;
+    }
     // Inputs a date to go to.
     // outputs data about what date we are on and what context we are in.
 
-    constructor() { }
+    private _date: Date = new Date();
+    constructor() { 
+        console.log('the calander component has been constructed');
+    }
 
     ngOnInit() {
     }

@@ -1,5 +1,5 @@
 
 <ns-action-bar [title]="'Your Schedule'"></ns-action-bar>
-<GridLayout columns="auto, *" rows="auto, *" class="body">
-  <ns-calander></ns-calander>
-</GridLayout>
+<StackLayout class="body">
+  <ns-calander [date]="startDate"></ns-calander>
+</StackLayout>

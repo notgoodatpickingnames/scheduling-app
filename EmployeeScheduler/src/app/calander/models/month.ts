@@ -1,30 +1,34 @@
 import { Week } from "./week";
+import { DatePipe } from "@angular/common";
 
 export class Month {
     public weeks: Week[] = [];
     public month: number;
     public year: number;
+    public name: string;
+
+    private datePipe = new DatePipe('en');
 
     constructor(year: number, month: number) {
         this.month = month;
         this.year = year;
-        const firstOfTheMonth = new Date(this.year, this.month, 1);
-        console.log('yeet', firstOfTheMonth.toUTCString());
-        const firstSunday = new Date(this.year, this.month, firstOfTheMonth.getDate() - firstOfTheMonth.getDay());
-        console.log('yeet 2', firstSunday.getDay());
-        for (let i = 0; i < this.numberOfDays; i+=7) {
-            this.weeks.push(new Week(new Date(firstSunday.getFullYear(), firstSunday.getMonth(), firstSunday.getDate() + i)));
-        }
+        this.name = this.datePipe.transform(new Date(year, month, 1), 'MMMM');
 
-        this.weeks.forEach(w => {
-            w.days.forEach(d => {
-                console.log(d.toUTCString());
-            });
-        });
+        this.buildWeeks();
     }
 
     public get numberOfDays() {
         return new Date(this.year, this.month + 1, 0).getDate();
+    }
+
+    private buildWeeks() {
+        console.log('building weeks for the month of', this.month);
+        const firstOfTheMonth = new Date(this.year, this.month, 1);
+        const firstSunday = new Date(this.year, this.month, firstOfTheMonth.getDate() - firstOfTheMonth.getDay());
+
+        for (let i = 0; i < this.numberOfDays; i += 7) {
+            this.weeks.push(new Week(new Date(firstSunday.getFullYear(), firstSunday.getMonth(), firstSunday.getDate() + i)));
+        }
     }
 
 }

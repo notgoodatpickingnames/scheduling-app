@@ -1,19 +1,21 @@
 import { Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday } from "../days";
+import { Day } from "./day";
 
 export class Week {
     public daysOfTheWeek: string[] = [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday];
-    public days: Date[] = [];
+    public days: Day[] = [];
 
     constructor(startDate: Date) { // The start date should be a sunday no matter what.
+        console.log('new week is being made');
         if (startDate.getDay() !== 0) {
             console.log('start date of week is not sunday.. shit');
         }
 
         for (let i = 0; i < 7; i++) {
-            this.days.push(new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + i));
+            const date = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + i);
+            const day = new Day(date);
+            this.days.push(day);
         }
-
-        this.days.forEach( d => console.log('day', d.toUTCString()));
     }
 
     public buildFromAnyDayInWeek(startDate: Date) {
@@ -21,17 +23,17 @@ export class Week {
         for (let i = 0; i < startDate.getDay(); i++) {
             const dateToAdd = new Date(startDate.toString());
             dateToAdd.setDate(dateToAdd.getDate() - (startDate.getDay() + i));
-            this.days.push(dateToAdd);
+            //this.days.push(dateToAdd);
         }
 
         // Add start date
-        this.days.push(startDate);
+        //this.days.push(startDate);
 
         // Add remaining days
         for (let i = startDate.getDay(); i < 6; i++) {
             let dateToAdd = new Date(startDate.toString());
             dateToAdd.setDate(dateToAdd.getDate() + (i - startDate.getDay()));
-            this.days.push(dateToAdd);
+            //this.days.push(dateToAdd);
         }
     }
 
