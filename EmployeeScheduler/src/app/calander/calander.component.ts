@@ -26,8 +26,8 @@ export class CalanderComponent implements OnInit {
     // outputs data about what date we are on and what context we are in.
 
     private _date: Date = new Date();
-    constructor() { 
-        console.log('the calander component has been constructed');
+    
+    constructor() {
     }
 
     ngOnInit() {

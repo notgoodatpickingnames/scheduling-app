@@ -6,6 +6,7 @@ import { YearComponent } from "./year/year.component";
 import { DayComponent } from "./day/day.component";
 import { WeekComponent } from "./week/week.component";
 import { MonthComponent } from "./month/month.component";
+import { MonthDaySelectorComponent } from "./month/monthDaySelector/monthDaySelector.component";
 
 @NgModule({
     imports: [
@@ -16,7 +17,8 @@ import { MonthComponent } from "./month/month.component";
        CalanderComponent,
        MonthComponent,
        DayComponent,
-       WeekComponent
+       WeekComponent,
+       MonthDaySelectorComponent
     ],
     exports: [
         CalanderComponent,

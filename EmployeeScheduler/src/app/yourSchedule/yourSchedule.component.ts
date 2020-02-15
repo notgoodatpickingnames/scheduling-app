@@ -14,8 +14,5 @@ export class YourScheduleComponent implements OnInit {
     constructor() {}
 
     ngOnInit() {
-        setTimeout(() => {
-            console.log(this.calander.monthComponent.month.weeks.length);
-        }, 2000);
     }
 }

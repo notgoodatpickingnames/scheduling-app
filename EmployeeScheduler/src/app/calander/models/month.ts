@@ -22,7 +22,6 @@ export class Month {
     }
 
     private buildWeeks() {
-        console.log('building weeks for the month of', this.month);
         const firstOfTheMonth = new Date(this.year, this.month, 1);
         const firstSunday = new Date(this.year, this.month, firstOfTheMonth.getDate() - firstOfTheMonth.getDay());
 

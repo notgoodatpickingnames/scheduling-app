@@ -6,11 +6,6 @@ export class Week {
     public days: Day[] = [];
 
     constructor(startDate: Date) { // The start date should be a sunday no matter what.
-        console.log('new week is being made');
-        if (startDate.getDay() !== 0) {
-            console.log('start date of week is not sunday.. shit');
-        }
-
         for (let i = 0; i < 7; i++) {
             const date = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + i);
             const day = new Day(date);
