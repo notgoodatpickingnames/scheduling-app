@@ -1,0 +1,27 @@
+.month {
+    padding: 24px;
+}
+
+.day {
+    padding: 4px;
+}
+
+.day {
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: black;
+    width: 100%;
+    height: 200px;
+}
+
+.warning {
+    background-color: yellow;
+}
+
+.error {
+    background-color: red;
+}
+
+.not-in-month {
+    background-color: darkgray;
+}

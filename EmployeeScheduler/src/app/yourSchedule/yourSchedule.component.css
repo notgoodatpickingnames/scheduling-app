@@ -1,3 +1,4 @@
-* {
-    color: white;
+.body {
+    background-color: var(--main-bg-color);
+    color: var(--primary-text-color);
 }

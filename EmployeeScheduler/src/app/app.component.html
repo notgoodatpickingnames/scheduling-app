@@ -1,13 +1,11 @@
 <nsDrawer:RadSideDrawer [drawerTransition]="sideDrawerTransition">
 	<GridLayout tkDrawerContent rows="auto, *" class="sidedrawer sidedrawer-left">
-		<StackLayout row="0" class="sidedrawer-header">
-			<!-- <Label class="fas fa-user-circle" text="&#xf2bd"></Label> -->
-			
-			<Label col="0" text="&#xf2bd;" class="fas fa-user-circle account-icon"></Label>
-		</StackLayout>
-
 		<ScrollView row="1">
 			<StackLayout class="sidedrawer-content">
+				<StackLayout row="0" class="sidedrawer-header">
+					<Label col="0" text="" class="fas fa-user-circle"></Label>
+				</StackLayout>
+
 				<GridLayout columns="auto, *" class="sidedrawer-list-item">
 					<Label col="0" text="&#xf015;" class="fas menu-icon"></Label>
 					<Label col="1" text="Your Schedule" class="p-r-10 menu-label"></Label>

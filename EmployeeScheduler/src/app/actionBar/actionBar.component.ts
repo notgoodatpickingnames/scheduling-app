@@ -18,6 +18,6 @@ export class ActionBarComponent implements OnInit {
   onDrawerButtonTap(): void {
     const sideDrawer = <RadSideDrawer>app.getRootView();
     sideDrawer.showDrawer();
-}
+  }
 
 }

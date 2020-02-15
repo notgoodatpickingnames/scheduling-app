@@ -1,12 +1,27 @@
 .left-item {
-    text-align: left;
+    text-align: center;
+    color: var(--primary-text-color);
+    font-size: 20px;
 }
 
 .center-item {
     text-align: center;
+    color: var(--primary-text-color);
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .right-item {
-    text-align: right;
-    /*test*/
+    text-align: center;
+    color: var(--primary-text-color);
+    font-size: 20px;
+    width: 40;
+}
+
+.action-bar {
+    background-color: var(--primary-dark-color);
+}
+
+.button {
+    background-color: var(--primary-dark-color);
 }
