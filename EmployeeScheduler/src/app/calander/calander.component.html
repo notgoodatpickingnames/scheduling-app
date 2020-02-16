@@ -1,4 +1,21 @@
 
-<ns-month *ngIf="isMonthContext" [startMonth]="date"></ns-month>
+<Tabs selectedIndex="0" tabsPosition="bottom">
+    <TabStrip class="tab-strip">
+        <TabStripItem>
+            <Label text="Month"></Label>
+        </TabStripItem>
+        <TabStripItem>
+            <Label text="Week"></Label>
+        </TabStripItem>
+    </TabStrip>
+
+    <TabContentItem>
+        <ns-month [startMonth]="date"></ns-month>
+    </TabContentItem>
+    <TabContentItem>
+        <Label text="Week"></Label>
+    </TabContentItem>
+</Tabs>
+
 <ns-week *ngIf="false"></ns-week>
 <ns-day *ngIf="false"></ns-day>

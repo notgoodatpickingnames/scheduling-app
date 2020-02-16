@@ -9,7 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
     styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-    private _sideDrawerTransition: DrawerTransitionBase;
+    public sideDrawerTransition: DrawerTransitionBase;
 
     constructor(
         private router: Router,
@@ -25,11 +25,15 @@ export class AppComponent {
     }
 
     ngOnInit(): void {
-        this._sideDrawerTransition = new SlideInOnTopTransition();
-        this.router.navigate(['yourSchedule'], {relativeTo: this.route});
+        //this.sideDrawerTransition = new SlideInOnTopTransition();
+        // this.router.navigate(['yourSchedule'], {relativeTo: this.route});
     }
 
-    
+    public navigateTo(route: string) {
+        this.router.navigate([route], {relativeTo: this.route});
+    }
+
+
 
 
 }

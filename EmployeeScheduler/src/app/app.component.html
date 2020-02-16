@@ -6,9 +6,14 @@
 					<Label col="0" text="" class="fas fa-user-circle"></Label>
 				</StackLayout>
 
-				<GridLayout columns="auto, *" class="sidedrawer-list-item">
+				<GridLayout columns="auto, *" class="sidedrawer-list-item" (tap)="navigateTo('yourSchedule')">
 					<Label col="0" text="&#xf015;" class="fas menu-icon"></Label>
 					<Label col="1" text="Your Schedule" class="p-r-10 menu-label"></Label>
+				</GridLayout>
+
+				<GridLayout columns="auto, *" class="sidedrawer-list-item" (tap)="navigateTo('yearSummary')">
+					<Label col="0" text="&#xf015;" class="fas menu-icon"></Label>
+					<Label col="1" text="Scheduling" class="p-r-10 menu-label"></Label>
 				</GridLayout>
 
 				<GridLayout columns="auto, *" class="sidedrawer-list-item">
@@ -21,3 +26,7 @@
 
 	<page-router-outlet tkMainContent class="page page-content"></page-router-outlet>
 </nsDrawer:RadSideDrawer>
+
+<Page>
+	<Label text="hi"></Label>
+</Page>

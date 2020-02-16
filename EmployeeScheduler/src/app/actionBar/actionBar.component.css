@@ -19,9 +19,9 @@
 }
 
 .action-bar {
-    background-color: var(--primary-dark-color);
+    background-color: var(--primary-color);
 }
 
 .button {
-    background-color: var(--primary-dark-color);
+    background-color: var(--primary-color);
 }

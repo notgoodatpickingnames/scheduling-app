@@ -1,10 +1,9 @@
 <ScrollView orientation="vertical">
-  <StackLayout class="month">
+  <StackLayout>
     <FlexboxLayout *ngFor="let week of month.weeks" orientation="vertical" class="week">
       <StackLayout *ngFor="let day of week.days" orientation="horizontal" class="day">
         <StackLayout>
-          <Label [text]="day.dayOfMonth"></Label>
-          <Label [text]="day.name"></Label>
+          <Label class="day-label"  [text]="day.dayOfMonth"></Label>
         </StackLayout>
       </StackLayout>
     </FlexboxLayout>

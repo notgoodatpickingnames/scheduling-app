@@ -31,10 +31,13 @@ The following CSS rule changes the font size of all Buttons that have the
     --secondary-color: #ffcc80;
     --secondary-light-color: #ffffb0;
     --secondary-dark-color: #ca9b52;
-    --primary-text-color: #000000;
-    --secondary-text-color: #000000;
-    --icon-color: #000000;
-    --main-bg-color: #e0e0e0;
+    --primary-text-color: #36454F;
+    --secondary-text-color: #61707b;
+    --icon-color: #0f1e27;
+    --main-bg-color: white;
+    --success-color: #00C851;
+    --warning-color: #ffbb33;
+    --conflict-color: #ff4444;
 }
 
 /*
@@ -56,5 +59,13 @@ The following CSS rule changes the font size of all Buttons that have the
     font-weight: 900;
 }
 
+.body {
+    background-color: var(--main-bg-color);
+    color: var(--primary-text-color);
+}
+
+.card {
+    box-shadow: 10px 10px 5px grey;
+}
 
 

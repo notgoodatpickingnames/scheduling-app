@@ -15,6 +15,10 @@
     background-color: var(--primary-light-color);
 }
 
+/* .sidedrawer-list-item {
+    background-color: black;
+} */
+
 .account-icon {
     text-align: center;
     padding-top: 34px;
@@ -30,5 +34,3 @@
     background-color: var(--primary-dark-color);
     height: 80;
 }
-
-

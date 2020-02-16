@@ -15,23 +15,25 @@ import { SettingsComponent } from "./settings/settings.component";
 import { ActionBarComponent } from "./actionBar/actionBar.component";
 import { CalanderComponent } from './calander/calander.component';
 import { CalanderComponentModule } from "./calander/calanderComponent.module";
+import { YearSummaryComponent } from "./scheduleCreation/yearSummary/yearSummary.component";
+import { SharedModule } from "./shared.module";
+import { ScheduleCreationModule } from "./scheduleCreation/scheduleCreation.module";
 
 @NgModule({
    bootstrap: [
       AppComponent
    ],
    imports: [
-      NativeScriptModule,
       AppRoutingModule,
-      NativeScriptFormsModule,
       NativeScriptUISideDrawerModule,
-      CalanderComponentModule
+      CalanderComponentModule,
+      ScheduleCreationModule,
+      SharedModule
    ],
    declarations: [
       AppComponent,
       YourScheduleComponent,
       SettingsComponent,
-      ActionBarComponent
    ],
    providers: [
       AccountService

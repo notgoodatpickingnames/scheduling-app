@@ -1,21 +1,37 @@
 .header {
-    background-color: var(--primary-light-color);
-    width: 120%;    
+    background-color: var(--main-bg-color);
+    width: 100%;
+    color: var(--primary-text-color);
 }
 
 .left {
     margin-top: 10px;
-    margin-right: 30px;
+    margin-left: 48px;
     font-size: 24px;
+    width: 100%;
 }
 
 .center {
     font-size: 24px;
+    width: 100%;
+    text-align: center;
 }
 
 .right {
     margin-top: 10px;
-    margin-left: 30px;
+    margin-right: 48px;
     font-Size: 24px;
+    width: 100%;
+    text-align: right;
 }
 
+.day-name-container {
+    padding: 24px;
+}
+
+.day-name-label {
+    color: var(--primary-text-color);
+    width: 100%;
+    padding: 4px;
+    text-align: center;
+}

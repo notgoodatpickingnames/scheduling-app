@@ -1,0 +1,15 @@
+<ns-action-bar [title]="'Year Summary'"></ns-action-bar>
+<StackLayout class="body">
+    <StackLayout orientation="horizontal" horizontalAlignment="center" class="header">
+        <Label text="&#xf0a8;" class="fas left" (tap)="onPreviousMonthClick()"></Label>
+        <Label [text]="nameOfMonth" class="center"></Label>
+        <Label text="&#xf0a9;" class="fas right" (tap)="onNextMonthClick()"></Label>
+    </StackLayout>
+    <ScrollView orientation="vertical">
+        <StackLayout class="weeks-container">
+            <StackLayout *ngFor="let week of weeks" class="week">
+                <Label [text]="week.displayName"></Label>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</StackLayout>
