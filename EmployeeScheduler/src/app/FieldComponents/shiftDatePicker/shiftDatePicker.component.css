@@ -1,0 +1,33 @@
+.picker-button {
+    color: var(--primary-text-color);
+    width: 40;
+    height: 40;
+    font-size: 20px;
+    background-color: white;
+    border-radius: 100;
+    margin-right: 110;
+}
+
+.container {
+    width: 100%;
+}
+
+.label {
+    color: var(--primary-text-color);
+    font-weight: bold;
+    font-size: 20px;
+    width: 150;
+    text-align: right;
+}
+
+.value {
+    border-bottom-width: 2px;
+    font-size: 20px;
+    color: var(--primary-text-color);
+    padding-right: 32px;
+    width: 150;
+}
+
+.field {
+    width: 100%;
+}

@@ -18,6 +18,7 @@ import { CalanderComponentModule } from "./calander/calanderComponent.module";
 import { YearSummaryComponent } from "./scheduleCreation/yearSummary/yearSummary.component";
 import { SharedModule } from "./shared.module";
 import { ScheduleCreationModule } from "./scheduleCreation/scheduleCreation.module";
+import { ShiftsModule } from "./shifts/shifts.module";
 
 @NgModule({
    bootstrap: [
@@ -28,12 +29,13 @@ import { ScheduleCreationModule } from "./scheduleCreation/scheduleCreation.modu
       NativeScriptUISideDrawerModule,
       CalanderComponentModule,
       ScheduleCreationModule,
+      ShiftsModule,
       SharedModule
    ],
    declarations: [
       AppComponent,
       YourScheduleComponent,
-      SettingsComponent,
+      SettingsComponent
    ],
    providers: [
       AccountService

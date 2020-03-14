@@ -7,11 +7,11 @@ import { DayComponent } from "./day/day.component";
 import { WeekComponent } from "./week/week.component";
 import { MonthComponent } from "./month/month.component";
 import { MonthDaySelectorComponent } from "./month/monthDaySelector/monthDaySelector.component";
+import { SharedModule } from "../shared.module";
 
 @NgModule({
     imports: [
-       NativeScriptModule,
-       NativeScriptFormsModule
+       SharedModule
     ],
     declarations: [
        CalanderComponent,

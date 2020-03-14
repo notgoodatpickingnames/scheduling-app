@@ -1,0 +1,28 @@
+<ns-action-bar [title]="'New Shift'"></ns-action-bar>
+
+<StackLayout orientation="vertical" class="body">
+    <form #form="ngForm" (submit)="onSubmit()">
+
+
+        <ns-shift-date-picker>
+
+        </ns-shift-date-picker>
+
+        <StackLayout orientation="vertical">
+            <Label
+                text="Notes"
+                class="text-center">
+            </Label>
+            <TextField
+                matInput
+                #testInput="ngModel"
+                name="testInput"
+                hint="test field"
+                [(ngModel)]="test">
+            </TextField>
+            <!-- <DatePicker [year]="currentYear" [month]="currentMonth" [day]="currentDay"
+                minDate="1970-01-01" maxDate="2100-12-31"></DatePicker> -->
+        </StackLayout>
+        <button text="finish testt" (tap)="onSubmit()"></button>
+    </form>
+</StackLayout>

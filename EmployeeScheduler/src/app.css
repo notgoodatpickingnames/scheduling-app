@@ -47,25 +47,46 @@ The following CSS rule changes the font size of all Buttons that have the
 .far {
     font-family: Font Awesome 5 Free, fa-regular-400;
     font-weight: 400;
+    color: var(--primary-text-color);
 }
 
 .fab {
     font-family: Font Awesome 5 Brands, fa-brands-400;
     font-weight: 400;
+    color: var(--primary-text-color);
 }
 
 .fas {
     font-family: Font Awesome 5 Free, fa-solid-900;
     font-weight: 900;
+    color: var(--primary-text-color);
 }
 
 .body {
     background-color: var(--main-bg-color);
     color: var(--primary-text-color);
+    width: 100%;
+    height: 100%;
 }
 
 .card {
     box-shadow: 10px 10px 5px grey;
 }
 
+/*--------------Tabs--------------*/
 
+.tab-strip-item {
+    background-color: var(--primary-color);
+}
+
+.tab-strip-item:active {
+    background-color:var(--primary-dark-color);
+}
+
+.tab-strip-item:active > .tab-strip-label {
+    color: var(--primary-text-color);
+}
+
+.tab-strip-label {
+    color: var(--secondary-text-color);
+}

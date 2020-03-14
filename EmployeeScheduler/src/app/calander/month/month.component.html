@@ -1,10 +1,10 @@
 <StackLayout orientation="vertical" width="100%">
-  <FlexboxLayout orientation="horizontal" horizontalAlignment="center" class="header">
+  <FlexboxLayout orientation="horizontal" horizontalAlignment="center" class="month-selector">
     <Label text="&#xf053;" class="fas left" (tap)="onPreviousMonthClick()"></Label>
     <Label [text]="nameOfMonth" class="center"></Label>
     <Label text="&#xf054;" class="fas right" (tap)="onNextMonthClick()"></Label>
   </FlexboxLayout>
-  <FlexboxLayout orientation="horizontal">
+  <FlexboxLayout orientation="horizontal" class="day-labels">
     <Label class="day-name-label" text="Su"></Label>
     <Label class="day-name-label" text="Mo"></Label>
     <Label class="day-name-label" text="Tu"></Label>
@@ -13,9 +13,6 @@
     <Label class="day-name-label" text="Fr"></Label>
     <Label class="day-name-label" text="Sa"></Label>
   </FlexboxLayout>
-  <StackLayout>
-
-  </StackLayout>
   <StackLayout id="daySelectorDiv">
     <ns-month-day-selector [month]="month"></ns-month-day-selector>
   </StackLayout>

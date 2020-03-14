@@ -25,8 +25,8 @@ export class AppComponent {
     }
 
     ngOnInit(): void {
-        //this.sideDrawerTransition = new SlideInOnTopTransition();
-        // this.router.navigate(['yourSchedule'], {relativeTo: this.route});
+        this.sideDrawerTransition = new SlideInOnTopTransition();
+        this.router.navigate(['shifts/create'], {relativeTo: this.route});
     }
 
     public navigateTo(route: string) {

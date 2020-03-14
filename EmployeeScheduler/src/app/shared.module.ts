@@ -6,17 +6,19 @@ import { NativeScriptFormsModule } from "nativescript-angular/forms";
 import { ActionBarComponent } from "./actionBar/actionBar.component";
 import { CommonModule } from "@angular/common";
 import { MatCardModule } from "@angular/material/card"
+import { ShiftDatePickerComponent } from "./FieldComponents/shiftDatePicker/shiftDatePicker.component";
 
 @NgModule({
     imports: [
         NativeScriptModule,
-        AppRoutingModule,
         NativeScriptFormsModule,
+        AppRoutingModule,
         CommonModule,
         MatCardModule
     ],
     declarations: [
-        ActionBarComponent
+        ActionBarComponent,
+        ShiftDatePickerComponent
     ],
     exports: [
         ActionBarComponent,
@@ -24,7 +26,8 @@ import { MatCardModule } from "@angular/material/card"
         AppRoutingModule,
         NativeScriptFormsModule,
         CommonModule,
-        MatCardModule
+        MatCardModule,
+        ShiftDatePickerComponent
     ]
 })
 export class SharedModule { }

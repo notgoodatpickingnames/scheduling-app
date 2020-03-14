@@ -1,11 +1,1 @@
-.tab-strip {
-    background-color: var(--primary-color);
-}
 
-Tabs TabStrip {
-    highlight-color: var(--primary-light-color);
-}
-
-TabContentItem {
-    background-color: var(--main-bg-color);
-}

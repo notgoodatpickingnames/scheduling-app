@@ -2,6 +2,7 @@
     width: 100%;
     height: 150px;
     padding: 4px;
+    color: var(--secondary-text-color);
 }
 
 .day-label {

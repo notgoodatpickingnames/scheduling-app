@@ -1,7 +1,12 @@
-.header {
+.day-labels {
+    margin-bottom: 24px;
+}
+
+.month-selector {
     background-color: var(--main-bg-color);
     width: 100%;
     color: var(--primary-text-color);
+    margin-bottom: 24px;
 }
 
 .left {
@@ -30,8 +35,9 @@
 }
 
 .day-name-label {
-    color: var(--primary-text-color);
+    color: var(--secondary-text-color);
     width: 100%;
     padding: 4px;
     text-align: center;
+    border-bottom-width: 2px;
 }
