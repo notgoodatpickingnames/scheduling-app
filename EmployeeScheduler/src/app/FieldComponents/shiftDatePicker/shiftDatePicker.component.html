@@ -1,98 +1,19 @@
-<StackLayout class="container">
-    <!-- <StackLayout orientation="horizontal" horizontalAlignment="center" name="Yearly">
-        <SegmentedBar [items]="shiftTypeItems" [(ngModel)]="selectedBarIndex">
-        </SegmentedBar>
-    </StackLayout> -->
-    <StackLayout orientation="horizontal" horizontalAlignment="center" class="field">
-
-        <Label
-            verticalAlignment="center"
-            class="label"
-            text="Date: ">
-        </Label>
-
-        <Label
-            verticalAlignment="center"
-            (tap)="onShowDatePicker()"
-            [text]="formattedSelectedDate"
-            class="value">
-        </Label>
-
-        <button
-            verticalAlignment="center"
-            (tap)="onShowDatePicker()"
-            class="far fa-calendar-alt picker-button"
-            text="&#xf073;">
-        </button>
-    </StackLayout>
-    <StackLayout orientation="horizontal" horizontalAlignment="center" class="field">
-        <Label
-            verticalAlignment="center"
-            class="label"
-            text="Start Time: ">
-        </Label>
-        <Label
-            verticalAlignment="center"
-            (tap)="onShowStartTimePicker()"
-            [text]="formattedStartTime"
-            class="value">
-        </Label>
-        <button
-            verticalAlignment="center"
-            (tap)="onShowStartTimePicker()"
-            class="far fa-clock-alt picker-button"
-            text="&#xf017;">
-        </button>
-    </StackLayout>
-    <StackLayout orientation="horizontal" horizontalAlignment="center" class="field">
-        <Label
-            verticalAlignment="center"
-            class="label"
-            text="End Time: ">
-        </Label>
-        <Label
-            verticalAlignment="center"
-            (tap)="onShowEndTimePicker()"
-            [text]="formattedEndTime"
-            class="value">
-        </Label>
-        <button
-            verticalAlignment="center"
-            (tap)="onShowEndTimePicker()"
-            class="far fa-clock-alt picker-button"
-            text="&#xf017;">
-        </button>
-    </StackLayout>
-    <StackLayout orientation="horizontal" horizontalAlignment="center" class="field">
-        <Label
-            verticalAlignment="center"
-            class="label"
-            text="End Time: ">
-        </Label>
-        <Label
-            verticalAlignment="center"
-            (tap)="onShowEndTimePicker()"
-            [text]="formattedEndTime"
-            class="value">
-        </Label>
-        <StackLayout orientation="horizontal" horizontalAlignment="center" class="field">
-            <Label
-                verticalAlignment="center"
-                class="label"
-                text="Retards Needed: ">
-            </Label>
-            <TextField
-                verticalAlignment="center"
-                name="employeeCountField"
-                #emplployeeCountField="ngModel"
-                [(ngModel)]="employeeCount"
-                class="value">
-            </TextField>
-            <button
-                verticalAlignment="center"
-                class="picker-button"
-                >
-            </button>
-        </StackLayout>
-    </StackLayout>
+<StackLayout orientation="horizontal" class="field">
+    <Label
+        verticalAlignment="center"
+        class="label"
+        [text]="label">
+    </Label>
+    <Label
+        verticalAlignment="center"
+        (tap)="onShowDatePicker()"
+        [text]="formattedDate"
+        class="value">
+    </Label>
+    <button
+        verticalAlignment="center"
+        (tap)="onShowDatePicker()"
+        class="far fa-calendar-alt picker-button"
+        text="&#xf073;">
+    </button>
 </StackLayout>

@@ -8,10 +8,6 @@
     margin-right: 110;
 }
 
-.container {
-    width: 100%;
-}
-
 .label {
     color: var(--primary-text-color);
     font-weight: bold;

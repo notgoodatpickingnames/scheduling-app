@@ -7,6 +7,7 @@ import { ActionBarComponent } from "./actionBar/actionBar.component";
 import { CommonModule } from "@angular/common";
 import { MatCardModule } from "@angular/material/card"
 import { ShiftDatePickerComponent } from "./FieldComponents/shiftDatePicker/shiftDatePicker.component";
+import { ShiftTimePickerComponent } from "./FieldComponents/shiftTimePicker/shiftTimePicker.component";
 
 @NgModule({
     imports: [
@@ -18,7 +19,8 @@ import { ShiftDatePickerComponent } from "./FieldComponents/shiftDatePicker/shif
     ],
     declarations: [
         ActionBarComponent,
-        ShiftDatePickerComponent
+        ShiftDatePickerComponent,
+        ShiftTimePickerComponent
     ],
     exports: [
         ActionBarComponent,
