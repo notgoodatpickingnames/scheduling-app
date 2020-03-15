@@ -1,0 +1,19 @@
+<StackLayout orientation="horizontal" horizontalAlignment="center" class="field">
+    <Label
+        verticalAlignment="center"
+        class="label"
+        [text]="label">
+    </Label>
+    <Label
+        verticalAlignment="center"
+        [text]="value"
+        (tap)="onFieldTapped()"
+        class="value">
+    </Label>
+
+    <!-- For Spacing -->
+    <Label
+        verticalAlignment="center"
+        class="container">
+    </Label>
+</StackLayout>

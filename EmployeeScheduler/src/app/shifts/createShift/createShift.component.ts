@@ -19,8 +19,8 @@ export class CreateShiftComponent {
 
     public onSubmit() {
         alert(`date of shift ${this.datePipe.transform(this.date, 'shortDate')}`);
-        alert(`shift starts at ${this.datePipe.transform(new Date(0,0,0, this.startShiftTime.hour, this.startShiftTime.minute), 'shortDate')}`);
-        alert(`shift ends at ${this.datePipe.transform(new Date(0,0,0, this.endShiftTime.hour, this.endShiftTime.minute), 'shortDate')}`);
+        alert(`shift starts at ${this.datePipe.transform(new Date(0,0,0, this.startShiftTime.hour, this.startShiftTime.minute), 'shortTime')}`);
+        alert(`shift ends at ${this.datePipe.transform(new Date(0,0,0, this.endShiftTime.hour, this.endShiftTime.minute), 'shortTime')}`);
     }
 
 }

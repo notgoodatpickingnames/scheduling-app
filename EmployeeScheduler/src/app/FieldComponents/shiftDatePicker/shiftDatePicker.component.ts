@@ -7,7 +7,7 @@ import { SegmentedBar, SegmentedBarItem } from "tns-core-modules/ui/segmented-ba
 @Component({
   selector: 'ns-shift-date-picker',
   templateUrl: './shiftDatePicker.component.html',
-  styleUrls: ['./shiftDatePicker.component.css']
+  styleUrls: ['../fieldStyles.css']
 })
 export class ShiftDatePickerComponent{
     @Input() public label = '';

@@ -8,6 +8,7 @@ import { CommonModule } from "@angular/common";
 import { MatCardModule } from "@angular/material/card"
 import { ShiftDatePickerComponent } from "./FieldComponents/shiftDatePicker/shiftDatePicker.component";
 import { ShiftTimePickerComponent } from "./FieldComponents/shiftTimePicker/shiftTimePicker.component";
+import { TextFieldComponent } from "./FieldComponents/textField/textField.component";
 
 @NgModule({
     imports: [
@@ -20,7 +21,8 @@ import { ShiftTimePickerComponent } from "./FieldComponents/shiftTimePicker/shif
     declarations: [
         ActionBarComponent,
         ShiftDatePickerComponent,
-        ShiftTimePickerComponent
+        ShiftTimePickerComponent,
+        TextFieldComponent
     ],
     exports: [
         ActionBarComponent,
@@ -30,7 +32,8 @@ import { ShiftTimePickerComponent } from "./FieldComponents/shiftTimePicker/shif
         CommonModule,
         MatCardModule,
         ShiftDatePickerComponent,
-        ShiftTimePickerComponent
+        ShiftTimePickerComponent,
+        TextFieldComponent
     ]
 })
 export class SharedModule { }

@@ -2,27 +2,30 @@
 
 <StackLayout orientation="vertical" class="body">
     <form #form="ngForm" (submit)="onSubmit()">
+        <ns-shift-date-picker
+            label="Date: "
+            modalTitle="Date Of Shift"
+            [(date)]="date">
+        </ns-shift-date-picker>
 
+        <ns-shift-time-picker
+            label="Start Time: "
+            modalTitle="Start Time"
+            [(shiftTime)]="startShiftTime">
+        </ns-shift-time-picker>
 
-            <ns-shift-date-picker
-                label="Date: "
-                modalTitle="Date Of Shift"
-                [(date)]="date">
-            </ns-shift-date-picker>
+        <ns-shift-time-picker
+            label="End Time: "
+            modalTitle="End Time"
+            [(shiftTime)]="endShiftTime">
+        </ns-shift-time-picker>
 
-            <ns-shift-time-picker
-                label="Start Time: "
-                modalTitle="Start Time"
-                [(shiftTime)]="startShiftTime">
-            </ns-shift-time-picker>
+        <ns-text-field
+            label="Slave Count: ">
 
-            <ns-shift-time-picker
-                label="End Time: "
-                modalTitle="End Time"
-                [(shiftTime)]="endShiftTime">
-            </ns-shift-time-picker>
+        </ns-text-field>
         <StackLayout horizontalAlignment="center">
-            <button text="finish testt" (tap)="onSubmit()"></button>
+            <button text="Add Shift" (tap)="onSubmit()"></button>
         </StackLayout>
     </form>
 </StackLayout>

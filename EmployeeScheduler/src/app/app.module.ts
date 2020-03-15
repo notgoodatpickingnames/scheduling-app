@@ -19,6 +19,7 @@ import { YearSummaryComponent } from "./scheduleCreation/yearSummary/yearSummary
 import { SharedModule } from "./shared.module";
 import { ScheduleCreationModule } from "./scheduleCreation/scheduleCreation.module";
 import { ShiftsModule } from "./shifts/shifts.module";
+import * as utils from "tns-core-modules/utils/utils";
 
 @NgModule({
    bootstrap: [

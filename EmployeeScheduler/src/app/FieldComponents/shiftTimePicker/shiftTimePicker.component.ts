@@ -6,7 +6,7 @@ import { ShiftTime } from './shiftTime';
 @Component({
   selector: 'ns-shift-time-picker',
   templateUrl: './shiftTimePicker.component.html',
-  styleUrls: ['./shiftTimePicker.component.css']
+  styleUrls: ['../fieldStyles.css']
 })
 export class ShiftTimePickerComponent {
     @Input() public label = '';
