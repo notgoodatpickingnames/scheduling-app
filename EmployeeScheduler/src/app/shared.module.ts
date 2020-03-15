@@ -29,7 +29,8 @@ import { ShiftTimePickerComponent } from "./FieldComponents/shiftTimePicker/shif
         NativeScriptFormsModule,
         CommonModule,
         MatCardModule,
-        ShiftDatePickerComponent
+        ShiftDatePickerComponent,
+        ShiftTimePickerComponent
     ]
 })
 export class SharedModule { }

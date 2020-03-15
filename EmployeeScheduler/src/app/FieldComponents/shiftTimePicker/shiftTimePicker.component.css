@@ -1,18 +1,17 @@
 .picker-button {
     color: var(--primary-text-color);
-    width: 40;
+    width: 80;
     height: 40;
     font-size: 20px;
     background-color: white;
     border-radius: 100;
-    margin-right: 110;
 }
 
 .label {
     color: var(--primary-text-color);
     font-weight: bold;
     font-size: 20px;
-    width: 150;
+    width: 33%;
     text-align: right;
 }
 
@@ -20,10 +19,15 @@
     border-bottom-width: 2px;
     font-size: 20px;
     color: var(--primary-text-color);
-    padding-right: 32px;
-    width: 150;
+    width: max-content;
+    min-width: 100;
+    text-align: center;
 }
 
 .field {
     width: 100%;
+}
+
+.container {
+    width: 33%;
 }

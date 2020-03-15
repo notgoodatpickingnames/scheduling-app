@@ -4,25 +4,25 @@
     <form #form="ngForm" (submit)="onSubmit()">
 
 
-        <ns-shift-date-picker>
+            <ns-shift-date-picker
+                label="Date: "
+                modalTitle="Date Of Shift"
+                [(date)]="date">
+            </ns-shift-date-picker>
 
-        </ns-shift-date-picker>
+            <ns-shift-time-picker
+                label="Start Time: "
+                modalTitle="Start Time"
+                [(shiftTime)]="startShiftTime">
+            </ns-shift-time-picker>
 
-        <StackLayout orientation="vertical">
-            <Label
-                text="Notes"
-                class="text-center">
-            </Label>
-            <TextField
-                matInput
-                #testInput="ngModel"
-                name="testInput"
-                hint="test field"
-                [(ngModel)]="test">
-            </TextField>
-            <!-- <DatePicker [year]="currentYear" [month]="currentMonth" [day]="currentDay"
-                minDate="1970-01-01" maxDate="2100-12-31"></DatePicker> -->
+            <ns-shift-time-picker
+                label="End Time: "
+                modalTitle="End Time"
+                [(shiftTime)]="endShiftTime">
+            </ns-shift-time-picker>
+        <StackLayout horizontalAlignment="center">
+            <button text="finish testt" (tap)="onSubmit()"></button>
         </StackLayout>
-        <button text="finish testt" (tap)="onSubmit()"></button>
     </form>
 </StackLayout>

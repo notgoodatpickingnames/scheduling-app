@@ -1,19 +1,22 @@
 <StackLayout orientation="horizontal" horizontalAlignment="center" class="field">
-  <Label
-      verticalAlignment="center"
-      class="label"
-      [text]="label">
-  </Label>
-  <Label
-      verticalAlignment="center"
-      (tap)="onShowTimePicker()"
-      [text]="formattedTime"
-      class="value">
-  </Label>
-  <button
-      verticalAlignment="center"
-      (tap)="onShowTimePicker()"
-      class="far fa-clock-alt picker-button"
-      text="&#xf017;">
-  </button>
+    <Label
+        verticalAlignment="center"
+        class="label"
+        [text]="label">
+    </Label>
+    <Label
+        verticalAlignment="center"
+        (tap)="onShowTimePicker()"
+        [text]="formattedTime"
+        class="value">
+    </Label>
+    <StackLayout class="container">
+        <button
+            horizontalAlignment="left"
+            verticalAlignment="center"
+            (tap)="onShowTimePicker()"
+            class="far fa-clock-alt picker-button"
+            text="&#xf017;">
+    </button>
+    </StackLayout>
 </StackLayout>
