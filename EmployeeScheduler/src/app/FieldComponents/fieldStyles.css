@@ -19,7 +19,7 @@
     border-bottom-width: 2px;
     font-size: 20px;
     color: var(--primary-text-color);
-    width: max-content;
+    width: auto;
     min-width: 100;
     text-align: center;
 }
