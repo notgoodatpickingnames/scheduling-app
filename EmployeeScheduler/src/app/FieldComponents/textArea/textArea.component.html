@@ -1,0 +1,13 @@
+<StackLayout>
+    <Label
+        [text]="label">
+    </Label>
+    <TextView  
+        class="text-area"
+        [hint]="hint"
+        [text]="value"
+        borderColor="#36454F"
+        (textChange)="onTextChanged($event.value)"
+        returnKeyType="send">
+    </TextView>
+</StackLayout>

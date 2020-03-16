@@ -1,5 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, AfterViewInit } from '@angular/core';
 import {TextField} from '@nativescript/core/ui/text-field'
+import * as utils from "@nativescript/core/utils/utils";
+import { KeyboardType } from './keyboardType';
+// import { TextField } from "@nativescript/core/ui/text-field";
 
 @Component({
     selector: 'ns-text-field',
@@ -7,15 +10,14 @@ import {TextField} from '@nativescript/core/ui/text-field'
     styleUrls: ['../fieldStyles.css']
 })
 export class TextFieldComponent {
-    @Input() public label: string;
-    @Input() public value: string;
+    @Input() public label = "";
+    @Input() public value = "";
+    @Input() public keyboardType = KeyboardType.text;
     @Output() public valueChange = new EventEmitter<string>();
 
-    private t = new TextField;
-
-    public onValueChanged(newValue: any): void {
-        this.t.text
-        alert(`the text has changed to: ${newValue.toString()}`);
+    public onTextChanged(newValue: string): void {
+        this.value = newValue;
+        this.valueChange.emit(this.value);
     }
 
 }

@@ -1,31 +1,41 @@
 <ns-action-bar [title]="'New Shift'"></ns-action-bar>
 
-<StackLayout orientation="vertical" class="body">
-    <form #form="ngForm" (submit)="onSubmit()">
-        <ns-shift-date-picker
-            label="Date: "
-            modalTitle="Date Of Shift"
-            [(date)]="date">
-        </ns-shift-date-picker>
+<ScrollView>
+    <StackLayout orientation="vertical" class="body" backgroundColor="white">
+        <form #form="ngForm" (submit)="onSubmit()">
+            <ns-shift-date-picker
+                label="Date: "
+                modalTitle="Date Of Shift"
+                [(date)]="date">
+            </ns-shift-date-picker>
 
-        <ns-shift-time-picker
-            label="Start Time: "
-            modalTitle="Start Time"
-            [(shiftTime)]="startShiftTime">
-        </ns-shift-time-picker>
+            <ns-shift-time-picker
+                label="Start Time: "
+                modalTitle="Start Time"
+                [(shiftTime)]="startShiftTime">
+            </ns-shift-time-picker>
 
-        <ns-shift-time-picker
-            label="End Time: "
-            modalTitle="End Time"
-            [(shiftTime)]="endShiftTime">
-        </ns-shift-time-picker>
+            <ns-shift-time-picker
+                label="End Time: "
+                modalTitle="End Time"
+                [(shiftTime)]="endShiftTime">
+            </ns-shift-time-picker>
 
-        <ns-text-field
-            label="Slave Count: ">
+            <ns-text-field
+                label="Slave Count: "
+                [(value)]="employeeCount"
+                [keyboardType]="numberKeyboardType">
+            </ns-text-field>
 
-        </ns-text-field>
-        <StackLayout horizontalAlignment="center">
-            <button text="Add Shift" (tap)="onSubmit()"></button>
-        </StackLayout>
-    </form>
-</StackLayout>
+            <ns-text-area
+                label="Notes"
+                [(value)]="notes"
+                [keyboardType]="textKeyboardType">
+
+            </ns-text-area>
+            <StackLayout horizontalAlignment="center">
+                <button text="Add" (tap)="onSubmit()" class="primary-button"></button>
+            </StackLayout>
+        </form>
+    </StackLayout>
+</ScrollView>

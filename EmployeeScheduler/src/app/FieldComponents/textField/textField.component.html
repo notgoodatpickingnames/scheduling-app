@@ -4,16 +4,17 @@
         class="label"
         [text]="label">
     </Label>
-    <Label
+    <TextField
         verticalAlignment="center"
         [text]="value"
-        (tap)="onFieldTapped()"
-        class="value">
-    </Label>
+        class="value"
+        borderColor="#36454F"
+        (textChange)="onTextChanged($event.value)"
+        [keyboardType]="keyboardType">
+    </TextField>
 
     <!-- For Spacing -->
-    <Label
-        verticalAlignment="center"
-        class="container">
+    <Label class="container">
+        
     </Label>
 </StackLayout>

@@ -19,9 +19,12 @@
     border-bottom-width: 2px;
     font-size: 20px;
     color: var(--primary-text-color);
+    border-bottom-color: var(--primary-text-color);
     width: auto;
     min-width: 100;
     text-align: center;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .field {
@@ -30,4 +33,11 @@
 
 .container {
     width: 33%;
+}
+
+.text-area {
+    border-color: var(--primary-text-color);
+    border-width: 1;
+    color: var(--primary-text-color);
+    padding: 6;
 }
