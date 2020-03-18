@@ -6,30 +6,30 @@
             <ns-shift-date-picker
                 label="Date: "
                 modalTitle="Date Of Shift"
-                [(date)]="date">
+                [(date)]="shift.dayOfTheYear">
             </ns-shift-date-picker>
 
             <ns-shift-time-picker
                 label="Start Time: "
                 modalTitle="Start Time"
-                [(shiftTime)]="startShiftTime">
+                [(shiftTime)]="shift.startTime">
             </ns-shift-time-picker>
 
             <ns-shift-time-picker
                 label="End Time: "
                 modalTitle="End Time"
-                [(shiftTime)]="endShiftTime">
+                [(shiftTime)]="shift.endTime">
             </ns-shift-time-picker>
 
             <ns-text-field
                 label="Slave Count: "
-                [(value)]="employeeCount"
+                [(value)]="shift.employeeCount"
                 [keyboardType]="numberKeyboardType">
             </ns-text-field>
 
             <ns-text-area
                 label="Notes"
-                [(value)]="notes"
+                [(value)]="shift.notes"
                 [keyboardType]="textKeyboardType">
 
             </ns-text-area>
@@ -37,5 +37,13 @@
                 <button text="Add" (tap)="onSubmit()" class="button"></button>
             </StackLayout>
         </form>
+        <StackLayout orientation="vertical">
+            <StackLayout *ngFor="let shift of shifts">
+                <Label
+                    [text]="shift.startTime.hour">
+
+                </Label>
+            </StackLayout>
+        </StackLayout>
     </StackLayout>
 </ScrollView>

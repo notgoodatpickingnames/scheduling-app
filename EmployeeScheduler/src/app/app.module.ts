@@ -19,6 +19,7 @@ import { YearSummaryComponent } from "./scheduleCreation/yearSummary/yearSummary
 import { SharedModule } from "./shared.module";
 import { ScheduleCreationModule } from "./scheduleCreation/scheduleCreation.module";
 import { ShiftsModule } from "./shifts/shifts.module";
+import { ShiftsService } from "./services/shift/shifts.service";
 //import * as utils from "tns-core-modules/utils/utils";
 
 @NgModule({
@@ -39,7 +40,8 @@ import { ShiftsModule } from "./shifts/shifts.module";
       SettingsComponent
    ],
    providers: [
-      AccountService
+      AccountService,
+      ShiftsService
    ],
    schemas: [
       NO_ERRORS_SCHEMA

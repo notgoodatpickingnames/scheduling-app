@@ -8,4 +8,8 @@ export class ShiftTime implements TimeResponse{
         this.hour = hour;
         this.minute = minute;
     }
+
+    public static constructNew(): ShiftTime {
+        return new ShiftTime(undefined, undefined);
+    }
 }

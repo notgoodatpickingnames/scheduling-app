@@ -31,6 +31,6 @@ export class ShiftDatePickerComponent{
     }
 
     public get formattedDate(): string {
-        return this.datePipe.transform(this.date, 'shortDate');
+        return this.date !== undefined ? this.datePipe.transform(this.date, 'shortDate') : undefined;
     }
 }

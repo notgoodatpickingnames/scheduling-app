@@ -41,4 +41,5 @@
     border-width: 1;
     color: var(--primary-text-color);
     padding: 6;
+    border-radius: 15;
 }

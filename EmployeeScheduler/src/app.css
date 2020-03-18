@@ -93,4 +93,6 @@ The following CSS rule changes the font size of all Buttons that have the
 
 /*---------------Buttons-----------------*/
 
-
+.button {
+    border-radius: 15;
+}

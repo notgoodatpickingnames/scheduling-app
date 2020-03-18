@@ -22,8 +22,8 @@ export class ShiftTimePickerComponent {
         this.timePicker.pickTime({
             title: this.modalTitle,
             theme: "dark",
-            startingHour: this.shiftTime ? this.shiftTime.hour : new Date().getHours(),
-            startingMinute: this.shiftTime ? this.shiftTime.minute : 0,
+            startingHour: this.shiftTime && this.shiftTime.hour ? this.shiftTime.hour : new Date().getHours(),
+            startingMinute: this.shiftTime && this.shiftTime.minute ? this.shiftTime.minute : 0,
         }).then(timeResponse => {
             this.shiftTime = timeResponse;
             this.shiftTimeChange.emit(this.shiftTime);
@@ -31,7 +31,7 @@ export class ShiftTimePickerComponent {
     }
 
     private get formattedTime(): string {
-        if (this.shiftTime) {
+        if (this.shiftTime !== undefined && this.shiftTime.hour !== undefined && this.shiftTime.minute !== undefined) {
             const timeAsDate = new Date(0, 0, 0, this.shiftTime.hour, this.shiftTime.minute);
             return this.datePipe.transform(timeAsDate, 'shortTime');
         }
