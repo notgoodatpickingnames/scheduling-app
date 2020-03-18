@@ -38,6 +38,6 @@ export class AppComponent {
     }
 
     private loadServices() {
-        this.shiftsService.load();
+        this.shiftsService.initialise();
     }
 }

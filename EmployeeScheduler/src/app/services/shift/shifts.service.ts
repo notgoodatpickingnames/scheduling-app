@@ -1,6 +1,6 @@
 import { Injectable, NgZone } from "@angular/core";
 import * as firebase from "nativescript-plugin-firebase";
-import { Observable, throwError, BehaviorSubject } from "rxjs";
+import { Observable, throwError, BehaviorSubject, ReplaySubject } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { Shift } from "./shift";
 
@@ -9,10 +9,20 @@ import { Shift } from "./shift";
 })
 export class ShiftsService {
 
+    public shift$ = new ReplaySubject<Shift[]>(1);
     private _path = "shifts";
-    private _shifts: Shift[];
   
-    constructor(private _ngZone: NgZone) {}
+    constructor(private _ngZone: NgZone) {
+        this.shift$.next([]);
+    }
+
+    public initialise(): void {
+        alert('called init on service');
+        this.load().subscribe(shifts => {
+                this.shift$.next(shifts); 
+                alert('shift is being sent out');
+            });
+    }
 
     public push(shift: Shift) {
         Object.keys(shift).forEach(key => console.log(key));
@@ -23,7 +33,7 @@ export class ShiftsService {
         firebase.getValue(`${this._path}${shiftId}`);
     }
   
-    public load(): Observable<any> {
+    private load(): Observable<any> {
         return new Observable((observer: any) => {
 
             const onValueEvent =(snapshot: any) => {
@@ -36,10 +46,6 @@ export class ShiftsService {
         })
         .pipe(catchError(this.handleErrors));
     }
-
-    public get shifts(): Shift[] {
-        return this._shifts;
-    }
   
     private handleErrors(error: Response): Observable<never> {
         alert(error.text);
@@ -47,17 +53,17 @@ export class ShiftsService {
     }
   
     private handleSnapshot(data: any): Shift[] {
-        this._shifts = [];
+        const shifts = [];
 
         if (data) {
             for(const id in data) {
                 if (data.hasOwnProperty(id)) {
                     const shiftToPush = new Shift(data[id]);
-                    this._shifts.push(shiftToPush);
+                    shifts.push(shiftToPush);
                 }
             }
         }
 
-        return this._shifts;
+        return shifts;
     }
 }

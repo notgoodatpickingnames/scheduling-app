@@ -18,17 +18,15 @@ export class CreateShiftComponent {
     public textKeyboardType = KeyboardType.text;
 
     public shift = Shift.constructNew();
-
+    public shifts: Shift[] = [];
     private datePipe = new DatePipe('en');
 
-    constructor(private shiftsService: ShiftsService) {}
+    constructor(private shiftsService: ShiftsService) {
+        this.shiftsService.shift$.subscribe
+    }
 
     public onSubmit() {
         this.shiftsService.push(this.shift);
-    }
-
-    public get shifts(): Shift[] {
-        return this.shiftsService.shifts;
     }
 
 }
