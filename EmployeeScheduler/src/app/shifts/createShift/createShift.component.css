@@ -1,4 +1,12 @@
-.body {
+.form {
     padding-left: 24px;
     padding-right: 24px;
+}
+
+.button {
+    background-color: var(--success-color);
+}
+
+.button-container {
+    margin-top: 24px;
 }

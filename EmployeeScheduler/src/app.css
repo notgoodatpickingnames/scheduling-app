@@ -93,7 +93,4 @@ The following CSS rule changes the font size of all Buttons that have the
 
 /*---------------Buttons-----------------*/
 
-.primary-button {
-    background-color: var(--success-color);
-    border-radius: 20;
-}
+

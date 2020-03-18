@@ -1,7 +1,7 @@
 <ns-action-bar [title]="'New Shift'"></ns-action-bar>
 
-<ScrollView>
-    <StackLayout orientation="vertical" class="body" backgroundColor="white">
+<ScrollView class="body">
+    <StackLayout orientation="vertical" class="form" backgroundColor="white">
         <form #form="ngForm" (submit)="onSubmit()">
             <ns-shift-date-picker
                 label="Date: "
@@ -33,8 +33,8 @@
                 [keyboardType]="textKeyboardType">
 
             </ns-text-area>
-            <StackLayout horizontalAlignment="center">
-                <button text="Add" (tap)="onSubmit()" class="primary-button"></button>
+            <StackLayout horizontalAlignment="left" class="button-container">
+                <button text="Add" (tap)="onSubmit()" class="button"></button>
             </StackLayout>
         </form>
     </StackLayout>
