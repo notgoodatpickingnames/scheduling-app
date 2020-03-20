@@ -1,4 +1,4 @@
-import { ShiftTime } from "~/app/FieldComponents/shiftTimePicker/shiftTime";
+import { ShiftTime } from "~/app/FormComponents/shiftTimePicker/shiftTime";
 
 export interface IShift {
     shiftId: string;

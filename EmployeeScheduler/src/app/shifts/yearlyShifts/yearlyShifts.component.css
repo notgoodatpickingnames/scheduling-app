@@ -7,3 +7,15 @@
     height: 400px;
     margin-top: 8px;
 }
+
+.column {
+    width: 50%;
+    background-color: red;
+    height: 100px;
+}
+
+.row {
+    width: 100%;
+    background-color: green;
+    height: auto;
+}
