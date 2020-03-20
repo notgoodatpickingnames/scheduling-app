@@ -30,8 +30,6 @@ export class Month {
             weekToAdd = new Week(newStartOfWeek);
             this.weeks.push(weekToAdd);
         } while (weekToAdd.startDate.getMonth() === this.month);
-
-        this.weeks.forEach(week => console.log(`week of ${week.startDate.toLocaleDateString()} - ${week.endDate.toLocaleDateString()}`));
     }
 
     private getFirstSunday(): Date {

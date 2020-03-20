@@ -1,0 +1,56 @@
+<!-- Non Error, Non Read-Only State-->
+<StackLayout *ngIf="!readonly && !error" orientation="horizontal" [horizontalAlignment]="horizontalAlignment" class="field">
+    <Label
+        verticalAlignment="center"
+        class="label"
+        [text]="label">
+    </Label>
+    <TextField
+        verticalAlignment="center"
+        [text]="value"
+        class="value"
+        borderColor="#36454F"
+        (textChange)="onTextChanged($event.value)"
+        [keyboardType]="keyboardType">
+    </TextField>
+    <!-- For Spacing -->
+    <Label class="container">
+    </Label>
+</StackLayout>
+
+<!-- Non Read-Only, Error State-->
+<StackLayout *ngIf="!readonly && error" orientation="horizontal" [horizontalAlignment]="horizontalAlignment" class="field">
+    <Label
+        verticalAlignment="center"
+        class="label"
+        [text]="label">
+    </Label>
+    <TextField
+        verticalAlignment="center"
+        [text]="value"
+        class="value"
+        borderColor="#36454F"
+        (textChange)="onTextChanged($event.value)"
+        [keyboardType]="keyboardType">
+    </TextField>
+    <!-- For Spacing -->
+    <Label class="container">
+    </Label>
+</StackLayout>
+
+<StackLayout *ngIf="readonly" orientation="horizontal" [horizontalAlignment]="horizontalAlignment" class="field">
+    <Label
+        verticalAlignment="center"
+        class="label"
+        [text]="label">
+    </Label>
+    <Label
+        verticalAlignment="center"
+        [text]="value"
+        class="value"
+        borderColor="#36454F">
+    </Label>
+    <!-- For Spacing -->
+    <Label class="container">
+    </Label>
+</StackLayout>

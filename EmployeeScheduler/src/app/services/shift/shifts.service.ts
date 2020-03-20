@@ -10,27 +10,23 @@ import { Shift } from "./shift";
 export class ShiftsService {
 
     public shift$ = new ReplaySubject<Shift[]>(1);
+
     private _path = "shifts";
   
-    constructor(private _ngZone: NgZone) {
-        this.shift$.next([]);
-    }
+    constructor(private _ngZone: NgZone) {}
 
     public initialise(): void {
-        alert('called init on service');
         this.load().subscribe(shifts => {
                 this.shift$.next(shifts); 
-                alert('shift is being sent out');
             });
     }
 
     public push(shift: Shift) {
-        Object.keys(shift).forEach(key => console.log(key));
-        firebase.push(this._path, shift);
+        firebase.push(this._path, shift.asInterface());
     }
   
     public get(shiftId: string) {
-        firebase.getValue(`${this._path}${shiftId}`);
+        firebase.getValue(`${this._path}/${shiftId}`);
     }
   
     private load(): Observable<any> {
@@ -48,7 +44,6 @@ export class ShiftsService {
     }
   
     private handleErrors(error: Response): Observable<never> {
-        alert(error.text);
         return throwError(error);
     }
   

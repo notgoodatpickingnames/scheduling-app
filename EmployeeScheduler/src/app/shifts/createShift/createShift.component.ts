@@ -1,10 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ShiftTime } from '~/app/FieldComponents/shiftTimePicker/shiftTime';
-import { DatePipe } from '@angular/common';
-import { KeyboardType } from '~/app/FieldComponents/textField/keyboardType';
 import { ShiftsService } from '~/app/services/shift/shifts.service';
 import { Shift } from '~/app/services/shift/shift';
+import { ActivatedRoute, Router } from '@angular/router';
+import { KeyboardType } from '~/app/FormComponents/textField/keyboardType';
 
 @Component({
     selector: 'ns-createShift',
@@ -19,14 +18,28 @@ export class CreateShiftComponent {
 
     public shift = Shift.constructNew();
     public shifts: Shift[] = [];
-    private datePipe = new DatePipe('en');
 
-    constructor(private shiftsService: ShiftsService) {
-        this.shiftsService.shift$.subscribe
+    constructor(private shiftsService: ShiftsService,
+        private route: ActivatedRoute,
+        private router: Router) {
+        this.shiftsService.shift$.subscribe(shifts => {
+            this.shifts = shifts;
+        });
     }
 
     public onSubmit() {
-        this.shiftsService.push(this.shift);
+        // this.form.submit
+        // if (this.form.isValid) {
+            //alert("The shift is valid so we gon send it boi")
+            this.shiftsService.push(this.shift);
+            this.onBackAction();
+        // } else {
+            // alert("The shift is invalid so fuck you");2
+        //}
+    }
+
+    public onBackAction() {
+        this.router.navigate(['../'], {relativeTo: this.route});
     }
 
 }

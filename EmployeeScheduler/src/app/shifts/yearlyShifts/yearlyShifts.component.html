@@ -1,5 +1,18 @@
 <ScrollView orientation="vertical" class="body">
-    <StackLayout orientation="vertical">
-
+    <StackLayout>
+        <StackLayout *ngFor="let shift of shifts" class="card">
+            <ns-text-field
+                horizontalAlignment="left"
+                readonly="true"
+                label="Date: "
+                [value]="shift.dayOfTheYear | date:'shortDate'">
+            </ns-text-field>
+            <ns-text-field
+                horizontalAlignment="left"
+                readonly="true"
+                label="Date: "
+                [value]="shift.dayOfTheYear | date:'shortDate'">
+            </ns-text-field>
+        </StackLayout>
     </StackLayout>
 </ScrollView>

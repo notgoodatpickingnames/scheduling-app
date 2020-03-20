@@ -4,10 +4,10 @@ export interface IShift {
     shiftId: string;
     startTime: ShiftTime;
     endTime: ShiftTime;
-    employeeCount: number;
+    employeeCount: string;
     notes: string;
 
-    dayOfWeek: number;
-    dayOfMonth: number;
+    dayOfWeek: string;
+    dayOfMonth: string;
     dayOfTheYear: string;
 }

@@ -12,12 +12,15 @@ import { KeyboardType } from './keyboardType';
 export class TextFieldComponent {
     @Input() public label = "";
     @Input() public value = "";
+    @Input() public horizontalAlignment: string = "center"
     @Input() public keyboardType = KeyboardType.text;
+    @Input() public readonly: boolean = false;
     @Output() public valueChange = new EventEmitter<string>();
+
+    public error: boolean = false;
 
     public onTextChanged(newValue: string): void {
         this.value = newValue;
         this.valueChange.emit(this.value);
     }
-
 }

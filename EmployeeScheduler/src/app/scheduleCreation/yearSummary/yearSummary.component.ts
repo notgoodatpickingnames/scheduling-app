@@ -20,7 +20,6 @@ export class YearSummaryComponent implements OnInit {
     }
 
     public get weeks(): Week[] {
-        console.log('getting into the weeks');
         return this.year.weeks ? this.year.weeks : [];
     }
 

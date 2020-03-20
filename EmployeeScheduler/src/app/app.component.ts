@@ -1,8 +1,10 @@
 import * as firebase from 'nativescript-plugin-firebase';
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component } from "@angular/core";
 import { DrawerTransitionBase, SlideInOnTopTransition, RadSideDrawer } from "nativescript-ui-sidedrawer";
 import { Router, ActivatedRoute } from '@angular/router';
 import { ShiftsService } from './services/shift/shifts.service';
+import { ApplicationEventData } from 'tns-core-modules/application/application';
+import * as app from "tns-core-modules/application";
 
 @Component({
     selector: "ns-app",
@@ -20,20 +22,30 @@ export class AppComponent {
         this.initialiseFirebaseAndAuthenticate();
     }
 
+
     private initialiseFirebaseAndAuthenticate() {
         firebase.init()
             .then(() => {
-                console.log('Firebase initialised.');
                 this.loadServices();
-            }).catch(error => console.log(error));
+            }).catch(error => {
+                if (error === 'Firebase already initialized') {
+                    this.loadServices();
+                }
+            });
     }
 
     ngOnInit(): void {
         this.sideDrawerTransition = new SlideInOnTopTransition();
-        this.router.navigate(['shifts/create'], {relativeTo: this.route});
+        this.router.navigate(['shifts'], {relativeTo: this.route});
     }
 
-    public navigateTo(route: string) {
+    public onNavigationTap(route: string) {
+        const sideDrawer = <RadSideDrawer>app.getRootView();
+        sideDrawer.showDrawer();
+        this.navigateTo(route);
+    }
+
+    private navigateTo(route: string) {
         this.router.navigate([route], {relativeTo: this.route});
     }
 

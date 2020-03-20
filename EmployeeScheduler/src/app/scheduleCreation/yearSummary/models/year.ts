@@ -17,7 +17,6 @@ export class Year {
     private getFirstSundayOfYear(): Date {
         const firstOfTheMonth = new Date(this.year, this.january, 1);
         const firstSunday = new Date(this.year, this.january, firstOfTheMonth.getDate() - firstOfTheMonth.getDay());
-        console.log('the first sunday of the year', firstSunday);
         return firstSunday;
     }
 
@@ -31,8 +30,5 @@ export class Year {
             weekToAdd = new Week(newStartOfWeek);
             this.weeks.push(weekToAdd);
         } while (weekToAdd.endDate.getFullYear() === this.year);
-
-        this.weeks.forEach(week => console.log(`week of ${week.startDate.toLocaleDateString()} - ${week.endDate.toLocaleDateString()}`));
     }
-
 }

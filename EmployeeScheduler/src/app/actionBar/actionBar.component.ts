@@ -1,23 +1,25 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { RadSideDrawer } from 'nativescript-ui-sidedrawer';
 import * as app from "tns-core-modules/application";
 
 @Component({
-  selector: 'ns-action-bar',
-  templateUrl: './actionBar.component.html',
-  styleUrls: ['./actionBar.component.css']
+    selector: 'ns-action-bar',
+    templateUrl: './actionBar.component.html',
+    styleUrls: ['./actionBar.component.css']
 })
-export class ActionBarComponent implements OnInit {
-  @Input() title: string;
+export class ActionBarComponent {
+    @Input() title: string;
+    @Input() showBackButton: boolean = true;
 
-  constructor() { }
+    @Output() back = new EventEmitter();
 
-  ngOnInit() {
-  }
+    onDrawerButtonTap(): void {
+        const sideDrawer = <RadSideDrawer>app.getRootView();
+        sideDrawer.showDrawer();
+    }
 
-  onDrawerButtonTap(): void {
-    const sideDrawer = <RadSideDrawer>app.getRootView();
-    sideDrawer.showDrawer();
-  }
+    onBackButtonTap(): void {
+        this.back.emit();
+    }
 
 }
