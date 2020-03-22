@@ -15,9 +15,11 @@
     background-color: var(--primary-light-color);
 }
 
-/* .sidedrawer-list-item {
-    background-color: black;
-} */
+.sidedrawer-list-item {
+    border-bottom-color: var(--secondary-text-color);
+    border-bottom-width: 1px;
+    height: 144px;
+}
 
 .account-icon {
     text-align: center;

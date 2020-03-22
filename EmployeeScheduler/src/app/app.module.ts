@@ -20,6 +20,7 @@ import { SharedModule } from "./shared.module";
 import { ScheduleCreationModule } from "./scheduleCreation/scheduleCreation.module";
 import { ShiftsModule } from "./shifts/shifts.module";
 import { ShiftsService } from "./services/shift/shifts.service";
+import { DropDownModule } from "nativescript-drop-down/angular";
 //import * as utils from "tns-core-modules/utils/utils";
 
 @NgModule({
@@ -32,6 +33,7 @@ import { ShiftsService } from "./services/shift/shifts.service";
       CalanderComponentModule,
       ScheduleCreationModule,
       ShiftsModule,
+      DropDownModule,
       SharedModule
    ],
    declarations: [

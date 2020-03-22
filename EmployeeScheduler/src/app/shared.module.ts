@@ -10,6 +10,7 @@ import { ShiftDatePickerComponent } from "./FormComponents/shiftDatePicker/shift
 import { ShiftTimePickerComponent } from "./FormComponents/shiftTimePicker/shiftTimePicker.component";
 import { TextFieldComponent } from "./FormComponents/textField/textField.component";
 import { TextAreaComponent } from "./FormComponents/textArea/textArea.component";
+import { DropDownFieldComponent } from "./FormComponents/dropDownField/dropDownField.component";
 
 @NgModule({
     imports: [
@@ -24,7 +25,8 @@ import { TextAreaComponent } from "./FormComponents/textArea/textArea.component"
         ShiftDatePickerComponent,
         ShiftTimePickerComponent,
         TextFieldComponent,
-        TextAreaComponent
+        TextAreaComponent,
+        DropDownFieldComponent
     ],
     exports: [
         ActionBarComponent,
@@ -36,7 +38,8 @@ import { TextAreaComponent } from "./FormComponents/textArea/textArea.component"
         ShiftDatePickerComponent,
         ShiftTimePickerComponent,
         TextFieldComponent,
-        TextAreaComponent
+        TextAreaComponent,
+        DropDownFieldComponent
     ]
 })
 export class SharedModule { }

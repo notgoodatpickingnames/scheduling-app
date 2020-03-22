@@ -4,34 +4,24 @@
     <Tabs #tabs [selectedIndex]="selectedTab" (selectedIndexChanged)="onIndexChanged($event)" tabsPosition="bottom">
         <TabStrip>
             <TabStripItem class="tab-strip-item">
-                <Label text="Yearly" class="tab-strip-label"></Label>
-            </TabStripItem>
-            <TabStripItem class="tab-strip-item">
-                <Label text="Monthly" class="tab-strip-label"></Label>
-            </TabStripItem>
-            <TabStripItem class="tab-strip-item">
                 <Label text="Weekly" class="tab-strip-label"></Label>
-
+            </TabStripItem>
+            <TabStripItem class="tab-strip-item">
+                <Label text="Special" class="tab-strip-label"></Label>
             </TabStripItem>
         </TabStrip>
 
         <TabContentItem>
-            <ns-yearly-shifts></ns-yearly-shifts>
+            <ns-weekly-shifts></ns-weekly-shifts>
         </TabContentItem>
         <TabContentItem>
-            <Label text="Month"></Label>
-        </TabContentItem>
-        <TabContentItem>
-            <Label text="Week"></Label>
+            <ns-special-shifts></ns-special-shifts>
         </TabContentItem>
     </Tabs>
 
 </StackLayout>
-
 <StackLayout class="button-container">
     <GridLayout #fabButton class="fab-button" (tap)="onCreateShiftTap()">
         <Label text="+" class="plus-sign"></Label>
     </GridLayout>
 </StackLayout>
-
-

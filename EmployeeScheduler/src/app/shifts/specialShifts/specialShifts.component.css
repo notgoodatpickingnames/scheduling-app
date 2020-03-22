@@ -3,19 +3,13 @@
     border-width: 2px;
     border-radius: 10;
     border-color: var(--secondary-text-color);
-    width: 1000px;
+    width: 850px;
     height: 400px;
-    margin-top: 8px;
-}
-
-.column {
-    width: 50%;
-    background-color: red;
-    height: 100px;
+    margin-top: 24px;
 }
 
 .row {
     width: 100%;
-    background-color: green;
-    height: auto;
+    height: 120px;
+    margin-right: 120px;
 }

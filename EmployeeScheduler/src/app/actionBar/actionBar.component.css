@@ -1,12 +1,19 @@
 .left-item {
-    text-align: center;
+    /* text-align: center; */
     color: var(--primary-text-color);
     font-size: 20px;
+}
+
+.margin-right {
     margin-right: 24px;
 }
 
-.section {
-    width: 33%;
+.outer-section {
+    width: 20%;
+}
+
+.middle-section {
+    width: 60%;
 }
 
 .center-item {
@@ -20,7 +27,6 @@
     text-align: center;
     color: var(--primary-text-color);
     font-size: 20px;
-    margin-right: 24px;
 }
 
 .action-bar {

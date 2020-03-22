@@ -36,7 +36,7 @@ export class AppComponent {
 
     ngOnInit(): void {
         this.sideDrawerTransition = new SlideInOnTopTransition();
-        this.router.navigate(['shifts'], {relativeTo: this.route});
+        this.router.navigate(['shifts/create'], {relativeTo: this.route});
     }
 
     public onNavigationTap(route: string) {

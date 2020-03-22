@@ -1,4 +1,5 @@
 import { TimeResponse } from "nativescript-modal-datetimepicker";
+import { DatePipe } from "@angular/common";
 
 export class ShiftTime implements TimeResponse{
     public hour: number;

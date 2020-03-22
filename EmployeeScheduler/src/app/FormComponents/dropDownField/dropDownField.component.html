@@ -1,0 +1,18 @@
+<StackLayout orientation="horizontal" horizontalAlignment="center" class="field">
+    <Label
+        verticalAlignment="center"
+        class="label"
+        [text]="label">
+    </Label>
+    <DropDown
+        #dd
+        itemsTextAlignment="center"
+        [items]="items"
+        [(ngModel)]="selectedIndex"
+        (selectedIndexChanged)="onChange($event)"
+        class="value">
+    </DropDown>
+    <Label class="container">
+
+    </Label>
+</StackLayout>
