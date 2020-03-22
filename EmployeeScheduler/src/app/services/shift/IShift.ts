@@ -3,7 +3,7 @@ import { ShiftType } from "./shiftType";
 
 export interface IShift {
     shiftId: string;
-    shiftType: ShiftType;
+    type: ShiftType;
     startTime: ShiftTime;
     endTime: ShiftTime;
     employeeCount: string;

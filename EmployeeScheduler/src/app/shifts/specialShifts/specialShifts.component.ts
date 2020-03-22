@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ShiftsService } from '~/app/services/shift/shifts.service';
 import { Shift } from '~/app/services/shift/shift';
+import { ShiftType } from '~/app/services/shift/shiftType';
 
 @Component({
   selector: 'ns-special-shifts',
@@ -12,7 +13,7 @@ export class SpecialShiftsComponent {
 
     constructor(private shiftService: ShiftsService) {
         shiftService.shift$.subscribe(shifts => {
-            this.shifts = shifts.filter(shift => shift.dayOfWeek !== undefined);
+            this.shifts = shifts.filter(shift => shift.type !== ShiftType.EveryWeek);
         });
     }
 

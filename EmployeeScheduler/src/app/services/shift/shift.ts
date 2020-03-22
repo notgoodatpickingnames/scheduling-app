@@ -7,7 +7,7 @@ import { ShiftType } from "./shiftType";
 
 export class Shift {
     public shiftId: string;
-    public shiftType: ShiftType;
+    public type: ShiftType;
 
     public startTime: ShiftTime;
     public endTime: ShiftTime;
@@ -23,7 +23,7 @@ export class Shift {
 
     constructor(shift: IShift) {
         this.shiftId = shift.shiftId;
-        this.shiftType = shift.shiftType;
+        this.type = shift.type;
         this.startTime = shift.startTime;
         this.endTime = shift.endTime;
         this.employeeCount = shift.employeeCount ? NanRemover.removeNAN(shift.employeeCount) : undefined;
@@ -37,7 +37,7 @@ export class Shift {
     public static constructNew(): Shift {
         return new Shift({
             shiftId: UUID.constructNew(),
-            shiftType: ShiftType.Unknown,
+            type: ShiftType.Unknown,
             startTime: ShiftTime.constructNew(),
             endTime: ShiftTime.constructNew(),
             employeeCount: '',
@@ -51,14 +51,14 @@ export class Shift {
     public asInterface() : IShift {
         return {
             shiftId: this.shiftId ? this.shiftId : UUID.constructNew(),
-            shiftType: this.shiftType ? this.shiftType : ShiftType.Unknown,
+            type: this.type ? this.type : ShiftType.Unknown,
             startTime: this.startTime ? this.startTime : ShiftTime.constructNew(),
             endTime: this.endTime ? this.endTime : ShiftTime.constructNew(),
             employeeCount: this.employeeCount ? this.employeeCount.toString() : "",
             notes: this.notes,
             dayOfWeek: this.dayOfWeek ? this.dayOfWeek.toString() : "",
             dayOfMonth: this.dayOfMonth ? this.dayOfMonth.toString() : "",
-            dayOfTheYear: this.dayOfTheYear.toString()
+            dayOfTheYear: this.dayOfTheYear ? this.dayOfTheYear.toString() : ""
         };
     }
 

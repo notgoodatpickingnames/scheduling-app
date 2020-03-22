@@ -1,5 +1,6 @@
-import { Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday } from "../days";
+import { Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday } from "~/app/core/days";
 import { Day } from "./day";
+
 
 export class Week {
     public daysOfTheWeek: string[] = [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday];

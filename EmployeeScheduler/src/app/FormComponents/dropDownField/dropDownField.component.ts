@@ -11,11 +11,15 @@ export class DropDownFieldComponent {
     @Input() public label: string;
     @Input() public items: ValueList<any>;
     @Input() public value: any;
+    @Input() public selectedIndex: number;
+    @Output() public selectedIndexChange = new EventEmitter<number>();
     @Output() public valueChange = new EventEmitter<any>();
 
-    public onChange(args: SelectedIndexChangedEventData) {
+    public onChange(args: SelectedIndexChangedEventData) {        
         this.value = this.items.getValue(args.newIndex);
         this.valueChange.emit(this.value);
+        this.selectedIndex = args.newIndex;
+        this.selectedIndexChange.emit(this.selectedIndex);
     }
 
     public onOpen() {

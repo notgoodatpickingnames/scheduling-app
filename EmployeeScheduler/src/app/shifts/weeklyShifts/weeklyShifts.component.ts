@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ShiftsService } from '~/app/services/shift/shifts.service';
 import { Shift } from '~/app/services/shift/shift';
+import { ShiftType } from '~/app/services/shift/shiftType';
 
 @Component({
     selector: 'ns-weekly-shifts',
@@ -12,8 +13,7 @@ export class WeeklyShiftsComponent {
 
     constructor(private shiftService: ShiftsService) { 
         shiftService.shift$.subscribe(shifts => {
-            shifts.forEach(shifts => console.log(`Year Shift Component Detected Shifts change ${shifts.dayOfTheYear}`));
-            this.shifts = shifts.filter(shift => shift.dayOfTheYear !== undefined);
+            this.shifts = shifts.filter(shift => shift.type === ShiftType.EveryWeek);
         });
     }
 
