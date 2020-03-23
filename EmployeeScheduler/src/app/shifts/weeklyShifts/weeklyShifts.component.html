@@ -11,12 +11,17 @@
             <Label class="day-name-label" text="Sa"></Label>
         </FlexboxLayout> -->
         
-        <StackLayout *ngFor="let day of days" class="day">
+        <StackLayout *ngFor="let day of days" class="day" horizontalAlignment="center">
             <Label
-                text="day.name">
+                class="day-label"
+                [text]="day.name">
             </Label>
-            <StackLayout class="shift-card">
-
+            <StackLayout *ngFor="let shift of day.shifts" class="shift" (tap)="onTap(shift.id)">
+                <Label
+                    class="shift-text"
+                    verticalAlignment="center"
+                    [text]="'From: ' + shift.startTimeAsString + ' to ' + shift.endTimeAsString">
+                </Label>
             </StackLayout>
         </StackLayout>
       

@@ -1,4 +1,4 @@
-<ns-action-bar [title]="'New Yearly Shift'" (back)="onBackAction()"></ns-action-bar>
+<ns-action-bar [title]="'New Shift'" (back)="onBackAction()"></ns-action-bar>
 
 <ScrollView class="body">
     <StackLayout orientation="vertical" class="form">
@@ -42,7 +42,7 @@
         </ns-shift-time-picker>
 
         <ns-text-field
-            label="Slave Count: "
+            label="Staff Count: "
             [(value)]="shift.employeeCount"
             [keyboardType]="numberKeyboardType">
         </ns-text-field>

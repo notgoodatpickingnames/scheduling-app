@@ -1,0 +1,27 @@
+.day {
+    width: 80%;
+}
+
+.day-label {
+    border-bottom-width: 2px;
+    border-bottom-left-radius: 10;
+    border-bottom-right-radius: 10;
+    color: var(--primary-text-color);
+    border-bottom-color: var(--secondary-text-color);
+    width: 100%;
+    text-align: center;
+}
+
+.shift {
+    height: 150px;
+    padding-top: 40px;
+    background-color: lightgray;
+    border-left-width: 2px;
+    border-bottom-width: 2px;
+    border-right-width: 2px;
+    border-bottom-left-radius: 10;
+    border-bottom-right-radius: 10;
+    border-color: var(--secondary-text-color);
+    text-align: center;
+    width: 80%;
+}

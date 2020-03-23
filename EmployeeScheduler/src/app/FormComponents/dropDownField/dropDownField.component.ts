@@ -11,7 +11,7 @@ export class DropDownFieldComponent {
     @Input() public label: string;
     @Input() public items: ValueList<any>;
     @Input() public value: any;
-    @Input() public selectedIndex: number;
+    @Input() public selectedIndex: number = 0;
     @Output() public selectedIndexChange = new EventEmitter<number>();
     @Output() public valueChange = new EventEmitter<any>();
 

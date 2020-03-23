@@ -5,6 +5,7 @@ import { SharedModule } from '../shared.module';
 import { SpecialShiftsComponent } from './specialShifts/specialShifts.component';
 import { CreateShiftComponent } from './createShift/createShift.component';
 import { WeeklyShiftsComponent } from './weeklyShifts/weeklyShifts.component';
+import { EditShiftComponent } from './editShift/editShift.component';
 
 @NgModule({
     imports: [
@@ -15,7 +16,8 @@ import { WeeklyShiftsComponent } from './weeklyShifts/weeklyShifts.component';
         ShiftsComponent,
         SpecialShiftsComponent,
         WeeklyShiftsComponent,
-        CreateShiftComponent
+        CreateShiftComponent,
+        EditShiftComponent
     ],
     providers: [
         // tabService to hold our last tab when navigating the shifts area.

@@ -1,7 +1,7 @@
 import { Injectable, NgZone } from "@angular/core";
 import * as firebase from "nativescript-plugin-firebase";
 import { Observable, throwError, BehaviorSubject, ReplaySubject } from "rxjs";
-import { catchError } from "rxjs/operators";
+import { catchError, map } from "rxjs/operators";
 import { Shift } from "./shift";
 
 @Injectable({
@@ -24,9 +24,13 @@ export class ShiftsService {
     public push(shift: Shift) {
         firebase.push(this._path, shift.asInterface());
     }
+
+    public update(shift: Shift) {
+        firebase.update(`${this._path}/${shift.id}`, shift.asInterface())
+    }
   
-    public get(shiftId: string) {
-        firebase.getValue(`${this._path}/${shiftId}`);
+    public get(id: string): Observable<Shift> {
+        return this.shift$.pipe(map(shifts => shifts.find(shift => shift.id === id)));
     }
   
     private load(): Observable<any> {
@@ -53,7 +57,7 @@ export class ShiftsService {
         if (data) {
             for(const id in data) {
                 if (data.hasOwnProperty(id)) {
-                    const shiftToPush = new Shift(data[id]);
+                    const shiftToPush = new Shift(data[id], id);
                     shifts.push(shiftToPush);
                 }
             }

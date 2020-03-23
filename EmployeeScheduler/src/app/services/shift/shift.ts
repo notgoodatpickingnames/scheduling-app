@@ -6,7 +6,6 @@ import { DatePipe } from "@angular/common";
 import { ShiftType } from "./shiftType";
 
 export class Shift {
-    public shiftId: string;
     public type: ShiftType;
 
     public startTime: ShiftTime;
@@ -19,10 +18,12 @@ export class Shift {
     public dayOfMonth: number; // Happens every month.
     public dayOfTheYear: Date; // Happens every year.
     
+    public id: string;
+
     private datePipe = new DatePipe('en');
 
-    constructor(shift: IShift) {
-        this.shiftId = shift.shiftId;
+    constructor(shift: IShift, id: string) {
+        this.id = id;
         this.type = shift.type;
         this.startTime = shift.startTime;
         this.endTime = shift.endTime;
@@ -36,7 +37,6 @@ export class Shift {
 
     public static constructNew(): Shift {
         return new Shift({
-            shiftId: UUID.constructNew(),
             type: ShiftType.Unknown,
             startTime: ShiftTime.constructNew(),
             endTime: ShiftTime.constructNew(),
@@ -45,12 +45,12 @@ export class Shift {
             dayOfWeek: '',
             dayOfMonth: '',
             dayOfTheYear: ''
-        })
+        },
+        undefined)
     }
 
     public asInterface() : IShift {
         return {
-            shiftId: this.shiftId ? this.shiftId : UUID.constructNew(),
             type: this.type ? this.type : ShiftType.Unknown,
             startTime: this.startTime ? this.startTime : ShiftTime.constructNew(),
             endTime: this.endTime ? this.endTime : ShiftTime.constructNew(),

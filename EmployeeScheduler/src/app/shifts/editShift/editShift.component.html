@@ -1,3 +1,61 @@
-<p>
-  editShift works!
-</p>
+<ns-action-bar [title]="'Edit Shift'" (back)="onBackAction()"></ns-action-bar>
+
+<ScrollView class="body">
+    <StackLayout orientation="vertical" class="form">
+        <ns-drop-down-field
+            label="Type: "
+            [items]="typesAsValueList"
+            [(value)]="shift.type"
+            [(selectedIndex)]="selectedTypeIndex">
+        </ns-drop-down-field>
+
+        <ns-shift-date-picker
+            *ngIf="isOnce || isEveryYear"
+            label="Date: "
+            modalTitle="Date Of Shift"
+            [(date)]="shift.dayOfTheYear">
+        </ns-shift-date-picker>
+
+        <ns-drop-down-field
+            *ngIf="isEveryOtherWeek || isEveryWeek"
+            label="Day: "
+            [items]="daysOfWeek"
+            [(selectedIndex)]="shift.dayOfWeek">
+        </ns-drop-down-field>
+
+        <ns-text-field
+            *ngIf="isEveryMonth"
+            label="Day Of Month: "
+            [(value)]="shift.dayOfMonth"
+            [keyboardType]="numberKeyboardType">
+        </ns-text-field>
+
+        <ns-shift-time-picker
+            label="Start Time: "
+            modalTitle="Start Time"
+            [(shiftTime)]="shift.startTime">
+        </ns-shift-time-picker>
+
+        <ns-shift-time-picker
+            label="End Time: "
+            modalTitle="End Time"
+            [(shiftTime)]="shift.endTime">
+        </ns-shift-time-picker>
+
+        <ns-text-field
+            label="Staff Count: "
+            [(value)]="shift.employeeCount"
+            [keyboardType]="numberKeyboardType">
+        </ns-text-field>
+
+        <ns-text-area
+            label="Notes"
+            [(value)]="shift.notes"
+            [keyboardType]="textKeyboardType">
+
+        </ns-text-area>
+        <StackLayout horizontalAlignment="left" class="button-container">
+            <button text="Add" (tap)="onSubmit()" class="button"></button>
+        </StackLayout>
+    </StackLayout>
+</ScrollView>
