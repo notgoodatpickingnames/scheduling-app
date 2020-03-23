@@ -17,7 +17,7 @@ export class Shift {
     public dayOfWeek: number; // Happens every week.
     public dayOfMonth: number; // Happens every month.
     public dayOfTheYear: Date; // Happens every year.
-    
+
     public id: string;
 
     private datePipe = new DatePipe('en');
@@ -27,12 +27,12 @@ export class Shift {
         this.type = shift.type;
         this.startTime = shift.startTime;
         this.endTime = shift.endTime;
-        this.employeeCount = shift.employeeCount ? NanRemover.removeNAN(shift.employeeCount) : undefined;
+        this.employeeCount = shift.employeeCount !== undefined ? NanRemover.removeNAN(shift.employeeCount) : undefined;
         this.notes = shift.notes;
 
-        this.dayOfWeek = shift.dayOfWeek ? NanRemover.removeNAN(shift.dayOfWeek) : undefined;
-        this.dayOfMonth = shift.dayOfMonth ? NanRemover.removeNAN(shift.dayOfMonth) : undefined;
-        this.dayOfTheYear = shift.dayOfTheYear ? new Date(shift.dayOfTheYear) : undefined;
+        this.dayOfWeek = shift.dayOfWeek !== undefined ? NanRemover.removeNAN(shift.dayOfWeek) : undefined;
+        this.dayOfMonth = shift.dayOfMonth !== undefined ? NanRemover.removeNAN(shift.dayOfMonth) : undefined;
+        this.dayOfTheYear = shift.dayOfTheYear !== undefined ? new Date(shift.dayOfTheYear) : undefined;
     }
 
     public static constructNew(): Shift {
@@ -51,14 +51,14 @@ export class Shift {
 
     public asInterface() : IShift {
         return {
-            type: this.type ? this.type : ShiftType.Unknown,
+            type: this.type !== undefined ? this.type : ShiftType.Unknown,
             startTime: this.startTime ? this.startTime : ShiftTime.constructNew(),
             endTime: this.endTime ? this.endTime : ShiftTime.constructNew(),
-            employeeCount: this.employeeCount ? this.employeeCount.toString() : "",
+            employeeCount: this.employeeCount !== undefined ? this.employeeCount.toString() : "",
             notes: this.notes,
-            dayOfWeek: this.dayOfWeek ? this.dayOfWeek.toString() : "",
-            dayOfMonth: this.dayOfMonth ? this.dayOfMonth.toString() : "",
-            dayOfTheYear: this.dayOfTheYear ? this.dayOfTheYear.toString() : ""
+            dayOfWeek: this.dayOfWeek !== undefined ? this.dayOfWeek.toString() : "",
+            dayOfMonth: this.dayOfMonth !== undefined ? this.dayOfMonth.toString() : "",
+            dayOfTheYear: this.dayOfTheYear !== undefined ? this.dayOfTheYear.toString() : ""
         };
     }
 
