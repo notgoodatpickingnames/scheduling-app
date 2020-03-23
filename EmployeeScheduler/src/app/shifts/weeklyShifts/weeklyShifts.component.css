@@ -15,7 +15,6 @@
 .shift {
     height: 150px;
     padding-top: 40px;
-    background-color: lightgray;
     border-left-width: 2px;
     border-bottom-width: 2px;
     border-right-width: 2px;
@@ -24,4 +23,8 @@
     border-color: var(--secondary-text-color);
     text-align: center;
     width: 80%;
+}
+
+.shift-text {
+    color: var(--primary-text-color);
 }
