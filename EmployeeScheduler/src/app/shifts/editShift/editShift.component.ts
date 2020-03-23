@@ -48,8 +48,10 @@ export class EditShiftComponent implements AfterViewInit {
         this.route.params.subscribe(params => {
             const shiftId = params['id'];
             this.shiftsService.get(shiftId).subscribe(shift => {
-                this.shift = shift;
-                this.selectedTypeIndex = this.typesArray.findIndex(type => type.value === this.shift.type);
+                setTimeout(() => {
+                    this.shift = shift;
+                    this.selectedTypeIndex = this.typesArray.findIndex(type => type.value === this.shift.type);
+                }, 0);
             });
         });
     }
