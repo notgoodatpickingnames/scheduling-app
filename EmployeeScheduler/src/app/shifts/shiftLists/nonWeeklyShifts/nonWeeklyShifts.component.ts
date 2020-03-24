@@ -12,10 +12,10 @@ import { SubscriptionBase } from '~/app/core/subscriptionBase';
   styleUrls: ['./nonWeeklyShifts.component.css']
 })
 export class NonWeeklyShiftsComponent extends SubscriptionBase {
-    public everyYearShifts: Shift[];
-    public everyOtherWeekShifts: Shift[];
-    public everyMonthShifts: Shift[];
-    public oneTimeShifts: Shift[];
+    public everyYearShifts: Shift[] = [];
+    public everyOtherWeekShifts: Shift[] = [];
+    public everyMonthShifts: Shift[] = [];
+    public oneTimeShifts: Shift[] = [];
 
     constructor(private shiftService: ShiftsService,
         private router: Router,
@@ -30,6 +30,22 @@ export class NonWeeklyShiftsComponent extends SubscriptionBase {
 
     public editShift(shiftId: string) {
         this.router.navigate([`./edit/${shiftId}`], {relativeTo: this.route});
+    }
+
+    public get hasEveryYearShifts(): boolean {
+        return this.everyYearShifts.length > 0;
+    }
+
+    public get hasEveryOtherWeekShifts(): boolean {
+        return this.everyOtherWeekShifts.length > 0;
+    }
+
+    public get hasEveryMonthShifts(): boolean {
+        return this.everyMonthShifts.length > 0;
+    }
+
+    public get hasOneTimeShifts(): boolean {
+        return this.oneTimeShifts.length > 0;
     }
 
     private ListenForShifts(shiftService: ShiftsService) {

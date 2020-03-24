@@ -4,8 +4,7 @@
 
 .day-label {
     border-bottom-width: 2px;
-    border-bottom-left-radius: 10;
-    border-bottom-right-radius: 10;
+    border-bottom: 10;
     color: var(--primary-text-color);
     border-bottom-color: var(--secondary-text-color);
     width: 100%;

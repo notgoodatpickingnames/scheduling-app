@@ -43,14 +43,10 @@ export class CreateShiftComponent {
         private router: Router) { }
 
     public onSubmit() {
-        // this.form.submit
-        // if (this.form.isValid) {
-            //alert("The shift is valid so we gon send it boi")
-            this.shiftsService.push(this.shift);
-            this.onBackAction();
-        // } else {
-            // alert("The shift is invalid so fuck you");2
-        //}
+        // Fire validation on all fields
+        // If all fields are valid then pupdate
+        this.shiftsService.push(this.shift);
+        this.onBackAction();
     }
 
     public onBackAction() {

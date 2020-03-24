@@ -1,0 +1,85 @@
+<ScrollView orientation="vertical" class="body">
+    <StackLayout>
+        <StackLayout orientation="vertical" class="shift" *ngIf="hasEveryYearShifts">
+            <Label
+                class="recurrence-label"
+                text="Every Year">
+            </Label>
+            <StackLayout *ngFor="let shift of everyYearShifts" width="100%" (tap)="onShiftCardTap(shift.id)">
+                <ns-date-card
+                    [shift]="shift">
+                </ns-date-card>
+            </StackLayout>
+        </StackLayout>
+        <StackLayout orientation="vertical" class="shift" *ngIf="hasEveryOtherWeekShifts">
+            <Label
+                class="recurrence-label"
+                text="Every Other Week">
+            </Label>
+            <StackLayout *ngFor="let shift of oneTimeShifts" width="100%" (tap)="onShiftCardTap(shift.id)">
+                <ns-date-card
+                    [shift]="shift">
+                </ns-date-card>
+            </StackLayout>
+        </StackLayout>
+        <StackLayout orientation="vertical" class="shift" *ngIf="hasEveryOtherWeekShifts">
+            <Label
+                class="recurrence-label"
+                text="Every Other Week">
+            </Label>
+            <StackLayout *ngFor="let shift of oneTimeShifts" width="100%" (tap)="onShiftCardTap(shift.id)">
+                <ns-date-card
+                    [shift]="shift">
+                </ns-date-card>
+            </StackLayout>
+        </StackLayout>
+        <StackLayout orientation="vertical" class="shift" *ngIf="hasOneTimeShifts">
+            <Label
+                class="recurrence-label"
+                text="One-Time (Will disapear after the date is old)">
+            </Label>
+            <StackLayout *ngFor="let shift of oneTimeShifts" width="100%" (tap)="onShiftCardTap(shift.id)">
+                <ns-date-card
+                    [shift]="shift">
+                </ns-date-card>
+            </StackLayout>
+        </StackLayout>
+    </StackLayout>
+</ScrollView>
+
+
+
+
+
+<!-- <StackLayout *ngFor="let shift of shifts" class="card" orientation="vertical" horizontalAlignment="center">
+            <StackLayout class="row" verticalAlignment="top">
+                <StackLayout horizontalAlignment="left" class="column">
+                    <ns-text-field
+                        horizontalAlignment="left"
+                        readonly="true"
+                        label="Date: "
+                        [value]="shift.dayOfTheYear | date:'shortDate'">
+                    </ns-text-field>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout class="row" verticalAlignment="top">
+                <StackLayout horizontalAlignment="left" class="column">
+                    <ns-text-field
+                        horizontalAlignment="left"
+                        readonly="true"
+                        label="Staff: "
+                        [value]="shift.employeeCount">
+                    </ns-text-field>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout class="row" verticalAlignment="top">
+                <StackLayout horizontalAlignment="left" class="column">
+                    <ns-text-field
+                        horizontalAlignment="left"
+                        readonly="true"
+                        label="From: "
+                        [value]="shift.startTimeAsString + ' to ' + shift.endTimeAsString">
+                    </ns-text-field>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout> -->

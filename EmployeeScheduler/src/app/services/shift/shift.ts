@@ -78,4 +78,12 @@ export class Shift {
 
         return undefined;
     }
+
+    public get dateAsString(): string {
+        if (this.dayOfTheYear) {
+            return this.datePipe.transform(this.dayOfTheYear, 'shortDate');
+        }
+
+        return undefined;
+    }
 }

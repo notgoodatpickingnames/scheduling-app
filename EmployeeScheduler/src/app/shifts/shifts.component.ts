@@ -8,7 +8,7 @@ import { Router, ActivatedRoute } from '@angular/router';
     styleUrls: ['./shifts.component.css']
 })
 export class ShiftsComponent implements AfterViewInit {
-    public selectedTab = 0;
+    public selectedTab = 1;
 
     constructor(private router: Router,
         private route: ActivatedRoute) {

@@ -1,0 +1,14 @@
+.card {
+    border-color: var(--secondary-text-color);
+    text-align: center;
+    width: 80%;
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-bottom-left-radius: 10;
+    border-bottom-right-radius: 10;
+}
+
+.shift-text {
+    color: var(--primary-text-color);
+}

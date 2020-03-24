@@ -14,7 +14,7 @@ import { takeUntil } from 'rxjs/operators';
     styleUrls: ['./weeklyShifts.component.css']
 })
 export class WeeklyShiftsComponent extends SubscriptionBase {
-    public days: Day[] = [];
+    public weeklyShifts: Shift[] = [];
 
     constructor(private shiftService: ShiftsService,
         private router: Router,
@@ -27,15 +27,7 @@ export class WeeklyShiftsComponent extends SubscriptionBase {
         this.editShift(shiftId);
     }
 
-    private buildDays(shifts: Shift[]) {
-        this.days = [];
-        for (let i = 0; i < 7; i++) {
-            const filteredShifts = shifts.filter(shift => shift.dayOfWeek === i);
-            const orderedShifts = filteredShifts.sort((shift1, shift2) => (shift1.startTime.hour > shift2.startTime.hour) ? 1 : -1);
-            const newDay = new Day(Days[i], orderedShifts);
-            this.days.push(newDay);
-        }
-    }
+
 
     private editShift(shiftId: string) {
         this.router.navigate([`./edit/${shiftId}`], {relativeTo: this.route});
@@ -43,8 +35,7 @@ export class WeeklyShiftsComponent extends SubscriptionBase {
 
     private listenForShifts(shiftService: ShiftsService) {
         shiftService.shift$.pipe(takeUntil(this.componentDestroyed)).subscribe(shifts => {
-            const filteredShifts = shifts.filter(shift => shift.recurrenceType === RecurrenceType.EveryWeek);
-            this.buildDays(filteredShifts);
+            this.weeklyShifts = shifts.filter(shift => shift.recurrenceType === RecurrenceType.EveryWeek);
         });
     }
 }
