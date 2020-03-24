@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Shift } from '~/app/services/shift/shift';
 import { Day } from '../../weeklyShifts/day';
 import { Days } from '~/app/core/days';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'ns-week-card',
@@ -13,6 +14,7 @@ export class WeekCardComponent {
         this._shifts = shifts;
         this.days = this.buildDays(shifts);
     }
+    @Output() public onShiftTap = new EventEmitter<string>();
 
     public get shifts(): Shift[] {
         return this._shifts;
@@ -20,6 +22,10 @@ export class WeekCardComponent {
 
     public days: Day[];
     private _shifts: Shift[];
+
+    public onShiftTapped(shiftId: string) {
+        this.onShiftTap.emit(shiftId);
+    }
 
     private buildDays(shifts: Shift[]): Day[] {
         const days = [];
@@ -32,5 +38,4 @@ export class WeekCardComponent {
 
         return days;
     }
-
 }

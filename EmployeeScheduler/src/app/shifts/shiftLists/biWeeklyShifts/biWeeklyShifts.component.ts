@@ -22,7 +22,7 @@ export class BiWeeklyShiftsComponent extends SubscriptionBase {
             this.listenForShifts(shiftService);
     }
 
-    public onTap(shiftId: string) {
+    public onShiftTap(shiftId: string) {
         this.editShift(shiftId);
     }
 

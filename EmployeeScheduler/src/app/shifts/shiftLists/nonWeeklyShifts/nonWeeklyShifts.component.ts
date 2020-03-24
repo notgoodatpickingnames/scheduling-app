@@ -13,7 +13,6 @@ import { SubscriptionBase } from '~/app/core/subscriptionBase';
 })
 export class NonWeeklyShiftsComponent extends SubscriptionBase {
     public everyYearShifts: Shift[] = [];
-    public everyOtherWeekShifts: Shift[] = [];
     public everyMonthShifts: Shift[] = [];
     public oneTimeShifts: Shift[] = [];
 
@@ -36,10 +35,6 @@ export class NonWeeklyShiftsComponent extends SubscriptionBase {
         return this.everyYearShifts.length > 0;
     }
 
-    public get hasEveryOtherWeekShifts(): boolean {
-        return this.everyOtherWeekShifts.length > 0;
-    }
-
     public get hasEveryMonthShifts(): boolean {
         return this.everyMonthShifts.length > 0;
     }
@@ -51,7 +46,6 @@ export class NonWeeklyShiftsComponent extends SubscriptionBase {
     private ListenForShifts(shiftService: ShiftsService) {
         shiftService.shift$.pipe(takeUntil(this.componentDestroyed)).subscribe(shifts => {
             this.everyYearShifts = shifts.filter(shift => shift.recurrenceType === RecurrenceType.EveryYear);
-            this.everyOtherWeekShifts = shifts.filter(shift => shift.recurrenceType === RecurrenceType.EveryOtherWeek);
             this.everyMonthShifts = shifts.filter(shift => shift.recurrenceType === RecurrenceType.EveryMonth);
             this.oneTimeShifts = shifts.filter(shift => shift.recurrenceType === RecurrenceType.OneTime);
         });

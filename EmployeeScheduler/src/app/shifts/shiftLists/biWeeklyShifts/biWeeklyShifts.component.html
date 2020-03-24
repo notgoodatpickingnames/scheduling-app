@@ -5,14 +5,14 @@
                 class="recurrence-label"
                 text="Even Weeks">
             </Label>
-            <ns-week-card [shifts]="evenWeeks"></ns-week-card>
+            <ns-week-card [shifts]="evenWeeks" (onShiftTap)="onShiftTap($event)"></ns-week-card>
         </StackLayout>
         <StackLayout width="100%" class="second-week">
             <Label
                 class="recurrence-label"
                 text="Odd Weeks">
             </Label>
-            <ns-week-card [shifts]="oddWeeks"></ns-week-card>
+            <ns-week-card [shifts]="oddWeeks" (onShiftTap)="onShiftTap($event)"></ns-week-card>
         </StackLayout>
     </StackLayout>
 </ScrollView>
