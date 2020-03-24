@@ -25,8 +25,10 @@ export class ShiftTimePickerComponent {
             startingHour: this.shiftTime && this.shiftTime.hour ? this.shiftTime.hour : new Date().getHours(),
             startingMinute: this.shiftTime && this.shiftTime.minute ? this.shiftTime.minute : 0,
         }).then(timeResponse => {
-            this.shiftTime = timeResponse;
-            this.shiftTimeChange.emit(this.shiftTime);
+            if (timeResponse) {
+                this.shiftTime = timeResponse;
+                this.shiftTimeChange.emit(this.shiftTime);
+            }
         });
     }
 

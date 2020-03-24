@@ -1,24 +1,25 @@
 import { Injectable, NgZone } from "@angular/core";
 import * as firebase from "nativescript-plugin-firebase";
 import { Observable, throwError, BehaviorSubject, ReplaySubject } from "rxjs";
-import { catchError, map } from "rxjs/operators";
+import { catchError, map, takeUntil } from "rxjs/operators";
 import { Shift } from "./shift";
+import { SubscriptionBase } from "~/app/core/subscriptionBase";
 
 @Injectable({
   providedIn: 'root'
 })
-export class ShiftsService {
+export class ShiftsService extends SubscriptionBase {
 
     public shift$ = new ReplaySubject<Shift[]>(1);
 
     private _path = "shifts";
-  
-    constructor(private _ngZone: NgZone) {}
+
+    constructor(private _ngZone: NgZone) {super()}
 
     public initialise(): void {
-        this.load().subscribe(shifts => {
-                this.shift$.next(shifts); 
-            });
+        this.load().pipe(takeUntil(this.componentDestroyed)).subscribe(shifts => {
+            this.shift$.next(shifts);
+        });
     }
 
     public push(shift: Shift) {
@@ -28,11 +29,11 @@ export class ShiftsService {
     public update(shift: Shift) {
         firebase.update(`${this._path}/${shift.id}`, shift.asInterface())
     }
-  
+
     public get(id: string): Observable<Shift> {
         return this.shift$.pipe(map(shifts => shifts.find(shift => shift.id === id)));
     }
-  
+
     private load(): Observable<any> {
         return new Observable((observer: any) => {
 
@@ -46,11 +47,11 @@ export class ShiftsService {
         })
         .pipe(catchError(this.handleErrors));
     }
-  
+
     private handleErrors(error: Response): Observable<never> {
         return throwError(error);
     }
-  
+
     private handleSnapshot(data: any): Shift[] {
         const shifts = [];
 

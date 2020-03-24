@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ShiftsComponent } from './shifts.component';
 import { SharedModule } from '../shared.module';
-import { SpecialShiftsComponent } from './specialShifts/specialShifts.component';
+import { NonWeeklyShiftsComponent } from './nonWeeklyShifts/nonWeeklyShifts.component';
 import { CreateShiftComponent } from './createShift/createShift.component';
 import { WeeklyShiftsComponent } from './weeklyShifts/weeklyShifts.component';
 import { EditShiftComponent } from './editShift/editShift.component';
+import { ShiftsTabService } from './shiftsTab.service';
 
 @NgModule({
     imports: [
@@ -14,13 +15,13 @@ import { EditShiftComponent } from './editShift/editShift.component';
     ],
     declarations: [
         ShiftsComponent,
-        SpecialShiftsComponent,
+        NonWeeklyShiftsComponent,
         WeeklyShiftsComponent,
         CreateShiftComponent,
         EditShiftComponent
     ],
     providers: [
-        // tabService to hold our last tab when navigating the shifts area.
+        ShiftsTabService
     ]
 })
 export class ShiftsModule { }

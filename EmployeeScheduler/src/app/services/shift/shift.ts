@@ -1,12 +1,11 @@
 import { IShift } from "./IShift";
-import { UUID } from "~/app/core/UUID";
 import { NanRemover } from "~/app/core/nanRemover";
 import { ShiftTime } from "~/app/FormComponents/shiftTimePicker/shiftTime";
 import { DatePipe } from "@angular/common";
-import { ShiftType } from "./shiftType";
+import { RecurrenceType } from "./recurrenceType";
 
 export class Shift {
-    public type: ShiftType;
+    public recurrenceType: RecurrenceType;
 
     public startTime: ShiftTime;
     public endTime: ShiftTime;
@@ -24,7 +23,7 @@ export class Shift {
 
     constructor(shift: IShift, id: string) {
         this.id = id;
-        this.type = shift.type;
+        this.recurrenceType = shift.recurrenceType;
         this.startTime = shift.startTime;
         this.endTime = shift.endTime;
         this.employeeCount = shift.employeeCount !== undefined ? NanRemover.removeNAN(shift.employeeCount) : undefined;
@@ -37,7 +36,7 @@ export class Shift {
 
     public static constructNew(): Shift {
         return new Shift({
-            type: ShiftType.Unknown,
+            recurrenceType: RecurrenceType.Unknown,
             startTime: ShiftTime.constructNew(),
             endTime: ShiftTime.constructNew(),
             employeeCount: '',
@@ -51,14 +50,14 @@ export class Shift {
 
     public asInterface() : IShift {
         return {
-            type: this.type !== undefined ? this.type : ShiftType.Unknown,
+            recurrenceType: this.recurrenceType !== undefined ? this.recurrenceType : RecurrenceType.Unknown,
             startTime: this.startTime ? this.startTime : ShiftTime.constructNew(),
             endTime: this.endTime ? this.endTime : ShiftTime.constructNew(),
             employeeCount: this.employeeCount !== undefined ? this.employeeCount.toString() : "",
             notes: this.notes,
             dayOfWeek: this.dayOfWeek !== undefined ? this.dayOfWeek.toString() : "",
             dayOfMonth: this.dayOfMonth !== undefined ? this.dayOfMonth.toString() : "",
-            dayOfTheYear: this.dayOfTheYear !== undefined ? this.dayOfTheYear.toString() : ""
+            dayOfTheYear: this.dayOfTheYear !== undefined && this.dayOfTheYear.toString() !== "Invalid Date" ? this.dayOfTheYear.toString() : ""
         };
     }
 

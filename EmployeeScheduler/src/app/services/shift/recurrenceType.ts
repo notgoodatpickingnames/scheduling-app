@@ -1,4 +1,4 @@
-export enum ShiftType {
+export enum RecurrenceType {
     EveryYear ="Every Year",
     EveryWeek = "Every Week",
     EveryOtherWeek = "Every Other Week",

@@ -1,26 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { ShiftsService } from '~/app/services/shift/shifts.service';
 import { Shift } from '~/app/services/shift/shift';
-import { ShiftType } from '~/app/services/shift/shiftType';
+import { RecurrenceType } from '~/app/services/shift/recurrenceType';
 import { Day } from './day';
 import { Days } from '~/app/core/days';
 import { Router, ActivatedRoute } from '@angular/router';
+import { SubscriptionBase } from '~/app/core/subscriptionBase';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'ns-weekly-shifts',
     templateUrl: './weeklyShifts.component.html',
     styleUrls: ['./weeklyShifts.component.css']
 })
-export class WeeklyShiftsComponent {
+export class WeeklyShiftsComponent extends SubscriptionBase {
     public days: Day[] = [];
 
     constructor(private shiftService: ShiftsService,
         private router: Router,
-        private route: ActivatedRoute) { 
-        shiftService.shift$.subscribe(shifts => {
-            const filteredShifts = shifts.filter(shift => shift.type === ShiftType.EveryWeek);
-            this.buildDays(filteredShifts);
-        });
+        private route: ActivatedRoute) {
+            super();
+            this.listenForShifts(shiftService);
     }
 
     public onTap(shiftId: string) {
@@ -39,5 +39,12 @@ export class WeeklyShiftsComponent {
 
     private editShift(shiftId: string) {
         this.router.navigate([`./edit/${shiftId}`], {relativeTo: this.route});
+    }
+
+    private listenForShifts(shiftService: ShiftsService) {
+        shiftService.shift$.pipe(takeUntil(this.componentDestroyed)).subscribe(shifts => {
+            const filteredShifts = shifts.filter(shift => shift.recurrenceType === RecurrenceType.EveryWeek);
+            this.buildDays(filteredShifts);
+        });
     }
 }

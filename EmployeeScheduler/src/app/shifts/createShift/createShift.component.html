@@ -3,9 +3,9 @@
 <ScrollView class="body">
     <StackLayout orientation="vertical" class="form">
         <ns-drop-down-field
-            label="Type: "
-            [items]="typesAsValueList"
-            [(value)]="shift.type">
+            label="Recurrence: "
+            [items]="recurrenceTypesAsValueList"
+            [(value)]="shift.recurrenceType">
         </ns-drop-down-field>
 
         <ns-shift-date-picker

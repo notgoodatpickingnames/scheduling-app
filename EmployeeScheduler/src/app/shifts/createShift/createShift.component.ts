@@ -5,8 +5,8 @@ import { Shift } from '~/app/services/shift/shift';
 import { ActivatedRoute, Router } from '@angular/router';
 import { KeyboardType } from '~/app/FormComponents/textField/keyboardType';
 import { ValueList } from 'nativescript-drop-down';
-import { ShiftType } from '~/app/services/shift/shiftType';
 import { Monday, Tuesday, Wednesday, Thursday, Sunday, Saturday, Friday } from '~/app/core/days';
+import { RecurrenceType } from '~/app/services/shift/recurrenceType';
 
 @Component({
     selector: 'ns-create-shift',
@@ -20,11 +20,11 @@ export class CreateShiftComponent {
     public textKeyboardType = KeyboardType.text;
     public shift = Shift.constructNew();
 
-    private everyYear = {value: ShiftType.EveryYear, display: ShiftType.EveryYear};
-    private everyMonth = {value: ShiftType.EveryMonth, display: ShiftType.EveryMonth};
-    private everyWeek = {value: ShiftType.EveryWeek, display: ShiftType.EveryWeek};
-    private everyOtherWeek = {value: ShiftType.EveryOtherWeek, display: ShiftType.EveryOtherWeek};
-    private once = {value: ShiftType.OneTime, display: ShiftType.OneTime};
+    private everyYear = {value: RecurrenceType.EveryYear, display: RecurrenceType.EveryYear};
+    private everyMonth = {value: RecurrenceType.EveryMonth, display: RecurrenceType.EveryMonth};
+    private everyWeek = {value: RecurrenceType.EveryWeek, display: RecurrenceType.EveryWeek};
+    private everyOtherWeek = {value: RecurrenceType.EveryOtherWeek, display: RecurrenceType.EveryOtherWeek};
+    private once = {value: RecurrenceType.OneTime, display: RecurrenceType.OneTime};
 
     private monday = {value: Monday, display: Monday};
     private tuesday = {value: Tuesday, display: Tuesday};
@@ -33,8 +33,10 @@ export class CreateShiftComponent {
     private friday = {value: Friday, display: Friday};
     private saturday = {value: Saturday, display: Saturday};
     private sunday = {value: Sunday, display: Sunday};
-    public typesAsValueList = new ValueList<ShiftType>([this.everyYear, this.everyMonth, this.everyWeek, this.everyOtherWeek, this.once]);
-    public daysOfWeek = new ValueList<string>([this.monday, this.tuesday, this.wednesday, this.thursday, this.friday, this.saturday, this.sunday]);
+    private recurrenceTypes = [this.everyYear, this.everyMonth, this.everyWeek, this.everyOtherWeek, this.once];
+    private dayArray = [this.monday, this.tuesday, this.wednesday, this.thursday, this.friday, this.saturday, this.sunday];
+    public recurrenceTypesAsValueList = new ValueList<RecurrenceType>(this.recurrenceTypes);
+    public daysOfWeek = new ValueList<string>(this.dayArray);
 
     constructor(private shiftsService: ShiftsService,
         private route: ActivatedRoute,
@@ -56,22 +58,22 @@ export class CreateShiftComponent {
     }
 
     public get isEveryYear(): boolean {
-        return this.shift.type === ShiftType.EveryYear;
+        return this.shift.recurrenceType === RecurrenceType.EveryYear;
     }
 
     public get isEveryMonth(): boolean {
-        return this.shift.type === ShiftType.EveryMonth;
+        return this.shift.recurrenceType === RecurrenceType.EveryMonth;
     }
 
     public get isEveryWeek(): boolean {
-        return this.shift.type === ShiftType.EveryWeek;
+        return this.shift.recurrenceType === RecurrenceType.EveryWeek;
     }
 
     public get isEveryOtherWeek(): boolean {
-        return this.shift.type === ShiftType.EveryOtherWeek;
+        return this.shift.recurrenceType === RecurrenceType.EveryOtherWeek;
     }
 
     public get isOnce(): boolean {
-        return this.shift.type === ShiftType.OneTime;
+        return this.shift.recurrenceType === RecurrenceType.OneTime;
     }
 }

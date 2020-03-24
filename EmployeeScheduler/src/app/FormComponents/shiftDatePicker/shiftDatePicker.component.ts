@@ -23,14 +23,16 @@ export class ShiftDatePickerComponent{
         this.datePicker.pickDate({
             title: this.modalTitle,
             theme: "dark",
-            startingDate: this.date ? this.date : new Date()
+            startingDate: this.date && this.date.toString() !== "Invalid Date" ? this.date : new Date()
           }).then(result => {
-            this.date = new Date(result.year, result.month - 1, result.day);
-            this.dateChange.emit(this.date);
+            if (result !== undefined) {
+                this.date = new Date(result.year, result.month - 1, result.day);
+                this.dateChange.emit(this.date);
+            }
           });
     }
 
     public get formattedDate(): string {
-        return this.date !== undefined ? this.datePipe.transform(this.date, 'shortDate') : undefined;
+        return this.date !== undefined && this.date.toString() !=="Invalid Date" ? this.datePipe.transform(this.date, 'shortDate') : undefined;
     }
 }

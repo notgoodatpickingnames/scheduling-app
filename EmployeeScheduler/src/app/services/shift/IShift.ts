@@ -1,8 +1,8 @@
+import { RecurrenceType } from "./recurrenceType";
 import { ShiftTime } from "~/app/FormComponents/shiftTimePicker/shiftTime";
-import { ShiftType } from "./shiftType";
 
 export interface IShift {
-    type: ShiftType;
+    recurrenceType: RecurrenceType;
     startTime: ShiftTime;
     endTime: ShiftTime;
     employeeCount: string;
