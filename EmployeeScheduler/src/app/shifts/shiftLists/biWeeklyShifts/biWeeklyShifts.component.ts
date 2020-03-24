@@ -1,20 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { ShiftsService } from '~/app/services/shift/shifts.service';
-import { Shift } from '~/app/services/shift/shift';
-import { RecurrenceType } from '~/app/services/shift/recurrenceType';
-import { Day } from './day';
-import { Days } from '~/app/core/days';
-import { Router, ActivatedRoute } from '@angular/router';
-import { SubscriptionBase } from '~/app/core/subscriptionBase';
 import { takeUntil } from 'rxjs/operators';
+import { SubscriptionBase } from '~/app/core/subscriptionBase';
+import { Shift } from '~/app/services/shift/shift';
+import { ShiftsService } from '~/app/services/shift/shifts.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { RecurrenceType } from '~/app/services/shift/recurrenceType';
 
 @Component({
-    selector: 'ns-weekly-shifts',
-    templateUrl: './weeklyShifts.component.html',
-    styleUrls: ['./weeklyShifts.component.css']
+  selector: 'ns-bi-weekly-shifts',
+  templateUrl: './biWeeklyShifts.component.html',
+  styleUrls: ['./biWeeklyShifts.component.css']
 })
-export class WeeklyShiftsComponent extends SubscriptionBase {
-    public weeklyShifts: Shift[] = [];
+export class BiWeeklyShiftsComponent extends SubscriptionBase {
+    public evenWeeks: Shift[] = [];
+    public oddWeeks: Shift[] = [];
 
     constructor(private shiftService: ShiftsService,
         private router: Router,
@@ -33,7 +32,8 @@ export class WeeklyShiftsComponent extends SubscriptionBase {
 
     private listenForShifts(shiftService: ShiftsService) {
         shiftService.shift$.pipe(takeUntil(this.componentDestroyed)).subscribe(shifts => {
-            this.weeklyShifts = shifts.filter(shift => shift.recurrenceType === RecurrenceType.EveryWeek);
+            this.evenWeeks = shifts.filter(shift => shift.recurrenceType === RecurrenceType.EveryEvenWeek);
+            this.oddWeeks = shifts.filter(shift => shift.recurrenceType === RecurrenceType.EveryOddWeek);
         });
     }
 }

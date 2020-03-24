@@ -9,6 +9,7 @@ import { EditShiftComponent } from './editShift/editShift.component';
 import { ShiftsTabService } from './shiftsTab.service';
 import { DateCardComponent } from './shiftLists/shiftCards/dateCard/dateCard.component';
 import { WeekCardComponent } from './shiftLists/shiftCards/weekCard/weekCard.component';
+import { BiWeeklyShiftsComponent } from './shiftLists/biWeeklyShifts/biWeeklyShifts.component';
 
 @NgModule({
     imports: [
@@ -19,6 +20,7 @@ import { WeekCardComponent } from './shiftLists/shiftCards/weekCard/weekCard.com
         ShiftsComponent,
         NonWeeklyShiftsComponent,
         WeeklyShiftsComponent,
+        BiWeeklyShiftsComponent,
         CreateShiftComponent,
         EditShiftComponent,
         WeekCardComponent,

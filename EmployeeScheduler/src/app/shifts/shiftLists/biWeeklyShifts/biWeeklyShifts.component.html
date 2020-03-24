@@ -1,0 +1,18 @@
+<ScrollView orientation="vertical" class="body">
+    <StackLayout width="80%">
+        <StackLayout width="100%" class="week">
+            <Label
+                class="recurrence-label"
+                text="Even Weeks">
+            </Label>
+            <ns-week-card [shifts]="evenWeeks"></ns-week-card>
+        </StackLayout>
+        <StackLayout width="100%" class="second-week">
+            <Label
+                class="recurrence-label"
+                text="Odd Weeks">
+            </Label>
+            <ns-week-card [shifts]="oddWeeks"></ns-week-card>
+        </StackLayout>
+    </StackLayout>
+</ScrollView>

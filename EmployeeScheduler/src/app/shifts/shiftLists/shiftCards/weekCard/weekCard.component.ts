@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Shift } from '~/app/services/shift/shift';
 import { Day } from '../../weeklyShifts/day';
+import { Days } from '~/app/core/days';
 
 @Component({
   selector: 'ns-week-card',
@@ -10,6 +11,7 @@ import { Day } from '../../weeklyShifts/day';
 export class WeekCardComponent {
     @Input() public set shifts(shifts: Shift[]) {
         this._shifts = shifts;
+        this.days = this.buildDays(shifts);
     }
 
     public get shifts(): Shift[] {
@@ -19,7 +21,7 @@ export class WeekCardComponent {
     public days: Day[];
     private _shifts: Shift[];
 
-    public static buildDays(shifts: Shift[]): Day[] {
+    private buildDays(shifts: Shift[]): Day[] {
         const days = [];
         for (let i = 0; i < 7; i++) {
             const filteredShifts = shifts.filter(shift => shift.dayOfWeek === i);
