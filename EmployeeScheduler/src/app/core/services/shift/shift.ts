@@ -1,6 +1,6 @@
 import { IShift } from "./IShift";
 import { NanRemover } from "~/app/core/nanRemover";
-import { ShiftTime } from "~/app/FormComponents/shiftTimePicker/shiftTime";
+import { ShiftTime } from "~/app/core/FormComponents/shiftTimePicker/shiftTime";
 import { DatePipe } from "@angular/common";
 import { RecurrenceType } from "./recurrenceType";
 

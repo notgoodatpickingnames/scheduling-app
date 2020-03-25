@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ShiftsService } from '~/app/services/shift/shifts.service';
-import { Shift } from '~/app/services/shift/shift';
-import { RecurrenceType } from '~/app/services/shift/recurrenceType';
+import { ShiftsService } from '~/app/core/services/shift/shifts.service';
+import { Shift } from '~/app/core/services/shift/shift';
+import { RecurrenceType } from '~/app/core/services/shift/recurrenceType';
 import { Router, ActivatedRoute } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { SubscriptionBase } from '~/app/core/subscriptionBase';

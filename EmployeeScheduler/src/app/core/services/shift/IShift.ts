@@ -1,5 +1,5 @@
 import { RecurrenceType } from "./recurrenceType";
-import { ShiftTime } from "~/app/FormComponents/shiftTimePicker/shiftTime";
+import { ShiftTime } from "~/app/core/FormComponents/shiftTimePicker/shiftTime";
 
 export interface IShift {
     recurrenceType: RecurrenceType;

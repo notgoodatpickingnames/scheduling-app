@@ -1,5 +1,4 @@
 import { Component, OnInit, Output, Input, ViewChild, EventEmitter } from '@angular/core';
-import { CalanderContext } from './calanderContext';
 import { MonthComponent } from './month/month.component';
 
 @Component({
@@ -10,7 +9,6 @@ import { MonthComponent } from './month/month.component';
 export class CalanderComponent implements OnInit {
     @ViewChild(MonthComponent, {read: MonthComponent, static: false}) public monthComponent: MonthComponent;
 
-    @Input() public context: CalanderContext = CalanderContext.Month;
     @Input() public set date(date: Date) {
         if (date!== this._date) {
             this._date = date;
@@ -31,25 +29,5 @@ export class CalanderComponent implements OnInit {
     }
 
     ngOnInit() {
-    }
-
-    public switchContext(context: CalanderContext) {
-        // Do context based stuff.
-    }
-
-    public get isYearContext() {
-        return this.context == CalanderContext.Year;
-    }
-
-    public get isMonthContext() {
-        return this.context == CalanderContext.Month;
-    }
-
-    public get isWeekContext() {
-        return this.context == CalanderContext.Week;
-    }
-
-    public get isDayContext() {
-        return this.context == CalanderContext.Day;
     }
 }

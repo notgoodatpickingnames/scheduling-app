@@ -2,7 +2,7 @@ import * as firebase from 'nativescript-plugin-firebase';
 import { Component } from "@angular/core";
 import { DrawerTransitionBase, SlideInOnTopTransition, RadSideDrawer } from "nativescript-ui-sidedrawer";
 import { Router, ActivatedRoute } from '@angular/router';
-import { ShiftsService } from './services/shift/shifts.service';
+import { ShiftsService } from './core/services/shift/shifts.service';
 import { ApplicationEventData } from 'tns-core-modules/application/application';
 import * as app from "tns-core-modules/application";
 
@@ -22,7 +22,6 @@ export class AppComponent {
         this.initialiseFirebaseAndAuthenticate();
     }
 
-
     private initialiseFirebaseAndAuthenticate() {
         firebase.init()
             .then(() => {
@@ -36,7 +35,7 @@ export class AppComponent {
 
     ngOnInit(): void {
         this.sideDrawerTransition = new SlideInOnTopTransition();
-        this.router.navigate(['shifts'], {relativeTo: this.route});
+        this.router.navigate(['scheduling'], {relativeTo: this.route});
     }
 
     public onNavigationTap(route: string) {

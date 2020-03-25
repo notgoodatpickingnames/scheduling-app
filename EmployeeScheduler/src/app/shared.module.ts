@@ -3,14 +3,16 @@ import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { NativeScriptFormsModule } from "nativescript-angular/forms";
-import { ActionBarComponent } from "./actionBar/actionBar.component";
+import { ActionBarComponent } from "./core/actionBar/actionBar.component";
 import { CommonModule } from "@angular/common";
 import { MatCardModule } from "@angular/material/card"
-import { ShiftDatePickerComponent } from "./FormComponents/shiftDatePicker/shiftDatePicker.component";
-import { ShiftTimePickerComponent } from "./FormComponents/shiftTimePicker/shiftTimePicker.component";
-import { TextFieldComponent } from "./FormComponents/textField/textField.component";
-import { TextAreaComponent } from "./FormComponents/textArea/textArea.component";
-import { DropDownFieldComponent } from "./FormComponents/dropDownField/dropDownField.component";
+import { ShiftDatePickerComponent } from "./core/FormComponents/shiftDatePicker/shiftDatePicker.component";
+import { ShiftTimePickerComponent } from "./core/FormComponents/shiftTimePicker/shiftTimePicker.component";
+import { TextFieldComponent } from "./core/FormComponents/textField/textField.component";
+import { TextAreaComponent } from "./core/FormComponents/textArea/textArea.component";
+import { DropDownFieldComponent } from "./core/FormComponents/dropDownField/dropDownField.component";
+import { CalanderComponent } from "./calander/calander.component";
+import { CalanderComponentModule } from "./calander/calanderComponent.module";
 
 @NgModule({
     imports: [

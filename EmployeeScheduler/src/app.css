@@ -37,7 +37,7 @@ The following CSS rule changes the font size of all Buttons that have the
     --main-bg-color: white;
     --success-color: #00C851;
     --warning-color: #ffbb33;
-    --conflict-color: #ff4444;
+    --error-color: #ff4444;
 }
 
 /*

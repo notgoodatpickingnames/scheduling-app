@@ -1,4 +1,4 @@
-import { Shift } from "~/app/services/shift/shift";
+import { Shift } from "~/app/core/services/shift/shift";
 import { Days } from "~/app/core/days";
 
 export class Day {

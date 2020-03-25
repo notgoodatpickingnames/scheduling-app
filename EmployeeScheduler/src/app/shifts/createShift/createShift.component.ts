@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ShiftsService } from '~/app/services/shift/shifts.service';
-import { Shift } from '~/app/services/shift/shift';
+import { ShiftsService } from '~/app/core/services/shift/shifts.service';
+import { Shift } from '~/app/core/services/shift/shift';
 import { ActivatedRoute, Router } from '@angular/router';
-import { KeyboardType } from '~/app/FormComponents/textField/keyboardType';
+import { KeyboardType } from '~/app/core/FormComponents/textField/keyboardType';
 import { ValueList } from 'nativescript-drop-down';
 import { Monday, Tuesday, Wednesday, Thursday, Sunday, Saturday, Friday } from '~/app/core/days';
-import { RecurrenceType } from '~/app/services/shift/recurrenceType';
+import { RecurrenceType } from '~/app/core/services/shift/recurrenceType';
 
 @Component({
     selector: 'ns-create-shift',

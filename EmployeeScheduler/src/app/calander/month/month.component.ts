@@ -1,9 +1,5 @@
 import { Component, OnInit, Input, ViewChild, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
-import { CalanderContext } from '../calanderContext';
-import { Week } from '../models/week';
 import { Month } from '../models/month';
-import { MonthDaySelectorComponent } from './monthDaySelector/monthDaySelector.component';
-import { StackLayout } from '@nativescript/core/ui/layouts/stack-layout';
 
 @Component({
   selector: 'ns-month',

@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { KeyboardType } from '~/app/FormComponents/textField/keyboardType';
-import { Shift } from '~/app/services/shift/shift';
-import { RecurrenceType } from '~/app/services/shift/recurrenceType';
+import { KeyboardType } from '~/app/core/FormComponents/textField/keyboardType';
+import { Shift } from '~/app/core/services/shift/shift';
+import { RecurrenceType } from '~/app/core/services/shift/recurrenceType';
 import { Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday } from '~/app/core/days';
 import { ValueList } from 'nativescript-drop-down';
-import { ShiftsService } from '~/app/services/shift/shifts.service';
+import { ShiftsService } from '~/app/core/services/shift/shifts.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SubscriptionBase } from '~/app/core/subscriptionBase';
 import { takeUntil } from 'rxjs/operators';
