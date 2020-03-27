@@ -16,7 +16,7 @@
         </ns-shift-date-picker>
 
         <ns-drop-down-field
-            *ngIf="isEveryOtherWeek || isEveryWeek"
+            *ngIf="isEveryWeek"
             label="Day: "
             [items]="daysOfWeek"
             [(selectedIndex)]="shift.dayOfWeek">

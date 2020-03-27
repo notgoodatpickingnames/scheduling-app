@@ -10,32 +10,14 @@ export class Day {
     private datePipe = new DatePipe('en');
 
     private conflict: boolean;
-    private noShift: boolean;
+    private noShift: boolean = true;
     private warning: boolean;
     private allMet: boolean;
 
-    constructor(date: Date) {
+    constructor(date: Date, shifts: Shift[]) {
         this.date = date;
         this.name = this.datePipe.transform(this.date, 'EEEEEE');
         this.dayOfMonth = this.date.getDate().toString();
-
-
-        const min = Math.ceil(0);
-        const max = Math.floor(3);
-        const random = Math.floor(Math.random() * (max - min + 1)) + min;
-
-        switch(random) {
-            case 0: this.conflict = true;
-                break;
-            case 1: this.noShift = true;
-                break;
-            case 2: this.warning = true;
-                break;
-            case 3: this.allMet = true;
-                break;
-            default: this.allMet = true;
-                break;
-        }
     }
 
     public get hasConflict(): boolean {

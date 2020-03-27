@@ -32,8 +32,8 @@ export class BiWeeklyShiftsComponent extends SubscriptionBase {
 
     private listenForShifts(shiftService: ShiftsService) {
         shiftService.shift$.pipe(takeUntil(this.componentDestroyed)).subscribe(shifts => {
-            this.evenWeeks = shifts.filter(shift => shift.recurrenceType === RecurrenceType.EveryEvenWeek);
-            this.oddWeeks = shifts.filter(shift => shift.recurrenceType === RecurrenceType.EveryOddWeek);
+            // this.evenWeeks = shifts.filter(shift => shift.recurrenceType === RecurrenceType.EveryEvenWeek);
+            // this.oddWeeks = shifts.filter(shift => shift.recurrenceType === RecurrenceType.EveryOddWeek);
         });
     }
 }

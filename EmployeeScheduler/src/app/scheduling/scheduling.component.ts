@@ -3,6 +3,7 @@ import { Month } from './models/month';
 import { ShiftsService } from '../core/services/shift/shifts.service';
 import { SubscriptionBase } from '../core/subscriptionBase';
 import { Shift } from '../core/services/shift/shift';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'ns-scheduling',
@@ -11,8 +12,7 @@ import { Shift } from '../core/services/shift/shift';
 })
 export class SchedulingComponent extends SubscriptionBase {
     private today = new Date();
-    private shifts: Shift[] = [];
-    public month = new Month(this.today.getFullYear(), this.today.getMonth(), this.shifts);
+    public month = new Month(this.today.getFullYear(), this.today.getMonth(), this.shiftService.shift$);
 
     constructor(private shiftService: ShiftsService) {
         super();
@@ -24,14 +24,10 @@ export class SchedulingComponent extends SubscriptionBase {
     }
 
     public onNextMonthClick() {
-        this.month = new Month(this.month.year, this.month.monthNumber + 1, this.shifts);
+        this.month = new Month(this.month.year, this.month.monthNumber + 1, this.shiftService.shift$);
     }
 
     public onPreviousMonthClick() {
-        this.month = new Month(this.month.year, this.month.monthNumber - 1, this.shifts);
-    }
-
-    private listenForShifts(): void {
-        this.shiftService.shift$
+        this.month = new Month(this.month.year, this.month.monthNumber - 1, this.shiftService.shift$);
     }
 }

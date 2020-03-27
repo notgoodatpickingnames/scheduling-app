@@ -25,8 +25,8 @@ export class EditShiftComponent extends SubscriptionBase implements AfterViewIni
   private everyYear = {value: RecurrenceType.EveryYear, display: RecurrenceType.EveryYear};
   private everyMonth = {value: RecurrenceType.EveryMonth, display: RecurrenceType.EveryMonth};
   private everyWeek = {value: RecurrenceType.EveryWeek, display: RecurrenceType.EveryWeek};
-  private everyOddWeek = {value: RecurrenceType.EveryOddWeek, display: RecurrenceType.EveryOddWeek};
-  private everyEvenWeek = {value: RecurrenceType.EveryEvenWeek, display: RecurrenceType.EveryEvenWeek};
+  // private everyOddWeek = {value: RecurrenceType.EveryOddWeek, display: RecurrenceType.EveryOddWeek};
+  // private everyEvenWeek = {value: RecurrenceType.EveryEvenWeek, display: RecurrenceType.EveryEvenWeek};
   private once = {value: RecurrenceType.OneTime, display: RecurrenceType.OneTime};
 
   private monday = {value: Monday, display: Monday};
@@ -36,7 +36,7 @@ export class EditShiftComponent extends SubscriptionBase implements AfterViewIni
   private friday = {value: Friday, display: Friday};
   private saturday = {value: Saturday, display: Saturday};
   private sunday = {value: Sunday, display: Sunday};
-  private recurrenceTypes = [this.everyYear, this.everyMonth, this.everyWeek, this.everyOddWeek, this.everyEvenWeek, this.once];
+  private recurrenceTypes = [this.everyYear, this.everyMonth, this.everyWeek, this.once];
   private dayArray = [this.monday, this.tuesday, this.wednesday, this.thursday, this.friday, this.saturday, this.sunday];
   public recurrenceTypesAsValueList = new ValueList<RecurrenceType>(this.recurrenceTypes);
   public daysOfWeek = new ValueList<string>(this.dayArray);
@@ -80,10 +80,6 @@ export class EditShiftComponent extends SubscriptionBase implements AfterViewIni
 
     public get isEveryWeek(): boolean {
         return this.shift.recurrenceType === RecurrenceType.EveryWeek;
-    }
-
-    public get isEveryOtherWeek(): boolean {
-        return this.shift.recurrenceType === RecurrenceType.EveryEvenWeek || this.shift.recurrenceType === RecurrenceType.EveryOddWeek;
     }
 
     public get isOnce(): boolean {
