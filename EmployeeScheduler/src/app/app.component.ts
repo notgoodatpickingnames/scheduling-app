@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ShiftsService } from './core/services/shift/shifts.service';
 import { ApplicationEventData } from 'tns-core-modules/application/application';
 import * as app from "tns-core-modules/application";
+import { SchedulesService } from './core/services/schedule/schedules.service';
 
 @Component({
     selector: "ns-app",
@@ -17,7 +18,8 @@ export class AppComponent {
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private shiftsService: ShiftsService
+        private shiftsService: ShiftsService,
+        private schedulesService: SchedulesService
     ) {
         this.initialiseFirebaseAndAuthenticate();
     }
@@ -50,5 +52,6 @@ export class AppComponent {
 
     private loadServices() {
         this.shiftsService.initialise();
+        this.schedulesService.initialise();
     }
 }

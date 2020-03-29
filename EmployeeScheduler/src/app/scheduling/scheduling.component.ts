@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Month } from './models/month';
 import { ShiftsService } from '../core/services/shift/shifts.service';
 import { SubscriptionBase } from '../core/subscriptionBase';
@@ -6,30 +6,23 @@ import { Shift } from '../core/services/shift/shift';
 import { takeUntil } from 'rxjs/operators';
 import { Day } from './models/day';
 import { SchedulesService } from '../core/services/schedule/schedules.service';
+import { Page } from 'tns-core-modules/ui/page/page';
 
 @Component({
     selector: 'ns-scheduling',
     templateUrl: './scheduling.component.html',
     styleUrls: ['./scheduling.component.css']
 })
-export class SchedulingComponent extends SubscriptionBase {
+export class SchedulingComponent{
     private today = new Date();
     private selectedMonthNumber: number = this.today.getMonth();
     private selectedYear: number = this.today.getFullYear();
     
-    public previousMonth = new Month(this.today.getFullYear(), this.today.getMonth(), this.shiftsService.shift$, this.schedulesService.schedule$);
-    public selectedMonth = new Month(this.today.getFullYear(), this.today.getMonth(), this.shiftsService.shift$, this.schedulesService.schedule$);
-    public nextMonth = new Month(this.today.getFullYear(), this.today.getMonth(), this.shiftsService.shift$, this.schedulesService.schedule$);
+    // public previousMonth = new Month(this.selectedYear, this.selectedMonthNumber - 1); 
+    public selectedMonth = new Month(this.selectedYear, this.selectedMonthNumber);
+    // public nextMonth = new Month(this.selectedYear, this.selectedMonthNumber + 1);
 
-    constructor(private shiftsService: ShiftsService,
-        private schedulesService: SchedulesService) {
-        super();
-
-        this.selectedMonth = new Month(this.selectedYear,
-            this.selectedMonthNumber,
-            this.shiftsService.shift$,
-            this.schedulesService.schedule$);
-    }
+    constructor() { }
 
     public get nameOfMonth(): string {
         return this.selectedMonth.name;

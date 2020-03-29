@@ -9,19 +9,19 @@ export class Week {
     public daysOfTheWeek: string[] = [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday];
     public days: Day[] = [];
 
-    constructor(startDate: Date, shift$: Observable<Shift[]>, schedule$: Observable<Schedule[]>) {
-        this.buildDays(startDate, shift$, schedule$);
+    constructor(startDate: Date) {
+        this.buildDays(startDate);
     }
 
     public getDayOfWeek(day: number) {
         return this.daysOfTheWeek[day];
     }
 
-    private buildDays(startDate: Date, shift$: Observable<Shift[]>, schedule$: Observable<Schedule[]>) {
+    private buildDays(startDate: Date) {
         for (let dayOfWeek = 0; dayOfWeek < 7; dayOfWeek++) {
             const date = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + dayOfWeek);
             
-            const day = new Day(date, shift$, schedule$);
+            const day = new Day(date);
             this.days.push(day);
         }
     }
