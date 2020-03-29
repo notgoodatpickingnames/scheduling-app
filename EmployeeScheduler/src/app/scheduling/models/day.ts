@@ -1,6 +1,6 @@
 import { DatePipe } from "@angular/common";
 import { Shift } from "~/app/core/services/shift/shift";
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject, Observable, combineLatest } from "rxjs";
 import { EventEmitter } from "@angular/core";
 import { SubscriptionBase } from "~/app/core/subscriptionBase";
 import { takeUntil } from "rxjs/operators";
@@ -13,24 +13,27 @@ export class Day extends SubscriptionBase {
     public name: string;
     public dayOfMonth: number;
     public shifts: Shift[] = [];
-    public schedule: Schedule;
+    public schedules: Schedule[] = [];
     public stateChange = new EventEmitter<DayStates>();
 
     private datePipe = new DatePipe('en');
     private state = DayStates.normal;
 
-    constructor(date: Date, shifts: Observable<Shift[]>) {
+    constructor(date: Date, shift$: Observable<Shift[]>, schedule$: Observable<Schedule[]>) {
         super();
         this.date = date;
         this.name = this.datePipe.transform(this.date, 'EEEEEE');
         this.dayOfMonth = this.date.getDate();
-        this.listenForShifts(shifts);
+        this.listenForData(shift$, schedule$);
         this.stateChange.emit(this.state);
     }
 
-    private listenForShifts(shifts: Observable<Shift[]>): void {
-        shifts.pipe(takeUntil(this.componentDestroyed)).subscribe(shifts => {
+    private listenForData(shift$: Observable<Shift[]>, schedule$: Observable<Schedule[]>): void {
+        combineLatest(shift$, schedule$).pipe(takeUntil(this.componentDestroyed)).subscribe(data => {
+            const shifts = data[0];
+            const schedules = data[1];
             this.shifts = this.filterShifts(shifts);
+            this.schedules = this.filterSchedules(schedules);
             this.setState();
         });
     }
@@ -39,11 +42,17 @@ export class Day extends SubscriptionBase {
         return shifts.filter(shift => this.isShiftOnDay(shift));
     }
 
+    private filterSchedules(schedules: Schedule[]): Schedule[] {
+        return schedules.filter(schedule => schedule.date === this.date)
+    }
+
     private setState(): void {
         if (this.shifts.length > 0) {
-
+            if (this.schedules.some)
         }
     }
+
+    private 
 
     private isShiftOnDay(shift: Shift): boolean {
         switch(shift.recurrenceType) {

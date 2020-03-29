@@ -5,6 +5,7 @@ import { SubscriptionBase } from '../core/subscriptionBase';
 import { Shift } from '../core/services/shift/shift';
 import { takeUntil } from 'rxjs/operators';
 import { Day } from './models/day';
+import { SchedulesService } from '../core/services/schedule/schedules.service';
 
 @Component({
     selector: 'ns-scheduling',
@@ -16,14 +17,18 @@ export class SchedulingComponent extends SubscriptionBase {
     private selectedMonthNumber: number = this.today.getMonth();
     private selectedYear: number = this.today.getFullYear();
     
-    public previousMonth = new Month(this.today.getFullYear(), this.today.getMonth(), this.shiftService.shift$);
-    public selectedMonth = new Month(this.today.getFullYear(), this.today.getMonth(), this.shiftService.shift$);
-    public nextMonth = new Month(this.today.getFullYear(), this.today.getMonth(), this.shiftService.shift$);
+    public previousMonth = new Month(this.today.getFullYear(), this.today.getMonth(), this.shiftsService.shift$, this.schedulesService.schedule$);
+    public selectedMonth = new Month(this.today.getFullYear(), this.today.getMonth(), this.shiftsService.shift$, this.schedulesService.schedule$);
+    public nextMonth = new Month(this.today.getFullYear(), this.today.getMonth(), this.shiftsService.shift$, this.schedulesService.schedule$);
 
-    constructor(private shiftService: ShiftsService) {
+    constructor(private shiftsService: ShiftsService,
+        private schedulesService: SchedulesService) {
         super();
 
-        this.selectedMonth = new Month(this.selectedYear, this.selectedMonthNumber, this.shiftService.shift$);
+        this.selectedMonth = new Month(this.selectedYear,
+            this.selectedMonthNumber,
+            this.shiftsService.shift$,
+            this.schedulesService.schedule$);
     }
 
     public get nameOfMonth(): string {
