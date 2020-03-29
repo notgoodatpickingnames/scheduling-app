@@ -14,13 +14,6 @@ export class Month extends SubscriptionBase {
 
     private datePipe = new DatePipe('en');
 
-    private everyWeekShifts: Shift[];
-    private everyOddWeekShifts: Shift[];
-    private everyEvenWeekShifts: Shift[];
-    private oneTimeShifts: Shift[];
-    private everyYearShifts: Shift[];
-    private everyMonthShifts: Shift[];
-
     constructor(year: number, monthNumber: number, shift$: Observable<Shift[]>) {
         super();
 
@@ -35,12 +28,10 @@ export class Month extends SubscriptionBase {
     }
 
     private listenForShifts(shift$: Observable<Shift[]>): void {
-        shift$.pipe(takeUntil(this.componentDestroyed)).subscribe(shifts => {
-            this.buildWeeks(shifts);
-        });
+        this.buildWeeks(shift$);
     }
 
-    private buildWeeks(shifts: Shift[]) {
+    private buildWeeks(shifts: Observable<Shift[]>) {
         const firstOfTheMonth = new Date(this.year, this.monthNumber, 1);
         const firstSunday = new Date(this.year, this.monthNumber, firstOfTheMonth.getDate() - firstOfTheMonth.getDay());
 

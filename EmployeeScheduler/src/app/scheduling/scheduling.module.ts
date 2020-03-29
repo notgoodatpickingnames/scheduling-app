@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SchedulingComponent } from './scheduling.component';
 import { SharedModule } from '../shared.module';
 import { CalanderComponentModule } from '../calander/calanderComponent.module';
+import { SchedulingDayComponent } from './schedulingDay/schedulingDay.component';
 
 @NgModule({
     imports: [
@@ -11,7 +12,8 @@ import { CalanderComponentModule } from '../calander/calanderComponent.module';
         SharedModule
     ],
     declarations: [
-        SchedulingComponent
+        SchedulingComponent,
+        SchedulingDayComponent
     ]
 })
 export class SchedulingModule { }

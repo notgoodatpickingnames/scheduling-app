@@ -5,24 +5,23 @@ import { DatePipe } from "@angular/common";
 import { RecurrenceType } from "./recurrenceType";
 
 export class Shift {
-    public recurrenceType: RecurrenceType;
+    public shiftId: string;
 
+    public recurrenceType: RecurrenceType;
     public startTime: ShiftTime;
     public endTime: ShiftTime;
     public employeeCount: number;
     public notes: string;
 
     // There can either be a day of the week or a day of the month or a day of the year.
-    public dayOfWeek: number; // Happens every week.
-    public dayOfMonth: number; // Happens every month.
-    public dayOfTheYear: Date; // Happens every year.
-
-    public id: string;
+    public dayOfWeek: number;
+    public dayOfMonth: number;
+    public dayOfTheYear: Date;
 
     private datePipe = new DatePipe('en');
 
     constructor(shift: IShift, id: string) {
-        this.id = id;
+        this.shiftId = id;
         this.recurrenceType = shift.recurrenceType;
         this.startTime = shift.startTime;
         this.endTime = shift.endTime;

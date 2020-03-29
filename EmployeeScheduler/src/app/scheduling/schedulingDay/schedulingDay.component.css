@@ -1,0 +1,19 @@
+.day {
+    width: 100%;
+    text-align: center;
+    color: var(--primary-text-color);
+}
+
+.day-container {
+    height: 150px;
+    background-color: var(--main-bg-color);
+    border-right-width: 2px;
+    border-left-width: 2px;
+    border-bottom-width: 2px;
+    border-bottom-left-radius: 10;
+    border-bottom-right-radius: 10;
+}
+
+.not-in-month {
+    background-color: var(--secondary-text-color);
+}

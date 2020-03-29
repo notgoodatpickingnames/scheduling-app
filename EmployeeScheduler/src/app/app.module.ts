@@ -5,7 +5,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 // Uncomment and add to NgModule imports if you need to use two-way binding
 import { NativeScriptFormsModule } from "nativescript-angular/forms";
-import { AccountService } from "./core/services/account.service";
+import { AccountService } from "./core/services/account/account.service";
 
 // Uncomment and add to NgModule imports if you need to use the HttpClient wrapper
 // import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
@@ -17,6 +17,7 @@ import { ShiftsModule } from "./shifts/shifts.module";
 import { ShiftsService } from "./core/services/shift/shifts.service";
 import { DropDownModule } from "nativescript-drop-down/angular";
 import { SchedulingModule } from "./scheduling/scheduling.module";
+import { SchedulesService } from "./core/services/schedule/schedules.service";
 //import * as utils from "tns-core-modules/utils/utils";
 
 @NgModule({
@@ -38,7 +39,8 @@ import { SchedulingModule } from "./scheduling/scheduling.module";
    ],
    providers: [
       AccountService,
-      ShiftsService
+      ShiftsService,
+      SchedulesService
    ],
    schemas: [
       NO_ERRORS_SCHEMA

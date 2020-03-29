@@ -3,9 +3,9 @@
 
 <StackLayout class="body month">
     <FlexboxLayout orientation="horizontal" horizontalAlignment="center" class="month-selector">
-        <Label text="&#xf053;" class="fas left" (tap)="onPreviousMonthClick()"></Label>
+        <Label text="&#xf053;" class="fas left" (tap)="onPreviousMonthTap()"></Label>
         <Label [text]="nameOfMonth" class="center"></Label>
-        <Label text="&#xf054;" class="fas right" (tap)="onNextMonthClick()"></Label>
+        <Label text="&#xf054;" class="fas right" (tap)="onNextMonthTap()"></Label>
     </FlexboxLayout>
     <FlexboxLayout orientation="horizontal" class="day-labels">
         <Label class="day-name-label border-right" text="Su"></Label>
@@ -18,13 +18,10 @@
     </FlexboxLayout>
     <ScrollView orientation="vertical">
         <StackLayout>
-            <StackLayout orientation="vertical" *ngFor="let week of month.weeks" class="week">
+            <StackLayout orientation="vertical" *ngFor="let week of selectedMonth.weeks" class="week">
                 <FlexboxLayout orientation="horizontal">
                     <StackLayout *ngFor="let day of week.days" class="day-container">
-                        <Label class="day warning" *ngIf="day.hasWarning" [text]="day.dayOfMonth"></Label>
-                        <Label class="day conflict" *ngIf="day.hasConflict" [text]="day.dayOfMonth"></Label>
-                        <Label class="day shifts-met" *ngIf="day.hasAllShiftsMet" [text]="day.dayOfMonth"></Label>
-                        <Label class="day" *ngIf="day.hasNoShifts" [text]="day.dayOfMonth"></Label>
+                        <ns-scheduling-day [day]="day" [monthNumber]="selectedMonthNumber" (onDayTap)="onDayTap($event)"></ns-scheduling-day>
                     </StackLayout>
                 </FlexboxLayout>
             </StackLayout>

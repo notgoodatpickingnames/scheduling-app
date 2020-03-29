@@ -35,7 +35,7 @@ export class CreateShiftComponent {
     private saturday = {value: Saturday, display: Saturday};
     private sunday = {value: Sunday, display: Sunday};
     private recurrenceTypes = [this.everyYear, this.everyMonth, this.everyWeek, this.once];
-    private dayArray = [this.monday, this.tuesday, this.wednesday, this.thursday, this.friday, this.saturday, this.sunday];
+    private dayArray = [ this.sunday, this.monday, this.tuesday, this.wednesday, this.thursday, this.friday, this.saturday];
     public recurrenceTypesAsValueList = new ValueList<RecurrenceType>(this.recurrenceTypes);
     public daysOfWeek = new ValueList<string>(this.dayArray);
 

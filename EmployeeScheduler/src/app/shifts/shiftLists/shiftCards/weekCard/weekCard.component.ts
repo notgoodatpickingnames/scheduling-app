@@ -30,7 +30,7 @@ export class WeekCardComponent {
     private buildDays(shifts: Shift[]): Day[] {
         const days = [];
         for (let i = 0; i < 7; i++) {
-            const filteredShifts = shifts.filter(shift => shift.dayOfWeek === i);
+            const filteredShifts = shifts.filter(shift => shift.dayOfWeek === i + 1);
             const orderedShifts = filteredShifts.sort((shift1, shift2) => (shift1.startTime.hour > shift2.startTime.hour) ? 1 : -1);
             const newDay = new Day(Days[i], orderedShifts);
             days.push(newDay);

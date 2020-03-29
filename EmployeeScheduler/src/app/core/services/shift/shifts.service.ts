@@ -9,7 +9,6 @@ import { SubscriptionBase } from "~/app/core/subscriptionBase";
   providedIn: 'root'
 })
 export class ShiftsService extends SubscriptionBase {
-
     public shift$ = new ReplaySubject<Shift[]>(1);
 
     private _path = "shifts";
@@ -27,11 +26,11 @@ export class ShiftsService extends SubscriptionBase {
     }
 
     public update(shift: Shift) {
-        firebase.update(`${this._path}/${shift.id}`, shift.asInterface())
+        firebase.update(`${this._path}/${shift.shiftId}`, shift.asInterface())
     }
 
     public get(id: string): Observable<Shift> {
-        return this.shift$.pipe(map(shifts => shifts.find(shift => shift.id === id)));
+        return this.shift$.pipe(map(shifts => shifts.find(shift => shift.shiftId === id)));
     }
 
     private load(): Observable<any> {
