@@ -82,6 +82,7 @@ export class SchedulingDayComponent extends SubscriptionBase {
     }
 
     private animateToWarning() {
+        alert('the state has been changed to warning');
         this.animateBackgroundColor(this.containerView, warningColor);
     }
 

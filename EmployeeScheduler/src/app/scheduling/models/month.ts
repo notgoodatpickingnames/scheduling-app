@@ -28,13 +28,13 @@ export class Month extends SubscriptionBase {
         return new Date(this.year, this.monthNumber + 1, 0).getDate();
     }
 
-    private buildWeeks(shifts: Observable<Shift[]>, schedule$: Observable<Schedule[]>) {
+    private buildWeeks(shift$: Observable<Shift[]>, schedule$: Observable<Schedule[]>) {
         const firstOfTheMonth = new Date(this.year, this.monthNumber, 1);
         const firstSunday = new Date(this.year, this.monthNumber, firstOfTheMonth.getDate() - firstOfTheMonth.getDay());
 
         for (let i = 0; i < this.numberOfDays; i += 7) {
             const newWeekStartDate = new Date(firstSunday.getFullYear(), firstSunday.getMonth(), firstSunday.getDate() + i);
-            this.weeks.push(new Week(newWeekStartDate, shifts, schedule$));
+            this.weeks.push(new Week(newWeekStartDate, shift$, schedule$));
         }
     }
 }

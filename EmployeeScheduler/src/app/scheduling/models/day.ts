@@ -48,11 +48,16 @@ export class Day extends SubscriptionBase {
 
     private setState(): void {
         if (this.shifts.length > 0) {
-            if (this.schedules.some)
+            if (this.someShiftsHaveNoSchedule()) {
+                this.state = DayStates.warning;
+                this.stateChange.emit(this.state);
+            }
         }
     }
 
-    private 
+    private someShiftsHaveNoSchedule(): boolean {
+        return this.shifts.some(shift => !this.schedules.find(schedule => shift.shiftId === schedule.shiftId));
+    }
 
     private isShiftOnDay(shift: Shift): boolean {
         switch(shift.recurrenceType) {
