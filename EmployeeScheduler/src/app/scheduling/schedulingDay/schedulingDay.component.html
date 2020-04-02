@@ -1,4 +1,4 @@
 <StackLayout #labelContainer class="day-container" (tap)="onTap()" [ngClass]="{'not-in-month': !isDayInMonth}">
     <Label #label class="day" [text]="day.dayOfMonth"></Label>
-    <Label #label class="day" [text]="shifts.length"></Label>
+    <Label class="day" [text]="shifts.length"></Label>
 </StackLayout>

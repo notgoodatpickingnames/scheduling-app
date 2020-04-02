@@ -81,7 +81,7 @@ export class SchedulingDayComponent extends SubscriptionBase {
         if (SchedulingDayComponent.dataListener !== undefined) {
             SchedulingDayComponent.dataListener.unsubscribe;
         }
-        
+
         SchedulingDayComponent.dataListener = combineLatest(this.shiftsService.shift$,
                 this.schedulesService.schedule$
             ).pipe(takeUntil(this.componentDestroyed)).subscribe(data => {
@@ -115,7 +115,6 @@ export class SchedulingDayComponent extends SubscriptionBase {
     }
 
     private isShiftOnDay(shift: Shift,): boolean {
-        
         switch(shift.recurrenceType) {
             case RecurrenceType.EveryWeek: return this.day.date.getDay() === shift.dayOfWeek;
             case RecurrenceType.EveryMonth: return this.day.dayOfMonth === shift.dayOfMonth;

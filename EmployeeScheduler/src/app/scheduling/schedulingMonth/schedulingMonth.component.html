@@ -1,0 +1,8 @@
+<StackLayout orientation="vertical" *ngFor="let week of month.weeks" class="week">
+    <FlexboxLayout>
+        <StackLayout *ngFor="let day of week.days" class="day-container">
+            <ns-scheduling-day [day]="day" [monthNumber]="monthNumber" (onDayTap)="onDayTap($event)"></ns-scheduling-day>
+        </StackLayout>
+    </FlexboxLayout>
+</StackLayout>
+

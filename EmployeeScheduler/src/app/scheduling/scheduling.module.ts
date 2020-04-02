@@ -4,6 +4,7 @@ import { SchedulingComponent } from './scheduling.component';
 import { SharedModule } from '../shared.module';
 import { CalanderComponentModule } from '../calander/calanderComponent.module';
 import { SchedulingDayComponent } from './schedulingDay/schedulingDay.component';
+import { SchedulingMonthComponent } from './schedulingMonth/schedulingMonth.component';
 
 @NgModule({
     imports: [
@@ -13,7 +14,8 @@ import { SchedulingDayComponent } from './schedulingDay/schedulingDay.component'
     ],
     declarations: [
         SchedulingComponent,
-        SchedulingDayComponent
+        SchedulingDayComponent,
+        SchedulingMonthComponent
     ]
 })
 export class SchedulingModule { }
