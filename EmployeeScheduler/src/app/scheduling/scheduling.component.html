@@ -3,7 +3,7 @@
 <StackLayout class="body">
     <FlexboxLayout orientation="horizontal" horizontalAlignment="center" class="month-selector">
         <Label text="&#xf053;" class="fas left" (tap)="onPreviousMonthTap()"></Label>
-        <Label [text]="nameOfMonth" class="center"></Label>
+        <Label [text]="monthYearHeader" class="center"></Label>
         <Label text="&#xf054;" class="fas right" (tap)="onNextMonthTap()"></Label>
     </FlexboxLayout>
     <FlexboxLayout orientation="horizontal" class="day-labels">
@@ -19,16 +19,13 @@
     <StackLayout>
 
         <ScrollView orientation="vertical">
-            <AbsoluteLayout #monthContainerElem height="auto" >
+            <AbsoluteLayout height="auto" >
 
-                <StackLayout #previousMonthElem class="month">
-                    <ns-scheduling-month [month]="previousMonth"></ns-scheduling-month>
+                <StackLayout #month0Elem class="month">
+                    <ns-scheduling-month *ngIf="month0" [month]="month0"  (onNextMonthTap)="onNextMonthTap()" (onThisMonthDayTap)="onThisMonthDayTap($event)" (onPreviousMonthTap)="onPreviousMonthTap()"></ns-scheduling-month>
                 </StackLayout>
-                <StackLayout #currentMonthElem class="month">
-                    <ns-scheduling-month [month]="selectedMonth" (onNextMonthTap)="onNextMonthTap()" (onThisMonthDayTap)="onThisMonthDayTap($event)" (onPreviousMonthTap)="onPreviousMonthTap()"></ns-scheduling-month>
-                </StackLayout>
-                <StackLayout #nextMonthElem class="month">
-                    <ns-scheduling-month [month]="nextMonth"></ns-scheduling-month>
+                <StackLayout #month1Elem class="month">
+                    <ns-scheduling-month *ngIf="month1" [month]="month1" (onNextMonthTap)="onNextMonthTap()" (onThisMonthDayTap)="onThisMonthDayTap($event)" (onPreviousMonthTap)="onPreviousMonthTap()"></ns-scheduling-month>
                 </StackLayout>
 
             </AbsoluteLayout>

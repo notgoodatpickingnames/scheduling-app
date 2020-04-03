@@ -38,7 +38,7 @@ export class SchedulingDayComponent extends SubscriptionBase {
     @Output() public onDayTap = new EventEmitter<Day>();
 
     public get isDayInMonth(): boolean {
-        if (this.day && this.monthNumber) {
+        if (this.day !== undefined && this.monthNumber !== undefined) {
             return this.day.date.getMonth() === this.monthNumber;
         }
 
@@ -81,7 +81,6 @@ export class SchedulingDayComponent extends SubscriptionBase {
         if (SchedulingDayComponent.dataListener !== undefined) {
             SchedulingDayComponent.dataListener.unsubscribe;
         }
-
         SchedulingDayComponent.dataListener = combineLatest(this.shiftsService.shift$,
                 this.schedulesService.schedule$
             ).pipe(takeUntil(this.componentDestroyed)).subscribe(data => {

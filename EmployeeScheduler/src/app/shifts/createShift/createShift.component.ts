@@ -44,8 +44,6 @@ export class CreateShiftComponent {
         private router: Router) { }
 
     public onSubmit() {
-        // Fire validation on all fields
-        // If all fields are valid then pupdate
         this.shiftsService.push(this.shift);
         this.onBackAction();
     }

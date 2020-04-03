@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Month } from './models/month';
 import { ShiftsService } from '../core/services/shift/shifts.service';
 import { SubscriptionBase } from '../core/subscriptionBase';
@@ -12,55 +12,41 @@ import { screen } from "tns-core-modules/platform/platform"
 import * as app from "tns-core-modules/application";
 import { on } from 'tns-core-modules/application';
 import { combineLatest } from 'rxjs';
+import { DatePipe } from '@angular/common';
 
 @Component({
     selector: 'ns-scheduling',
     templateUrl: './scheduling.component.html',
     styleUrls: ['./scheduling.component.css']
 })
-export class SchedulingComponent{
-    @ViewChild('previousMonthElem', {read: ElementRef, static: false}) public set previousMonthView(monthRef: ElementRef) {
-        this._previousMonthView = <View>monthRef.nativeElement;
-        this.initMonthViews();
+export class SchedulingComponent {
+    @ViewChild('month0Elem', {read: ElementRef, static: false}) public set month0View(monthRef: ElementRef) {
+        this._month0View = <View>monthRef.nativeElement;
     }
-    @ViewChild('nextMonthElem', {read: ElementRef, static: false}) public set nextMonthView(monthRef: ElementRef) {
-        this._nextMonthView = <View>monthRef.nativeElement;
-        this.initMonthViews();
+    @ViewChild('month1Elem', {read: ElementRef, static: false}) public set month1View(monthRef: ElementRef) {
+        this._month1View = <View>monthRef.nativeElement;
     }
 
-    @ViewChild('currentMonthElem', {read: ElementRef, static: false}) public set currentMonthView(monthRef: ElementRef) {
-        this._currentMonthView = <View>monthRef.nativeElement;
-        this.initMonthViews();
-    }
+    private datePipe = new DatePipe('en');
 
-    @ViewChild('monthContainerElem', {read: ElementRef, static: false}) public set monthContainer(monthRef: ElementRef) {
-        this._monthContainerView = <View>monthRef.nativeElement;
-        this.initMonthViews();
-    }
-
-    private _previousMonthView: View;
-    private _nextMonthView: View;
-    private _currentMonthView: View;
-    private _monthContainerView: View;
+    private _month0View: View;
+    private _month1View: View;
 
     private today = new Date();
     private selectedMonthNumber: number = this.today.getMonth();
     private selectedYear: number = this.today.getFullYear();
 
-    public previousMonth = new Month(this.selectedYear, this.selectedMonthNumber - 1);
-    public selectedMonth = new Month(this.selectedYear, this.selectedMonthNumber);
-    public nextMonth = new Month(this.selectedYear, this.selectedMonthNumber + 1);
+    public month0 = new Month(this.selectedYear, this.selectedMonthNumber);
+    public month1: Month;
+
+    public isMonth0Shown = true;
 
     constructor(private page: Page) {
         on("orientationChanged", this.onOrientationChanged);
     }
 
     public onOrientationChanged = (event) => {
-        this.initMonthViews();
-    }
-
-    public get nameOfMonth(): string {
-        return this.selectedMonth.name;
+        // Change the name shorthand here.
     }
 
     public onNextMonthTap(): void {
@@ -75,52 +61,71 @@ export class SchedulingComponent{
         alert('this month day tapped');
     }
 
+    public get monthYearHeader(): string {
+        const date = new Date(this.selectedYear, this.selectedMonthNumber, 1);
+        return `${this.datePipe.transform(date, 'MMMM')} ${this.selectedYear}`;
+    }
+
     private moveToNextMonth(): void {
+        if (this.selectedMonthNumber + 1 === 12) {
+            alert('moving to next year');
+            this.selectedYear++;
+            this.selectedMonthNumber = -1;
+        }
+
+        this.selectedMonthNumber++;
         const deltaLeft = (this.monthContainerWidth) * -1;
-        combineLatest(
-        this._currentMonthView.animate({translate: {x: deltaLeft, y:0}, duration: 750}),
-        this._nextMonthView.animate({translate: {x: 0, y:0}, duration: 750}))
-        .subscribe(() => {
-            // this.
-        });
-    }
 
-    private moveToPreviousMonth(): void {
-
-    }
-
-    private initMonthViews(): void {
-        if (this._currentMonthView && this._nextMonthView && this._previousMonthView && this._monthContainerView) {
-            setTimeout(() => {
-                this.initPreviousMonthView();
-                this.initCurrentMonthView();
-                this.initNextMonthView();
-            }, 0);
+        if (this.isMonth0Shown) {
+            this.month1 = new Month(this.selectedYear, this.selectedMonthNumber);
+            this._month1View.translateX = this.monthContainerWidth;
+            combineLatest(
+                this._month0View.animate({translate: {x: deltaLeft, y:0}, duration: 750}),
+                this._month1View.animate({translate: {x: 0, y:0}, duration: 750}))
+            .subscribe(() => {
+                this.isMonth0Shown = false;
+            });
+        } else {
+            this.month0 = new Month(this.selectedYear, this.selectedMonthNumber);
+            this._month0View.translateX = this.monthContainerWidth;
+            combineLatest(
+                this._month1View.animate({translate: {x: deltaLeft, y:0}, duration: 750}),
+                this._month0View.animate({translate: {x: 0, y:0}, duration: 750}))
+            .subscribe(() => {
+                this.isMonth0Shown = true;
+            });
         }
     }
 
-    private initNextMonthView(): void {
-        const deltaLeft = (this.monthContainerWidth);
-        // alert(`Moving next month right byy ${deltaLeft}`);
-        const deltaUp = this.monthHeight * 2;
-        this._nextMonthView.translateX = (deltaLeft);
-        // this._nextMonthView.translateY = (deltaUp);
-    }
+    private moveToPreviousMonth(): void {
+        if (this.selectedMonthNumber - 1 === 0) {
+            alert('moving to previous year');
+            this.selectedYear--;
+            this.selectedMonthNumber = 12;
+        }
 
-    private initPreviousMonthView(): void {
-        const deltaLeft = (this.monthContainerWidth) * -1;
-        // alert(`Moving previous month left by ${deltaLeft}`);
-        this._previousMonthView.translateX = (deltaLeft);
-    }
+        this.selectedMonthNumber--;
+        const deltaRight = (this.monthContainerWidth);
 
-    private initCurrentMonthView(): void {
-        const deltaUp = this.monthHeight * -1;
-        //alert(`Moving current month up by ${deltaUp}`);
-        // this._currentMonthView.translateY = (deltaUp);
-    }
-
-    private get monthHeight(): number {
-        return 300;
+        if (this.isMonth0Shown) {
+            this.month1 = new Month(this.selectedYear, this.selectedMonthNumber);
+            this._month1View.translateX = this.monthContainerWidth * -1;
+            combineLatest(
+                this._month0View.animate({translate: {x: deltaRight, y:0}, duration: 750}),
+                this._month1View.animate({translate: {x: 0, y:0}, duration: 750}))
+            .subscribe(() => {
+                this.isMonth0Shown = false;
+            });
+        } else {
+            this.month0 = new Month(this.selectedYear, this.selectedMonthNumber);
+            this._month0View.translateX = this.monthContainerWidth * -1;
+            combineLatest(
+                this._month1View.animate({translate: {x: deltaRight, y:0}, duration: 750}),
+                this._month0View.animate({translate: {x: 0, y:0}, duration: 750}))
+            .subscribe(() => {
+                this.isMonth0Shown = true;
+            });
+        }
     }
 
     private get monthContainerWidth(): number {
