@@ -11,14 +11,13 @@ import { AccountService } from "./core/services/account/account.service";
 // import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
 import { NativeScriptUISideDrawerModule } from "nativescript-ui-sidedrawer/angular";
 import { YourScheduleComponent } from './yourSchedule/yourSchedule.component';
-import { SettingsComponent } from "./settings/settings.component";
 import { SharedModule } from "./shared.module";
 import { ShiftsModule } from "./shifts/shifts.module";
 import { ShiftsService } from "./core/services/shift/shifts.service";
 import { DropDownModule } from "nativescript-drop-down/angular";
 import { SchedulingModule } from "./scheduling/scheduling.module";
 import { SchedulesService } from "./core/services/schedule/schedules.service";
-//import * as utils from "tns-core-modules/utils/utils";
+import { AccountSettingsModule } from "./accountSettings/accountSettings.module";
 
 @NgModule({
    bootstrap: [
@@ -30,12 +29,12 @@ import { SchedulesService } from "./core/services/schedule/schedules.service";
       ShiftsModule,
       DropDownModule,
       SchedulingModule,
+      AccountSettingsModule,
       SharedModule
    ],
    declarations: [
       AppComponent,
       YourScheduleComponent,
-      SettingsComponent
    ],
    providers: [
       AccountService,

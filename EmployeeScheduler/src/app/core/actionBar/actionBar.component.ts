@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { RadSideDrawer } from 'nativescript-ui-sidedrawer';
 import * as app from "tns-core-modules/application";
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'ns-action-bar',
@@ -13,13 +14,23 @@ export class ActionBarComponent {
 
     @Output() back = new EventEmitter();
 
-    onDrawerButtonTap(): void {
+    constructor(private router: Router) {}
+
+    public onDrawerButtonTap(): void {
         const sideDrawer = <RadSideDrawer>app.getRootView();
         sideDrawer.showDrawer();
     }
 
-    onBackButtonTap(): void {
+    public onSettingsButtonTap(): void {
+        this.router.navigate(['settings']);
+    }
+
+    public onBackButtonTap(): void {
         this.back.emit();
+    }
+
+    private animateSettingsButton(): void {
+
     }
 
 }

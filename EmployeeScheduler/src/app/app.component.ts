@@ -37,17 +37,19 @@ export class AppComponent {
 
     ngOnInit(): void {
         this.sideDrawerTransition = new SlideInOnTopTransition();
-        this.router.navigate(['scheduling'], {relativeTo: this.route});
+        this.router.navigate(['account'], {relativeTo: this.route});
     }
 
     public onNavigationTap(route: string) {
         const sideDrawer = <RadSideDrawer>app.getRootView();
         sideDrawer.showDrawer();
-        this.navigateTo(route);
+        this.onNavigateTo(route);
     }
 
-    private navigateTo(route: string) {
+    public onNavigateTo(route: string) {
         this.router.navigate([route], {relativeTo: this.route});
+        const sideDrawer = <RadSideDrawer>app.getRootView();
+        sideDrawer.closeDrawer();
     }
 
     private loadServices() {
