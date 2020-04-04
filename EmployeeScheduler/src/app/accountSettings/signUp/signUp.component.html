@@ -1,1 +1,24 @@
+<StackLayout verticalAlignment="center" class="body">
+    <ns-text-field
+        label="Email: "
+        [(value)]="email"
+        [keyboardType]="emailKeyboardType">
+    </ns-text-field>
 
+    <ns-text-field
+        label="Password: "
+        [(value)]="password"
+        [keyboardType]="emailKeyboardType"
+        hideText="true">
+    </ns-text-field>
+
+    <ns-text-field
+        label="Re-Enter Password: "
+        [(value)]="reEnteredPassword"
+        [keyboardType]="emailKeyboardType"
+        hideText="true">
+    </ns-text-field>
+
+    <button text="Sign Up" (tap)="onSignUpTap()" class="button"></button>
+
+</StackLayout>
