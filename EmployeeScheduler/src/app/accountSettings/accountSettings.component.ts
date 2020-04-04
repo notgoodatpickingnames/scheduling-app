@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { KeyboardType } from '../core/FormComponents/textField/keyboardType';
 import { AuthenticationService } from '../core/services/authentication/authentication.service';
+import { User } from 'nativescript-plugin-firebase';
 
 @Component({
     selector: 'ns-account-settings',
@@ -15,5 +16,7 @@ export class AccountSettingsComponent {
     public doesUserHaveLocalAccount: boolean;
 
     constructor(private authenticationService: AuthenticationService) { }
+
+    
 
 }

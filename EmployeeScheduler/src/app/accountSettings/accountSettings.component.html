@@ -1,3 +1,3 @@
 <ns-action-bar [title]="'Account'" [showBackButton]="false"></ns-action-bar>
 
-<ns-sign-up [(password)]="password" [(email)]="eamil"></ns-sign-up>
+<ns-sign-up (accountCreated)="onAccountCreated($event)"></ns-sign-up>
