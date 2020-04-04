@@ -1,0 +1,6 @@
+
+.button {
+    background-color: var(--success-color);
+    margin-top: 48px;
+    width: 496px;
+}

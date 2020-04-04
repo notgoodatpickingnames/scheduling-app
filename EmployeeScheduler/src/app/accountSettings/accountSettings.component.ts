@@ -1,15 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { KeyboardType } from '../core/FormComponents/textField/keyboardType';
+import { AuthenticationService } from '../core/services/authentication/authentication.service';
 
 @Component({
     selector: 'ns-account-settings',
     templateUrl: './accountSettings.component.html',
     styleUrls: ['./accountSettings.component.css']
 })
-export class AccountSettingsComponent implements OnInit {
+export class AccountSettingsComponent {
+    public email: string = "";
+    public password: string = "";
 
-    constructor() { }
+    public hasUserBeenVerified: boolean;
+    public doesUserHaveLocalAccount: boolean;
 
-    ngOnInit() {
-    }
+    constructor(private authenticationService: AuthenticationService) { }
 
 }

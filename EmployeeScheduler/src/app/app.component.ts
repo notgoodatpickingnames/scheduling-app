@@ -1,11 +1,12 @@
 import * as firebase from 'nativescript-plugin-firebase';
-import { Component } from "@angular/core";
+import { Component, EventEmitter } from "@angular/core";
 import { DrawerTransitionBase, SlideInOnTopTransition, RadSideDrawer } from "nativescript-ui-sidedrawer";
 import { Router, ActivatedRoute } from '@angular/router';
 import { ShiftsService } from './core/services/shift/shifts.service';
 import { ApplicationEventData } from 'tns-core-modules/application/application';
 import * as app from "tns-core-modules/application";
 import { SchedulesService } from './core/services/schedule/schedules.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
     selector: "ns-app",
@@ -30,6 +31,7 @@ export class AppComponent {
                 this.loadServices();
             }).catch(error => {
                 if (error === 'Firebase already initialized') {
+                    // this.authenticate.
                     this.loadServices();
                 }
             });

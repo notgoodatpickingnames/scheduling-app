@@ -28,6 +28,7 @@
     "nativescript-drop-down": "^5.0.4",
     "nativescript-modal-datetimepicker": "^1.2.2",
     "nativescript-plugin-firebase": "^10.3.3",
+    "nativescript-secure-storage": "^2.6.0",
     "nativescript-ui-sidedrawer": "^8.0.0",
     "reflect-metadata": "~0.1.12",
     "rxjs": "^6.4.0",

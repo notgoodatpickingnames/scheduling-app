@@ -21,8 +21,8 @@ export class ActionBarComponent {
         sideDrawer.showDrawer();
     }
 
-    public onSettingsButtonTap(): void {
-        this.router.navigate(['settings']);
+    public onAccountButtonTap(): void {
+        this.router.navigate(['account']);
     }
 
     public onBackButtonTap(): void {

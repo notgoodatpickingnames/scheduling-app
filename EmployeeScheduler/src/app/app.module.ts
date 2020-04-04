@@ -18,6 +18,7 @@ import { DropDownModule } from "nativescript-drop-down/angular";
 import { SchedulingModule } from "./scheduling/scheduling.module";
 import { SchedulesService } from "./core/services/schedule/schedules.service";
 import { AccountSettingsModule } from "./accountSettings/accountSettings.module";
+import { AuthenticationService } from "./core/services/authentication/authentication.service";
 
 @NgModule({
    bootstrap: [
@@ -39,7 +40,8 @@ import { AccountSettingsModule } from "./accountSettings/accountSettings.module"
    providers: [
       AccountService,
       ShiftsService,
-      SchedulesService
+      SchedulesService,
+      AuthenticationService
    ],
    schemas: [
       NO_ERRORS_SCHEMA

@@ -1,4 +1,5 @@
 export enum KeyboardType {
     number = "number",
-    text = ""
+    text = "",
+    email = "email"
 }

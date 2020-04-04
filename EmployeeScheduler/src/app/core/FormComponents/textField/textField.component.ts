@@ -15,6 +15,7 @@ export class TextFieldComponent {
     @Input() public horizontalAlignment: string = "center"
     @Input() public keyboardType = KeyboardType.text;
     @Input() public readonly: boolean = false;
+    @Input() public hideText: boolean = false;
     @Output() public valueChange = new EventEmitter<string>();
 
     public error: boolean = false;
