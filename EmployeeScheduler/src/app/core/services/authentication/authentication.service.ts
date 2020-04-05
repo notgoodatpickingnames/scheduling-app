@@ -5,13 +5,15 @@ import { User, AuthStateChangeListener } from 'nativescript-plugin-firebase';
 import { SecureStorage } from "nativescript-secure-storage"
 import { Credentials } from './credentials';
 import { LoginState } from './loginState';
+import { AuthLevel } from './authLevel';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthenticationService {
-    public user: User;
+    public user = new BehaviorSubject<User>(undefined);
     public loginState = new BehaviorSubject<LoginState>(LoginState.noCredentials);
+    public authLevel = new BehaviorSubject<AuthLevel>(undefined);
 
     private secureStorage = new SecureStorage();
     private credentialsKey = 'cred';
@@ -23,13 +25,11 @@ export class AuthenticationService {
     public initialise(): void {
         this.getCredentials()
             .then((credentials) => {
-                //alert(`got creds email: ${credentials.email}, password: ${credentials.password}`);
                 if (credentials) {
-                    alert('found credentials, logging in.')
-                    this.login(credentials.email, credentials.password);
-                }
+                    this.login(credentials)
+                        .then(user => this.setUser(user))}
                 else {
-                    alert('no credentials saved');
+                    this.setUser(undefined);
                     this.loginState.next(LoginState.noCredentials);
                 }
             })
@@ -39,37 +39,34 @@ export class AuthenticationService {
     }
 
     public setUser(user: User): void {
-        alert('setting the user');
-        this.user = user;
+        this.user.next(user);
     }
 
     public saveCredentials(credentials: Credentials) {
-        this.secureStorage.set({key: this.credentialsKey, value: credentials.asJson()})
-            .then(() => {
-                alert('the password has been saved');
-            });
+        this.secureStorage.set({key: this.credentialsKey, value: credentials.asJson()});
     }
 
-    private async getCredentials(): Promise<Credentials>  {
+    public async getCredentials(): Promise<Credentials>  {
         const credentialsAsJson = await this.secureStorage.get({ key: this.credentialsKey });
         return Credentials.fromJson(credentialsAsJson);
     }
 
-    private login(email: string, password: string): void {
-        firebase.login({
-            type: firebase.LoginType.PASSWORD,
+    public async login(credentials: Credentials): Promise<User> {
+        try {
+            const user = await firebase.login({
+                type: firebase.LoginType.PASSWORD,
                 passwordOptions: {
-                    email: email,
-                    password: password
+                    email: credentials.email,
+                    password: credentials.password
                 }
-            })
-            .then(user => {
-                this.setUser(user);
-                this.loginState.next(LoginState.loggedIn);
-            })
-            .catch(error => {
-                alert(error);
-                this.loginState.next(LoginState.loggedOut);
             });
+            this.setUser(user);
+            this.loginState.next(LoginState.loggedIn);
+            return user;
+        }
+        catch (error) {
+            this.loginState.next(LoginState.loggedOut);
+            return undefined;
+        }
     }
 }

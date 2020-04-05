@@ -1,14 +1,22 @@
 <StackLayout verticalAlignment="center" class="body">
     <ns-text-field
         label="Email: "
-        [(value)]="credentials.email"
+        [(value)]="email"
         [keyboardType]="emailKeyboardType">
     </ns-text-field>
 
     <ns-text-field
         label="Password: "
-        [(value)]="credentials.password"
+        [(value)]="password"
         [keyboardType]="emailKeyboardType"
         hideText="true">
     </ns-text-field>
+
+    <StackLayout class="error-container">
+        <Label *ngIf="showFailToLoginError" class="error" text="Either the username or password is incorrect."></Label>
+    </StackLayout>
+
+    <button text="Login" (tap)="onLoginTap()" class="login-button button"></button>
+
+    <button text="Sign Up" (tap)="onSignupTapped()" class="sign-up-button button"></button>
 </StackLayout>

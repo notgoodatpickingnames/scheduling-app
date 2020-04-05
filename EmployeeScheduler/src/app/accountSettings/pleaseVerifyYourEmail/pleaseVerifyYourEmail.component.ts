@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 @Component({
-  selector: 'ns-pleaseVerifyYourEmail',
+  selector: 'ns-please-verify-your-email',
   templateUrl: './pleaseVerifyYourEmail.component.html',
   styleUrls: ['./pleaseVerifyYourEmail.component.css']
 })
-export class PleaseVerifyYourEmailComponent implements OnInit {
+export class PleaseVerifyYourEmailComponent {
+    @Output() public onCreateNewAccountTap = new EventEmitter();
+    @Output() public onBackToLoginTap = new EventEmitter();
 
-  constructor() { }
+    public onCreateNewAccountTapped(): void {
+        this.onCreateNewAccountTap.emit();
+    }
 
-  ngOnInit() {
-  }
-
+    public onBackToLoginTapped(): void {
+        this.onBackToLoginTap.emit();
+    }
 }

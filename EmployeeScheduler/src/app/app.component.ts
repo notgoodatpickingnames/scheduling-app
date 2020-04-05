@@ -12,6 +12,7 @@ import { Page } from 'tns-core-modules/ui/page/page';
 import { takeUntil } from 'rxjs/operators';
 import { SubscriptionBase } from './core/subscriptionBase';
 import { LoginState } from './core/services/authentication/loginState';
+import { AuthLevel } from './core/services/authentication/authLevel';
 
 @Component({
     selector: "ns-app",
@@ -20,6 +21,8 @@ import { LoginState } from './core/services/authentication/loginState';
 })
 export class AppComponent extends SubscriptionBase{
     public sideDrawerTransition: DrawerTransitionBase;
+    public loginState: LoginState;
+    public authLevel: AuthLevel;
 
     constructor(
         private router: Router,
@@ -30,21 +33,27 @@ export class AppComponent extends SubscriptionBase{
     ) {
         super();
         this.initialise();
+        this.listenForApplicationEvents();
     }
-    
+
     ngOnInit(): void {
         this.sideDrawerTransition = new SlideInOnTopTransition();
         this.router.navigate(['account'], {relativeTo: this.route});
     }
-    
+
+    private listenForApplicationEvents() {
+        on(resumeEvent, this.onApplicationResume);
+    }
+
     private onApplicationResume() {
-        alert('The app has been resumed');
+        // alert('The app has been resumed');
     }
 
     private initialise(): Promise<any> {
         this.listenForLoginState();
         return firebase.init({
             onAuthStateChanged: (data) => {
+                alert('the auth state has changed');
                 if (data.loggedIn) {
                     this.authenticationService.setUser(data.user);
                 }
@@ -58,7 +67,6 @@ export class AppComponent extends SubscriptionBase{
         this.authenticationService.loginState
             .pipe(takeUntil(this.componentDestroyed))
             .subscribe(loginState => {
-                alert(`Login State Changed To ${loginState}`);
                 if (loginState === LoginState.loggedOut || LoginState.noCredentials) {
                     this.navigateTo('account')
                 }

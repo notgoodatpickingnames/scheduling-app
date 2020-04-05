@@ -58,7 +58,6 @@ export class SchedulingComponent {
     }
 
     public onThisMonthDayTap(day: Day) {
-        alert('this month day tapped');
     }
 
     public get monthYearHeader(): string {
@@ -68,7 +67,6 @@ export class SchedulingComponent {
 
     private moveToNextMonth(): void {
         if (this.selectedMonthNumber + 1 === 12) {
-            alert('moving to next year');
             this.selectedYear++;
             this.selectedMonthNumber = -1;
         }
@@ -99,7 +97,6 @@ export class SchedulingComponent {
 
     private moveToPreviousMonth(): void {
         if (this.selectedMonthNumber - 1 === 0) {
-            alert('moving to previous year');
             this.selectedYear--;
             this.selectedMonthNumber = 12;
         }

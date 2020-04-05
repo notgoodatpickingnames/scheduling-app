@@ -1,22 +1,88 @@
 import { Component, OnInit } from '@angular/core';
 import { KeyboardType } from '../core/FormComponents/textField/keyboardType';
 import { AuthenticationService } from '../core/services/authentication/authentication.service';
-import { User } from 'nativescript-plugin-firebase';
+import { User, login } from 'nativescript-plugin-firebase';
+import { SubscriptionBase } from '../core/subscriptionBase';
+import { takeUntil } from 'rxjs/operators';
+import { LoginState } from '../core/services/authentication/loginState';
+import { borderTopRightRadiusProperty } from 'tns-core-modules/ui/page/page';
 
 @Component({
     selector: 'ns-account-settings',
     templateUrl: './accountSettings.component.html',
     styleUrls: ['./accountSettings.component.css']
 })
-export class AccountSettingsComponent {
+export class AccountSettingsComponent extends SubscriptionBase {
     public email: string = "";
     public password: string = "";
 
-    public hasUserBeenVerified: boolean;
-    public doesUserHaveLocalAccount: boolean;
+    public loginState = LoginState.loggedOut;
+    public user: User;
 
-    constructor(private authenticationService: AuthenticationService) { }
+    public showVerifyAccountPage: boolean = false;
+    public showSignUpPage: boolean = false;
+    public showLoginPage: boolean = true;
 
-    
+    constructor(private authenticationService: AuthenticationService) {
+        super();
+        this.listenForLoginState();
+        this.listenForUser();
+    }
 
+    public onSignupTap() {
+        this.setShowSignUp();
+    }
+
+    public onBackToLoginTap() {
+        this.setShowLogin();
+    }
+
+    public onAccountCreated() {
+        this.setShowVerify();
+
+        this.authenticationService.getCredentials()
+            .then(credentials => {
+                this.authenticationService.login(credentials)
+                    .then(user => this.user = user);
+            });
+    }
+
+    private listenForLoginState(): void {
+        this.authenticationService.loginState
+            .pipe(takeUntil(this.componentDestroyed))
+            .subscribe(loginState => this.loginState = loginState);
+    }
+
+    private listenForUser(): void {
+        this.authenticationService.user
+            .pipe(takeUntil(this.componentDestroyed))
+            .subscribe(user => {
+                if (user !== undefined && !user.emailVerified) {
+                    this.setShowVerify();
+                }
+
+                this.user = user;
+            });
+    }
+
+    private setShowSignUp(): void {
+        console.log('showing sign up');
+        this.showVerifyAccountPage = false;
+        this.showLoginPage = false;
+        this.showSignUpPage = true;
+    }
+
+    private setShowLogin(): void {
+        console.log('showing login');
+        this.showVerifyAccountPage = false;
+        this.showLoginPage = true;
+        this.showSignUpPage = false;
+    }
+
+    private setShowVerify(): void {
+        console.log('showing verify');
+        this.showVerifyAccountPage = true;
+        this.showLoginPage = false;
+        this.showSignUpPage = false;
+    }
 }

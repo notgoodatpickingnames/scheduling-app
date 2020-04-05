@@ -1,6 +1,12 @@
-
-.button {
-    background-color: var(--success-color);
+.sign-up-button {
     margin-top: 48px;
     width: 496px;
+    background-color: var(--success-color);
+}
+
+.back-to-login-button {
+    margin-top: 48px;
+    width: 346px;
+    font-size: 12px;
+    background-color: var(--secondary-text-color);
 }

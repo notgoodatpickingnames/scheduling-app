@@ -4,6 +4,7 @@ import { AccountSettingsComponent } from './accountSettings.component';
 import { SharedModule } from '../shared.module';
 import { SignUpComponent } from './signUp/signUp.component';
 import { LoginComponent } from './login/login.component';
+import { PleaseVerifyYourEmailComponent } from './pleaseVerifyYourEmail/pleaseVerifyYourEmail.component';
 
 @NgModule({
     imports: [
@@ -13,7 +14,8 @@ import { LoginComponent } from './login/login.component';
     declarations: [
        AccountSettingsComponent,
        SignUpComponent,
-       LoginComponent
+       LoginComponent,
+       PleaseVerifyYourEmailComponent
     ]
 })
 export class AccountSettingsModule { }

@@ -1,3 +1,7 @@
 <ns-action-bar [title]="'Account'" [showBackButton]="false"></ns-action-bar>
 
-<ns-sign-up (accountCreated)="onAccountCreated($event)"></ns-sign-up>
+<ns-please-verify-your-email *ngIf="showVerifyAccountPage" (onCreateNewAccountTap)="onSignupTap()" (onBackToLoginTap)="onBackToLoginTap()"></ns-please-verify-your-email>
+<ns-sign-up *ngIf="showSignUpPage && !showVerifyAccountPage" (onBackToLoginTap)="onBackToLoginTap()" (onAccountCreated)="onAccountCreated()"></ns-sign-up>
+<ns-login *ngIf="showLoginPage && !showVerifyAccountPage" (onSignupTap)="onSignupTap()"></ns-login>
+
+
