@@ -9,10 +9,11 @@ import { SchedulesService } from './core/services/schedule/schedules.service';
 import { BehaviorSubject } from 'rxjs';
 import { AuthenticationService } from './core/services/authentication/authentication.service';
 import { Page } from 'tns-core-modules/ui/page/page';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, skip } from 'rxjs/operators';
 import { SubscriptionBase } from './core/subscriptionBase';
 import { LoginState } from './core/services/authentication/loginState';
 import { AuthLevel } from './core/services/authentication/authLevel';
+import { InitOptions, login } from 'nativescript-plugin-firebase';
 
 @Component({
     selector: "ns-app",
@@ -38,7 +39,6 @@ export class AppComponent extends SubscriptionBase{
 
     ngOnInit(): void {
         this.sideDrawerTransition = new SlideInOnTopTransition();
-        this.router.navigate(['account'], {relativeTo: this.route});
     }
 
     private listenForApplicationEvents() {
@@ -46,17 +46,13 @@ export class AppComponent extends SubscriptionBase{
     }
 
     private onApplicationResume() {
-        // alert('The app has been resumed');
     }
 
     private initialise(): Promise<any> {
         this.listenForLoginState();
         return firebase.init({
             onAuthStateChanged: (data) => {
-                alert('the auth state has changed');
-                if (data.loggedIn) {
-                    this.authenticationService.setUser(data.user);
-                }
+                this.authenticationService.setUser(data.user);
             }
         })
         .then(() => this.onFirebaseInit())
@@ -67,8 +63,13 @@ export class AppComponent extends SubscriptionBase{
         this.authenticationService.loginState
             .pipe(takeUntil(this.componentDestroyed))
             .subscribe(loginState => {
-                if (loginState === LoginState.loggedOut || LoginState.noCredentials) {
+                this.loginState = loginState;
+                if (this.loginState === LoginState.loggedOut || this.loginState === LoginState.loggedInEmailUnVerified || this.loginState === LoginState.noCredentials) {
                     this.navigateTo('account')
+                }
+
+                if (this.loginState === LoginState.loggedInEmailVerified) {
+                    this.navigateTo('yourSchedule');
                 }
             });
     }

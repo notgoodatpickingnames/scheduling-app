@@ -17,6 +17,8 @@ export class AuthenticationService {
 
     private secureStorage = new SecureStorage();
     private credentialsKey = 'cred';
+    private emailVerifiedKey = 'verified';
+    private _loginState = LoginState.loggedOut;
 
     constructor() {
 
@@ -27,19 +29,48 @@ export class AuthenticationService {
             .then((credentials) => {
                 if (credentials) {
                     this.login(credentials)
-                        .then(user => this.setUser(user))}
+                        .then(user => {
+                            console.log(`logged in from init and got a user: ${user !== undefined}`);
+                            if (user.emailVerified) {
+                                this.setLoginState(LoginState.loggedInEmailVerified);
+                                this.storeVerificationState(true);
+                            }
+
+                            if (!user.emailVerified) {
+                                this.setLoginState(LoginState.loggedInEmailUnVerified);
+                                this.storeVerificationState(false);
+                            }
+
+                            this.setUser(user);
+                        })
+                        .catch(error => {
+                            this.setUser(undefined);
+                            this.setLoginState(LoginState.loggedOut);
+                            console.log(`login error ${error}`);
+                        });
+                    }
                 else {
                     this.setUser(undefined);
-                    this.loginState.next(LoginState.noCredentials);
+                    this.setLoginState(LoginState.noCredentials);
+                    console.log('no credentials stored on this phone');
                 }
             })
             .catch((reason) => {
-                alert(reason);
+                console.log(reason);
             });
     }
 
     public setUser(user: User): void {
+        if (user) {
+            this.storeVerificationState(user.emailVerified);
+        }
+
         this.user.next(user);
+    }
+
+    public setLoginState(loginState: LoginState) {
+        this._loginState = loginState;
+        this.loginState.next(this._loginState);
     }
 
     public saveCredentials(credentials: Credentials) {
@@ -61,12 +92,26 @@ export class AuthenticationService {
                 }
             });
             this.setUser(user);
-            this.loginState.next(LoginState.loggedIn);
+            this.setLoginState(LoginState.loggedInEmailUnVerified);
             return user;
         }
         catch (error) {
-            this.loginState.next(LoginState.loggedOut);
+            this.setLoginState(LoginState.loggedOut);
             return undefined;
         }
+    }
+
+    public async relog(): Promise<User> {
+        const credentials = await this.getCredentials();
+        return await this.login(credentials);
+    }
+
+    public async getVerificationState(): Promise<boolean> {
+        const emailVerifiedAsString = await this.secureStorage.get({ key: this.emailVerifiedKey });
+        return emailVerifiedAsString === "1" ? true : false;
+    }
+
+    private storeVerificationState(emailVerified: boolean): void {
+        this.secureStorage.set({key: this.emailVerifiedKey, value: emailVerified ? "1" : "0"})
     }
 }

@@ -3,6 +3,7 @@ import { Credentials } from '~/app/core/services/authentication/credentials';
 import { AuthenticationService } from '~/app/core/services/authentication/authentication.service';
 import { User } from 'nativescript-plugin-firebase';
 import { Router, ActivationEnd, ActivatedRoute } from '@angular/router';
+import { KeyboardType } from '~/app/core/FormComponents/textField/keyboardType';
 
 @Component({
     selector: 'ns-login',
@@ -14,6 +15,9 @@ export class LoginComponent {
 
     public credentials = new Credentials('', '');
     public showFailToLoginError: boolean = false;
+
+    public emailKeyboardType = KeyboardType.email;
+    public textKeyboardType = KeyboardType.text;
 
     constructor(private authenticationService: AuthenticationService,
         private router: Router,

@@ -36,7 +36,7 @@ export class SignUpComponent extends SubscriptionBase {
                 this.sendVerificationEmail(user);
                 this.onAccountCreated.emit();
             }, (errorMessage) => {
-                alert(errorMessage)
+                console.log(errorMessage)
             });
     }
 

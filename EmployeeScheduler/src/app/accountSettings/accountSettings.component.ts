@@ -21,7 +21,11 @@ export class AccountSettingsComponent extends SubscriptionBase {
 
     public showVerifyAccountPage: boolean = false;
     public showSignUpPage: boolean = false;
-    public showLoginPage: boolean = true;
+    public showLoginPage: boolean = false;
+
+    public get showSettingsPage(): boolean {
+        return this.user && this.user.emailVerified;
+    }
 
     constructor(private authenticationService: AuthenticationService) {
         super();
@@ -57,7 +61,11 @@ export class AccountSettingsComponent extends SubscriptionBase {
         this.authenticationService.user
             .pipe(takeUntil(this.componentDestroyed))
             .subscribe(user => {
-                if (user !== undefined && !user.emailVerified) {
+                if (!user) {
+                    this.setShowLogin();
+                }
+
+                if (user && !user.emailVerified) {
                     this.setShowVerify();
                 }
 
@@ -66,21 +74,18 @@ export class AccountSettingsComponent extends SubscriptionBase {
     }
 
     private setShowSignUp(): void {
-        console.log('showing sign up');
         this.showVerifyAccountPage = false;
         this.showLoginPage = false;
         this.showSignUpPage = true;
     }
 
     private setShowLogin(): void {
-        console.log('showing login');
         this.showVerifyAccountPage = false;
         this.showLoginPage = true;
         this.showSignUpPage = false;
     }
 
     private setShowVerify(): void {
-        console.log('showing verify');
         this.showVerifyAccountPage = true;
         this.showLoginPage = false;
         this.showSignUpPage = false;
