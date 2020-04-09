@@ -10,7 +10,7 @@ import { PersonalScheduleComponent } from "./personalSchedule/personalSchedule.c
 
 
 const routes: Routes = [
-    { path: "", redirectTo: "/yourSchedule", pathMatch: "full" },
+    { path: "", redirectTo: "/personalSchedule", pathMatch: "full" },
     { path: 'personalSchedule', component: PersonalScheduleComponent},
     { path: 'account', component: AccountComponent },
     { path: 'scheduling', component: SchedulingComponent},

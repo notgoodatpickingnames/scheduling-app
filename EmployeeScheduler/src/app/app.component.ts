@@ -69,7 +69,7 @@ export class AppComponent extends SubscriptionBase{
                 }
 
                 if (this.loginState === LoginState.loggedInEmailVerified) {
-                    this.navigateTo('yourSchedule');
+                    this.navigateTo('personalSchedule');
                 }
             });
     }

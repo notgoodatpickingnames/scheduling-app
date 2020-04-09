@@ -11,8 +11,6 @@ import { ShiftTimePickerComponent } from "./core/FormComponents/shiftTimePicker/
 import { TextFieldComponent } from "./core/FormComponents/textField/textField.component";
 import { TextAreaComponent } from "./core/FormComponents/textArea/textArea.component";
 import { DropDownFieldComponent } from "./core/FormComponents/dropDownField/dropDownField.component";
-import { CalanderComponent } from "./calander/calander.component";
-import { CalanderComponentModule } from "./calander/calanderComponent.module";
 
 @NgModule({
     imports: [

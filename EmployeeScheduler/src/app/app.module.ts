@@ -21,32 +21,31 @@ import { AccountModule } from "./account/account.module";
 import { PersonalScheduleModule } from "./personalSchedule/personalSchedule.module";
 
 @NgModule({
-   bootstrap: [
-      AppComponent
-   ],
-   imports: [
-      AppRoutingModule,
-      NativeScriptUISideDrawerModule,
-      ShiftsModule,
-      DropDownModule,
-      SchedulingModule,
-      AccountModule,
-      SharedModule,
-      PersonalScheduleModule
-   ],
-   declarations: [
-      AppComponent,
-      YourScheduleComponent,
-   ],
-   providers: [
-      AccountService,
-      ShiftsService,
-      SchedulesService,
-      AuthenticationService
-   ],
-   schemas: [
-      NO_ERRORS_SCHEMA
-   ]
+    bootstrap: [
+        AppComponent
+    ],
+    imports: [
+        AppRoutingModule,
+        NativeScriptUISideDrawerModule,
+        ShiftsModule,
+        DropDownModule,
+        SchedulingModule,
+        AccountModule,
+        SharedModule,
+        PersonalScheduleModule
+    ],
+    declarations: [
+        AppComponent
+    ],
+    providers: [
+        AccountService,
+        ShiftsService,
+        SchedulesService,
+        AuthenticationService
+    ],
+    schemas: [
+        NO_ERRORS_SCHEMA
+    ]
 })
 /*
 Pass your application module to the bootstrapModule function located in main.ts to start your app
