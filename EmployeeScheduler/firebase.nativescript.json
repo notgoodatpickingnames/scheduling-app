@@ -2,7 +2,7 @@
     "using_ios": true,
     "using_android": true,
     "analytics": true,
-    "firestore": false,
+    "firestore": true,
     "realtimedb": true,
     "authentication": true,
     "remote_config": false,
