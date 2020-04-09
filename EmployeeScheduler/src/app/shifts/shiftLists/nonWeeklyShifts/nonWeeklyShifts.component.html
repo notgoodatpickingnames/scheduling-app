@@ -14,7 +14,7 @@
         <StackLayout orientation="vertical" class="shift" *ngIf="hasEveryMonthShifts">
             <Label
                 class="recurrence-label"
-                text="Every Other Week">
+                text="Every Month">
             </Label>
             <StackLayout *ngFor="let shift of oneTimeShifts" width="100%" (tap)="onShiftCardTap(shift.id)">
                 <ns-date-card

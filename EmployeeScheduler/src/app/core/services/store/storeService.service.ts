@@ -3,6 +3,7 @@ import { takeUntil, catchError } from 'rxjs/operators';
 import { SubscriptionBase } from '../../subscriptionBase';
 import { Store } from './store';
 import * as firebase from 'nativescript-plugin-firebase';
+import { Observable, throwError } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -29,9 +30,10 @@ export class StoreServiceService extends SubscriptionBase{
         // firebase.update(`${this._path}/${shift.shiftId}`, shift.asInterface())
     }
 
-    public get(id: string): Observable<Shift> {
+    public get(userId: string): Observable<Store> {
         // return this.shift$.pipe(map(shifts => shifts.find(shift => shift.shiftId === id)));
-
+        // Return stores where the user id is in the employees or owners category.
+        return null;
     }
 
     private load(): Observable<any> {
@@ -52,13 +54,13 @@ export class StoreServiceService extends SubscriptionBase{
         return throwError(error);
     }
 
-    private handleSnapshot(data: any): Shift[] {
+    private handleSnapshot(data: any): Store[] {
         const shifts = [];
 
         if (data) {
             for(const id in data) {
                 if (data.hasOwnProperty(id)) {
-                    const shiftToPush = new Shift(data[id], id);
+                    const shiftToPush = new Store(data[id], id);
                     shifts.push(shiftToPush);
                 }
             }
