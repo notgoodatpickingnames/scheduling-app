@@ -83,6 +83,10 @@ export class AuthenticationService {
         return Credentials.fromJson(credentialsAsJson);
     }
 
+    public clearCredentials(): Promise<boolean> {
+        return this.secureStorage.remove({key: this.credentialsKey});
+    }
+
     public async login(credentials: Credentials): Promise<User> {
         try {
             const user = await firebase.login({
@@ -108,9 +112,12 @@ export class AuthenticationService {
         return await this.login(credentials);
     }
 
-    public logout(): Promise<any> {
-        
-        return firebase.logout().then(response => console.log(`fvfvfe ${response}`));
+    public async logout(): Promise<any> {
+        console.log('trying to logout');
+        await firebase.logout();
+        this.clearCredentials();
+        this.loginState.next(LoginState.loggedOut);
+        this.setUser(undefined);
     }
 
     public async getVerificationState(): Promise<boolean> {

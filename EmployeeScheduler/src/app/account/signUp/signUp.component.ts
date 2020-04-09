@@ -13,9 +13,9 @@ import { SubscriptionBase } from '~/app/core/subscriptionBase';
     styleUrls: ['./signUp.component.css']
 })
 export class SignUpComponent extends SubscriptionBase {
+    @Input() public credentials = new Credentials('', '');
     @Output() onBackToLoginTap = new EventEmitter();
     @Output() onAccountCreated = new EventEmitter();
-    public credentials = new Credentials('', '');
 
     public reEnteredPassword: string = "";
 

@@ -6,6 +6,7 @@ import { SubscriptionBase } from '../core/subscriptionBase';
 import { takeUntil } from 'rxjs/operators';
 import { LoginState } from '../core/services/authentication/loginState';
 import { borderTopRightRadiusProperty } from 'tns-core-modules/ui/page/page';
+import { Credentials } from '../core/services/authentication/credentials';
 
 @Component({
     selector: 'ns-account',
@@ -13,8 +14,7 @@ import { borderTopRightRadiusProperty } from 'tns-core-modules/ui/page/page';
     styleUrls: ['./account.component.css']
 })
 export class AccountComponent extends SubscriptionBase {
-    public email: string = "";
-    public password: string = "";
+    public credentials = new Credentials('', '');
 
     public loginState = LoginState.loggedOut;
     public user: User;

@@ -29,6 +29,7 @@ export class PleaseVerifyYourEmailComponent {
     }
 
     public onBackToLoginTapped(): void {
+        this.authenticationService.logout();
         this.onBackToLoginTap.emit();
     }
 
