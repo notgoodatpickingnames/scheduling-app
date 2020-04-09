@@ -6,6 +6,7 @@ import { SecureStorage } from "nativescript-secure-storage"
 import { Credentials } from './credentials';
 import { LoginState } from './loginState';
 import { AuthLevel } from './authLevel';
+import * as FacebookSdk from 'nativescript-plugin-firebase'
 
 @Injectable({
     providedIn: 'root'
@@ -91,6 +92,7 @@ export class AuthenticationService {
                     password: credentials.password
                 }
             });
+            this.saveCredentials(credentials);
             this.setUser(user);
             this.setLoginState(LoginState.loggedInEmailUnVerified);
             return user;
@@ -104,6 +106,11 @@ export class AuthenticationService {
     public async relog(): Promise<User> {
         const credentials = await this.getCredentials();
         return await this.login(credentials);
+    }
+
+    public logout(): Promise<any> {
+        
+        return firebase.logout().then(response => console.log(`fvfvfe ${response}`));
     }
 
     public async getVerificationState(): Promise<boolean> {

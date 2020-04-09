@@ -4,8 +4,8 @@
 <ns-sign-up *ngIf="showSignUpPage && !showVerifyAccountPage" (onBackToLoginTap)="onBackToLoginTap()" (onAccountCreated)="onAccountCreated()"></ns-sign-up>
 <ns-login *ngIf="showLoginPage && !showVerifyAccountPage" (onSignupTap)="onSignupTap()"></ns-login>
 
-<StackLayout class="body" *ngIf="showSettingsPage">
-    <Label text="This is the accounts page"></Label>
-    <Label text="You are logged in as: "></Label>
-    <Label [text]="user.email"></Label>
+<StackLayout class="body" *ngIf="showSettingsPage" horizontalAlignment="center">
+    <Label class="label" text="You are logged in as: "></Label>
+    <Label class="label" [text]="user.email"></Label>
+    <button text="Logout" (tap)="onLogoutTap()" class="logout-button button"></button>
 </StackLayout>

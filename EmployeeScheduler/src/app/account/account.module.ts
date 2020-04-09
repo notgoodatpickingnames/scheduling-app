@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AccountSettingsComponent } from './account.component';
+import { AccountComponent } from './account.component';
 import { SharedModule } from '../shared.module';
 import { SignUpComponent } from './signUp/signUp.component';
 import { LoginComponent } from './login/login.component';
@@ -12,10 +12,10 @@ import { PleaseVerifyYourEmailComponent } from './pleaseVerifyYourEmail/pleaseVe
         SharedModule
     ],
     declarations: [
-       AccountSettingsComponent,
-       SignUpComponent,
-       LoginComponent,
-       PleaseVerifyYourEmailComponent
+        AccountComponent,
+        SignUpComponent,
+        LoginComponent,
+        PleaseVerifyYourEmailComponent
     ]
 })
-export class AccountSettingsModule { }
+export class AccountModule { }

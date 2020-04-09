@@ -8,11 +8,11 @@ import { LoginState } from '../core/services/authentication/loginState';
 import { borderTopRightRadiusProperty } from 'tns-core-modules/ui/page/page';
 
 @Component({
-    selector: 'ns-account-settings',
-    templateUrl: './accountSettings.component.html',
-    styleUrls: ['./accountSettings.component.css']
+    selector: 'ns-account',
+    templateUrl: './account.component.html',
+    styleUrls: ['./account.component.css']
 })
-export class AccountSettingsComponent extends SubscriptionBase {
+export class AccountComponent extends SubscriptionBase {
     public email: string = "";
     public password: string = "";
 
@@ -39,6 +39,10 @@ export class AccountSettingsComponent extends SubscriptionBase {
 
     public onBackToLoginTap() {
         this.setShowLogin();
+    }
+
+    public onLogoutTap() {
+        this.authenticationService.logout();
     }
 
     public onAccountCreated() {

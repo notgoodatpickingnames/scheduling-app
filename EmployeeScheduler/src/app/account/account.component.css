@@ -1,0 +1,9 @@
+.logout-button {
+    width: 496px;
+    background-color: var(--secondary-text-color);
+    margin-top: 48px;
+}
+
+.label {
+    text-align: center;;
+}
