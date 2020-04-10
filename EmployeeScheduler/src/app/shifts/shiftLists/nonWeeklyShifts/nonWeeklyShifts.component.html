@@ -5,7 +5,7 @@
                 class="recurrence-label"
                 text="Every Year">
             </Label>
-            <StackLayout *ngFor="let shift of everyYearShifts" width="100%" (tap)="onShiftCardTap(shift.id)">
+            <StackLayout *ngFor="let shift of everyYearShifts" width="100%" (tap)="onShiftCardTap(shift.shiftId)">
                 <ns-date-card
                     [shift]="shift">
                 </ns-date-card>
@@ -16,10 +16,10 @@
                 class="recurrence-label"
                 text="Every Month">
             </Label>
-            <StackLayout *ngFor="let shift of oneTimeShifts" width="100%" (tap)="onShiftCardTap(shift.id)">
-                <ns-date-card
+            <StackLayout *ngFor="let shift of everyMonthShifts" width="100%" (tap)="onShiftCardTap(shift.shiftId)">
+                <ns-day-card
                     [shift]="shift">
-                </ns-date-card>
+                </ns-day-card>
             </StackLayout>
         </StackLayout>
         <StackLayout orientation="vertical" class="shift" *ngIf="hasOneTimeShifts">
@@ -27,7 +27,7 @@
                 class="recurrence-label"
                 text="One-Time (Will disapear after the date is old)">
             </Label>
-            <StackLayout *ngFor="let shift of oneTimeShifts" width="100%" (tap)="onShiftCardTap(shift.id)">
+            <StackLayout *ngFor="let shift of oneTimeShifts" width="100%" (tap)="onShiftCardTap(shift.shiftId)">
                 <ns-date-card
                     [shift]="shift">
                 </ns-date-card>

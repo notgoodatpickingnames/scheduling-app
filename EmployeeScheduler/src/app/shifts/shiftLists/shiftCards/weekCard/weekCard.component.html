@@ -3,7 +3,7 @@
         class="day-label"
         [text]="day.name">
     </Label>
-    <StackLayout *ngFor="let shift of day.shifts" class="shift" (tap)="onShiftTapped(shift.id)">
+    <StackLayout *ngFor="let shift of day.shifts" class="shift" (tap)="onShiftTapped(shift.shiftId)">
         <Label
             class="shift-text"
             verticalAlignment="center"

@@ -24,11 +24,9 @@ export class LoginComponent {
         private route: ActivatedRoute) { }
 
     public onLoginTap(): void {
-        console.log(`Trying to login with email: ${this.credentials.email} and password: ${this.credentials.password}`);
         this.authenticationService.login(this.credentials)
             .then(() => this.router.navigate(['../personalSchedule'], {relativeTo: this.route}))
             .catch(error => {
-                console.log(`error when logging in: ${error}`);
                 this.showFailToLoginError = true
             });
     }
