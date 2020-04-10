@@ -10,10 +10,10 @@ import { KeyboardType } from './keyboardType';
     styleUrls: ['../fieldStyles.css']
 })
 export class TextFieldComponent {
-    @Input() public label = "";
-    @Input() public value = "";
-    @Input() public horizontalAlignment: string = "center"
-    @Input() public keyboardType = KeyboardType.text;
+    @Input() public label = '';
+    @Input() public value = '';
+    public horizontalAlignment: string = 'center'
+    @Input() public keyboardType: KeyboardType;
     @Input() public readonly: boolean = false;
     @Input() public hideText: boolean = false;
     @Output() public valueChange = new EventEmitter<string>();

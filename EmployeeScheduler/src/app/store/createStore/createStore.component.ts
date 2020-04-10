@@ -10,8 +10,6 @@ import { KeyboardType } from '~/app/core/FormComponents/textField/keyboardType';
 })
 export class CreateStoreComponent implements OnInit {
     public store = Store.constructNew();
-    
-    public textKeyboardType = KeyboardType.text;
 
     constructor(private router: Router,
         private route: ActivatedRoute) { }

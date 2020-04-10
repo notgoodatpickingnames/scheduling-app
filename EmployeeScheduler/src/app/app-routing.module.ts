@@ -8,6 +8,7 @@ import { SchedulingComponent } from "./scheduling/scheduling.component";
 import { AccountComponent } from "./account/account.component";
 import { PersonalScheduleComponent } from "./personalSchedule/personalSchedule.component";
 import { StoreComponent } from "./store/store.component";
+import { CreateStoreComponent } from "./store/createStore/createStore.component";
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
     { path: 'account', component: AccountComponent },
     { path: 'scheduling', component: SchedulingComponent },
     { path: 'stores', component: StoreComponent },
+    { path: 'stores/create', component: CreateStoreComponent },
     { path: 'shifts', component: ShiftsComponent },
     { path: 'shifts/create', component: CreateShiftComponent },
     { path: 'shifts/edit/:id', component: EditShiftComponent },
