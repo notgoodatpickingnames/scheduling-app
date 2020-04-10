@@ -7,16 +7,18 @@ import { EditShiftComponent } from "./shifts/editShift/editShift.component";
 import { SchedulingComponent } from "./scheduling/scheduling.component";
 import { AccountComponent } from "./account/account.component";
 import { PersonalScheduleComponent } from "./personalSchedule/personalSchedule.component";
+import { StoreComponent } from "./store/store.component";
 
 
 const routes: Routes = [
     { path: "", redirectTo: "/personalSchedule", pathMatch: "full" },
-    { path: 'personalSchedule', component: PersonalScheduleComponent},
+    { path: 'personalSchedule', component: PersonalScheduleComponent },
     { path: 'account', component: AccountComponent },
-    { path: 'scheduling', component: SchedulingComponent},
-    { path: 'shifts', component: ShiftsComponent},
-    { path: 'shifts/create', component: CreateShiftComponent},
-    { path: 'shifts/edit/:id', component: EditShiftComponent},
+    { path: 'scheduling', component: SchedulingComponent },
+    { path: 'stores', component: StoreComponent },
+    { path: 'shifts', component: ShiftsComponent },
+    { path: 'shifts/create', component: CreateShiftComponent },
+    { path: 'shifts/edit/:id', component: EditShiftComponent },
 ];
 
 @NgModule({

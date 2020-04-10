@@ -1,0 +1,33 @@
+<ns-action-bar [title]="'Stores'" [showBackButton]="false"></ns-action-bar>
+
+<StackLayout>
+    <Tabs #tabs [selectedIndex]="storesTabService.selectedTab" (selectedIndexChanged)="onIndexChanged($event)" tabsPosition="bottom">
+        <TabStrip>
+            <TabStripItem class="tab-strip-item">
+                <Label text="Stores You Own" class="tab-strip-label"></Label>
+            </TabStripItem>
+            <!-- <TabStripItem class="tab-strip-item">
+                <Label text="Bi-Weekly" class="tab-strip-label"></Label>
+            </TabStripItem> -->
+            <TabStripItem class="tab-strip-item">
+                <Label text="Stores That Own You" class="tab-strip-label"></Label>
+            </TabStripItem>
+        </TabStrip>
+
+        <TabContentItem>
+            <Label text="Stores You Own"></Label>
+        </TabContentItem>
+        <!-- <TabContentItem>
+            <ns-bi-weekly-shifts></ns-bi-weekly-shifts>
+        </TabContentItem> -->
+        <TabContentItem>
+            <Label text="Stores That Own You"></Label>
+        </TabContentItem>
+    </Tabs>
+
+</StackLayout>
+<StackLayout class="button-container">
+<GridLayout #fabButton class="fab-button" (tap)="onCreateShiftTap()">
+    <Label text="+" class="plus-sign"></Label>
+</GridLayout>
+</StackLayout>

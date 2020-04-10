@@ -19,6 +19,7 @@ import { SchedulesService } from "./core/services/schedule/schedules.service";
 import { AuthenticationService } from "./core/services/authentication/authentication.service";
 import { AccountModule } from "./account/account.module";
 import { PersonalScheduleModule } from "./personalSchedule/personalSchedule.module";
+import { StoreModule } from "./store/store.module";
 
 @NgModule({
     bootstrap: [
@@ -32,7 +33,8 @@ import { PersonalScheduleModule } from "./personalSchedule/personalSchedule.modu
         SchedulingModule,
         AccountModule,
         SharedModule,
-        PersonalScheduleModule
+        PersonalScheduleModule,
+        StoreModule
     ],
     declarations: [
         AppComponent
