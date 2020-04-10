@@ -20,6 +20,7 @@ export class StoreComponent {
     }
 
     public onIndexChanged(event: SelectedIndexChangedEventData) {
+        console.log('set the selected index');
         this.storesTabService.selectedIndex = event.newIndex;
     }
 }

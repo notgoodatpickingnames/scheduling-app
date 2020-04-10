@@ -1,26 +1,35 @@
-import { Employee } from "./employee";
+import { User } from "./user";
 import { IStore } from "./IStore";
 
 export class Store {
-    public id: string;
-    public ownerUserId: string;
+    public storeId: string;
     public storeName: string;
     public storeNumber: string;
-    public employees: Employee[];
-    public joinRequests: Employee[];
+    public users: User[];
+    public userJoinRequests: User[];
 
-    constructor(store: IStore, id: string) {
-        this.id = id;
-        this.ownerUserId
+    constructor(store: IStore, storeId: string) {
+        this.storeId = storeId;
+        this.storeName = store.storeName;
+        this.users = store.users !== undefined ? store.users : [];
+        this.userJoinRequests = store.userJoinRequests !== undefined ? store.userJoinRequests : [];
     }
 
     public asInterface(): IStore {
         return {
-            ownerUserId: this.ownerUserId,
             storeName: this.storeName,
             storeNumber: this.storeNumber,
-            employees: this.employees,
-            joinRequests: this.joinRequests
+            users: this.users,
+            userJoinRequests: this.userJoinRequests
         }
+    }
+
+    public static constructNew(): Store {
+        return new Store({
+            storeName: '',
+            storeNumber: '',
+            users: [],
+            userJoinRequests: []
+        }, undefined)
     }
 }

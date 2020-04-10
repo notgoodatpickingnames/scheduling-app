@@ -1,9 +1,8 @@
-import { Employee } from "./employee";
+import { User } from "./user";
 
 export interface IStore {
-    ownerUserId: string,
     storeName: string;
     storeNumber: string;
-    employees: Employee[];
-    joinRequests: Employee[];
+    users: User[];
+    userJoinRequests: User[];
 }
