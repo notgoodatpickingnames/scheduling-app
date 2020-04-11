@@ -20,7 +20,6 @@ export class SignUpComponent extends SubscriptionBase {
     public reEnteredPassword: string = "";
 
     public emailKeyboardType = KeyboardType.email;
-    public textKeyboardType = KeyboardType.text;
 
     constructor(private authenticationService: AuthenticationService) {
         super();

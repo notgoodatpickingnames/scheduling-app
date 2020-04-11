@@ -10,7 +10,7 @@ export class TextAreaComponent {
     @Input() public label = "";
     @Input() public value = "";
     @Input() public hint = "";
-    @Input() public keyboardType = KeyboardType.text;
+    @Input() public keyboardType;
     @Output() public valueChange = new EventEmitter<string>();
 
     public onTextChanged(newValue: string): void {

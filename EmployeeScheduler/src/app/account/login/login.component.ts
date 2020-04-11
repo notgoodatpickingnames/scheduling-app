@@ -17,7 +17,6 @@ export class LoginComponent {
     public showFailToLoginError: boolean = false;
 
     public emailKeyboardType = KeyboardType.email;
-    public textKeyboardType = KeyboardType.text;
 
     constructor(private authenticationService: AuthenticationService,
         private router: Router,

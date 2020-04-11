@@ -17,7 +17,6 @@ export class CreateShiftComponent {
     @ViewChild(NgForm, {read: NgForm, static: false}) public form: NgForm;
 
     public numberKeyboardType = KeyboardType.number;
-    public textKeyboardType = KeyboardType.text;
     public shift = Shift.constructNew();
 
     private everyYear = {value: RecurrenceType.EveryYear, display: RecurrenceType.EveryYear};
