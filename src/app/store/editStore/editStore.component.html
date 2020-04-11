@@ -1,3 +1,20 @@
-<p>
-  editStore works!
-</p>
+<ns-action-bar [title]="'New Store'" (back)="onBackAction()"></ns-action-bar>
+
+<ScrollView class="body">
+    <StackLayout orientation="vertical" class="form">
+
+        <ns-text-field
+            label="Store Name"
+            [(value)]="store.storeName">
+        </ns-text-field>
+
+        <ns-text-area
+            label="Description"
+            [(value)]="store.description">
+        </ns-text-area>
+
+        <StackLayout horizontalAlignment="center" class="button-container">
+            <button text="Finish" (tap)="onSubmit()" class="finish-button"></button>
+        </StackLayout>
+    </StackLayout>
+</ScrollView>

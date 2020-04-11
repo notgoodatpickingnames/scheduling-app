@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Page } from 'tns-core-modules/ui/page/page';
 import { AuthenticationService } from '~/app/core/services/authentication/authentication.service';
-import { setInterval, clearInterval } from 'tns-core-modules/timer';
+import { setInterval, clearInterval } from '@nativescript/core/timer';
 
 @Component({
   selector: 'ns-please-verify-your-email',
@@ -35,6 +35,7 @@ export class PleaseVerifyYourEmailComponent {
 
     private pollForVerification() {
         PleaseVerifyYourEmailComponent.pollIntervalId = setInterval(() => {
+            console.log('polling for verification of email');
             this.authenticationService.relog()
                 .then(user => {
                     if (user && user.emailVerified) {

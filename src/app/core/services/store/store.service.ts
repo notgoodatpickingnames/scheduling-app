@@ -4,68 +4,28 @@ import { SubscriptionBase } from '../../subscriptionBase';
 import { Store } from './store';
 import * as firebase from 'nativescript-plugin-firebase';
 import { Observable, throwError } from 'rxjs';
+import { User } from 'nativescript-plugin-firebase';
+import { CreateStoreRequest } from './createStoreRequest';
+import { CreateStoreResponse } from './createStoreResponse';
 
 @Injectable({
     providedIn: 'root'
 })
 export class StoreService extends SubscriptionBase{
 
-    private _path: string = "store"
+    private _path: string = "stores"
+    // private createStoreCloudFunction = firebase.functions.httpsCallable("createStore");
 
     constructor(private _ngZone: NgZone) {
         super();
     }
 
-    public initialise(): void {
-        // this.load().pipe(takeUntil(this.componentDestroyed)).subscribe(shifts => {
-        //     this.shift$.next(shifts);
-        // });
-    }
-
-    public push(store: Store) {
-        // firebase.push(this._path, store.asInterface());
-    }
-
-    public update(shift: Store) {
-        // firebase.update(`${this._path}/${shift.shiftId}`, shift.asInterface())
-    }
-
-    public get(userId: string): Observable<Store> {
-        // return this.shift$.pipe(map(shifts => shifts.find(shift => shift.shiftId === id)));
-        // Return stores where the user id is in the employees or owners category.
-        return null;
-    }
-
-    private load(): Observable<any> {
-        return new Observable((observer: any) => {
-
-            const onValueEvent =(snapshot: any) => {
-                this._ngZone.run(() => {
-                    const results = this.handleSnapshot(snapshot.value);
-                    observer.next(results);
-                })
-            }
-            firebase.addValueEventListener(onValueEvent, `/${this._path}`);
-        })
-        .pipe(catchError(this.handleErrors));
-    }
-
-    private handleErrors(error: Response): Observable<never> {
-        return throwError(error);
-    }
-
-    private handleSnapshot(data: any): Store[] {
-        const shifts = [];
-
-        if (data) {
-            for(const id in data) {
-                if (data.hasOwnProperty(id)) {
-                    const shiftToPush = new Store(data[id], id);
-                    shifts.push(shiftToPush);
-                }
-            }
-        }
-
-        return shifts;
+    public create(store: Store): Promise<any> {
+        // const createStoreRequest: CreateStoreRequest = {storeName: store.storeName, storeDescription: store.description, userId: user.uid};
+        // return this.createStoreCloudFunction(createStoreRequest)
+        //     .then((response: CreateStoreResponse) => response.message)
+        //     .catch(error => `There was an error creating the new store: ${error}`);
+        console.log('pushing new store');
+        return firebase.push(this._path, store.asInterface());
     }
 }

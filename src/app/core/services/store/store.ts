@@ -1,5 +1,6 @@
 import { User } from "./user";
 import { IStore } from "./IStore";
+import { StoreAuthLevel } from "./storeAuthLevel";
 
 export class Store {
     public storeId: string;
@@ -15,6 +16,11 @@ export class Store {
         this.description = store.description;
         this.users = store.users !== undefined ? store.users : [];
         this.userJoinRequests = store.userJoinRequests !== undefined ? store.userJoinRequests : [];
+    }
+
+    public setOwnerAsOnlyUser(userId: string, userDisplayName: string) {
+        const owner = new User(userId, userDisplayName, StoreAuthLevel.owener);
+        this.users = [owner];
     }
 
     public asInterface(): IStore {

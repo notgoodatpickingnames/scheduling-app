@@ -25,6 +25,7 @@
     "@angular/router": "~8.2.0",
     "@nativescript/core": "^6.5.1",
     "@nativescript/theme": "~2.2.1",
+    "firebase-admin": "^8.10.0",
     "nativescript-angular": "~8.20.3",
     "nativescript-drop-down": "^5.0.4",
     "nativescript-modal-datetimepicker": "^1.2.2",

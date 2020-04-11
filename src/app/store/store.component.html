@@ -1,27 +1,15 @@
 <ns-action-bar [title]="'Stores'" [showBackButton]="false"></ns-action-bar>
 
 <StackLayout>
-    <Tabs #tabs [selectedIndex]="storesTabService.selectedTab" (selectedIndexChanged)="onIndexChanged($event)" tabsPosition="bottom">
-        <TabStrip>
-            <TabStripItem class="tab-strip-item">
-                <Label text="Stores You Own" class="tab-strip-label"></Label>
-            </TabStripItem>
-            <TabStripItem class="tab-strip-item">
-                <Label text="Stores That Own You" class="tab-strip-label"></Label>
-            </TabStripItem>
-        </TabStrip>
+    <ScrollView orientation="vertical" class="body">
+        <StackLayout orientation="vertical" width="100%">
 
-        <TabContentItem>
-            <Label text="Stores You Own"></Label>
-        </TabContentItem>
-        <TabContentItem>
-            <Label text="Stores That Own You"></Label>
-        </TabContentItem>
-    </Tabs>
-
+        </StackLayout>
+    </ScrollView>
 </StackLayout>
+
 <StackLayout class="button-container">
-<GridLayout #fabButton class="fab-button" (tap)="onCreateShiftTap()">
-    <Label text="+" class="plus-sign"></Label>
-</GridLayout>
+    <GridLayout #fabButton class="fab-button" (tap)="onCreateShiftTap()">
+        <Label text="+" class="plus-sign"></Label>
+    </GridLayout>
 </StackLayout>

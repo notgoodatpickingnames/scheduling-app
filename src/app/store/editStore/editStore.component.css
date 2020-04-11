@@ -1,0 +1,13 @@
+.finish-button {
+    width: 496px;
+    background-color: var(--success-color);
+    margin-top: 48px;
+    padding: 24px;
+}
+
+.button {
+    background-color: var(--secondary-text-color);
+    margin-top: 48px;
+    padding: 24px;
+    width: 496px;
+}

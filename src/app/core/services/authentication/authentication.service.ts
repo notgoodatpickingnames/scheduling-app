@@ -102,8 +102,9 @@ export class AuthenticationService {
             return user;
         }
         catch (error) {
+            console.log('failed to login boi');
             this.setLoginState(LoginState.loggedOut);
-            return undefined;
+            return Promise.reject(error);
         }
     }
 

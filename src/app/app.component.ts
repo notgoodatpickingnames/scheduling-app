@@ -25,8 +25,6 @@ export class AppComponent extends SubscriptionBase{
     public loginState: LoginState;
     public authLevel: AuthLevel;
 
-    private fn = firebase.functions.httpsCallable("helloWorld");
-
     constructor(
         private router: Router,
         private route: ActivatedRoute,
@@ -37,9 +35,6 @@ export class AppComponent extends SubscriptionBase{
         super();
         this.initialise();
         this.listenForApplicationEvents();
-        console.log('about to call to the firebase function');
-        this.fn("yeet").then(response => console.log(`The response came back as: ${response}`));
-
     }
 
     ngOnInit(): void {
@@ -70,11 +65,11 @@ export class AppComponent extends SubscriptionBase{
             .subscribe(loginState => {
                 this.loginState = loginState;
                 if (this.loginState === LoginState.loggedOut || this.loginState === LoginState.loggedInEmailUnVerified || this.loginState === LoginState.noCredentials) {
-                    this.navigateTo('stores/create') // Change this during dev.
+                    this.navigateTo('account') // Change this during dev.
                 }
 
                 if (this.loginState === LoginState.loggedInEmailVerified) {
-                    this.navigateTo('personalSchedule');
+                    this.navigateTo('stores/create');
                 }
             });
     }
