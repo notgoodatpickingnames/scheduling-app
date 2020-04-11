@@ -25,6 +25,8 @@ export class AppComponent extends SubscriptionBase{
     public loginState: LoginState;
     public authLevel: AuthLevel;
 
+    private fn = firebase.functions.httpsCallable("helloWorld");
+
     constructor(
         private router: Router,
         private route: ActivatedRoute,
@@ -35,6 +37,8 @@ export class AppComponent extends SubscriptionBase{
         super();
         this.initialise();
         this.listenForApplicationEvents();
+        console.log('about to call to the firebase function');
+        this.fn("yeet").then(response => console.log(`The response came back as: ${response}`));
 
     }
 
