@@ -1,0 +1,6 @@
+.button {
+    width: 496px;
+    background-color: var(--success-color);
+    margin-top: 48px;
+    padding: 24px;
+}

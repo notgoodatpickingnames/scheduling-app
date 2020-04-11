@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Store } from '~/app/core/services/store/store';
 import { KeyboardType } from '~/app/core/FormComponents/textField/keyboardType';
+import { StoreService } from '~/app/core/services/store/store.service';
 
 @Component({
   selector: 'ns-createStore',
@@ -12,7 +13,8 @@ export class CreateStoreComponent implements OnInit {
     public store = Store.constructNew();
 
     constructor(private router: Router,
-        private route: ActivatedRoute) { }
+        private route: ActivatedRoute,
+        private storeService: StoreService) { }
 
     ngOnInit() {
     }

@@ -4,9 +4,14 @@
     <StackLayout orientation="vertical" class="form">
 
         <ns-text-field
-            label="Notes"
+            label="Store Name"
             [(value)]="store.storeName">
         </ns-text-field>
+
+        <ns-text-area
+            label="Description"
+            [(value)]="store.description">
+        </ns-text-area>
 
         <StackLayout horizontalAlignment="center" class="button-container">
             <button text="Add" (tap)="onSubmit()" class="button"></button>

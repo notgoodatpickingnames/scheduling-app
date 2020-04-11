@@ -1,6 +1,6 @@
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
-import { Tabs, SelectedIndexChangedEventData } from 'tns-core-modules/ui/tabs';
 import { Router, ActivatedRoute } from '@angular/router';
+import { SelectedIndexChangedEventData } from '@nativescript/core/ui/tab-view/tab-view';
 
 @Component({
     selector: 'ns-shifts',

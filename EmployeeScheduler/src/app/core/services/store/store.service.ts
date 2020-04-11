@@ -8,7 +8,7 @@ import { Observable, throwError } from 'rxjs';
 @Injectable({
     providedIn: 'root'
 })
-export class StoreServiceService extends SubscriptionBase{
+export class StoreService extends SubscriptionBase{
 
     private _path: string = "store"
 

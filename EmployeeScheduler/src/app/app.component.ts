@@ -35,6 +35,7 @@ export class AppComponent extends SubscriptionBase{
         super();
         this.initialise();
         this.listenForApplicationEvents();
+
     }
 
     ngOnInit(): void {
@@ -65,7 +66,7 @@ export class AppComponent extends SubscriptionBase{
             .subscribe(loginState => {
                 this.loginState = loginState;
                 if (this.loginState === LoginState.loggedOut || this.loginState === LoginState.loggedInEmailUnVerified || this.loginState === LoginState.noCredentials) {
-                    this.navigateTo('account')
+                    this.navigateTo('stores/create') // Change this during dev.
                 }
 
                 if (this.loginState === LoginState.loggedInEmailVerified) {

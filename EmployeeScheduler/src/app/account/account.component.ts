@@ -5,7 +5,6 @@ import { User, login } from 'nativescript-plugin-firebase';
 import { SubscriptionBase } from '../core/subscriptionBase';
 import { takeUntil } from 'rxjs/operators';
 import { LoginState } from '../core/services/authentication/loginState';
-import { borderTopRightRadiusProperty } from 'tns-core-modules/ui/page/page';
 import { Credentials } from '../core/services/authentication/credentials';
 
 @Component({
