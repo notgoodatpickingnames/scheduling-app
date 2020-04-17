@@ -6,7 +6,7 @@ import { SecureStorage } from "nativescript-secure-storage"
 import { Credentials } from './credentials';
 import { LoginState } from './loginState';
 import { AuthLevel } from './authLevel';
-import * as FacebookSdk from 'nativescript-plugin-firebase'
+import { UserAccount } from '../account/userAccount';
 
 @Injectable({
     providedIn: 'root'
@@ -25,39 +25,37 @@ export class AuthenticationService {
 
     }
 
-    public initialise(): void {
+    public initialise() {
         this.getCredentials()
             .then((credentials) => {
-                if (credentials) {
-                    this.login(credentials)
-                        .then(user => {
-                            console.log(`logged in from init and got a user: ${user !== undefined}`);
-                            if (user.emailVerified) {
-                                this.setLoginState(LoginState.loggedInEmailVerified);
-                                this.storeVerificationState(true);
-                            }
-
-                            if (!user.emailVerified) {
-                                this.setLoginState(LoginState.loggedInEmailUnVerified);
-                                this.storeVerificationState(false);
-                            }
-
-                            this.setUser(user);
-                        })
-                        .catch(error => {
-                            this.setUser(undefined);
-                            this.setLoginState(LoginState.loggedOut);
-                            console.log(`login error ${error}`);
-                        });
-                    }
-                else {
-                    this.setUser(undefined);
+                if (!credentials) {
                     this.setLoginState(LoginState.noCredentials);
                     console.log('no credentials stored on this phone');
                 }
+
+                this.login(credentials)
+                    .then(user => {
+                        if (user.emailVerified) {
+                            this.setLoginState(LoginState.loggedInEmailVerified);
+                            this.storeVerificationState(true);
+                        } else {
+                            this.setLoginState(LoginState.loggedInEmailUnVerified);
+                            this.storeVerificationState(false);
+                        }
+
+                        this.setUser(user);
+                        return user;
+                    })
+                    .catch(error => {
+                        this.setUser(undefined);
+                        this.setLoginState(LoginState.loggedOut);
+                        console.log(`login error ${error}`);
+                        return ;
+                    });
             })
             .catch((reason) => {
                 console.log(reason);
+                return Promise.reject;
             });
     }
 
@@ -99,6 +97,17 @@ export class AuthenticationService {
             this.saveCredentials(credentials);
             this.setUser(user);
             this.setLoginState(LoginState.loggedInEmailUnVerified);
+            this.getUserRecord(user.uid)
+                .then(response => {
+                    if (response.value) {
+                        console.log(`got a value for the user ${response.value}`);
+                    }
+                    else {
+                        this.createUserRecord(user.uid)
+                            .then(response => console.log(`Created User Record with ${JSON.stringify(response)}`))
+                            .catch(error => console.log(error));
+                    }
+                })
             return user;
         }
         catch (error) {
@@ -128,5 +137,13 @@ export class AuthenticationService {
 
     private storeVerificationState(emailVerified: boolean): void {
         this.secureStorage.set({key: this.emailVerifiedKey, value: emailVerified ? "1" : "0"})
+    }
+
+    private getUserRecord(userId: string): Promise<any> {
+        return firebase.getValue(`users/${userId}`);
+    }
+
+    private createUserRecord(userId: string): Promise<any> {
+        return firebase.setValue(`users/${userId}`, {relatedStores: ['1']});
     }
 }

@@ -14,6 +14,7 @@ import { SubscriptionBase } from './core/subscriptionBase';
 import { LoginState } from './core/services/authentication/loginState';
 import { AuthLevel } from './core/services/authentication/authLevel';
 import { InitOptions, login } from 'nativescript-plugin-firebase';
+import { StoreService } from './core/services/store/store.service';
 
 @Component({
     selector: "ns-app",
@@ -28,8 +29,7 @@ export class AppComponent extends SubscriptionBase{
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private shiftsService: ShiftsService,
-        private schedulesService: SchedulesService,
+        private storeService: StoreService,
         private authenticationService: AuthenticationService
     ) {
         super();
@@ -53,6 +53,7 @@ export class AppComponent extends SubscriptionBase{
         return firebase.init({
             onAuthStateChanged: (data) => {
                 this.authenticationService.setUser(data.user);
+                this.onFirebaseInit();
             }
         })
         .then(() => this.onFirebaseInit())
@@ -95,8 +96,28 @@ export class AppComponent extends SubscriptionBase{
     }
 
     private loadServices() {
-        this.authenticationService.initialise();
-        this.shiftsService.initialise();
-        this.schedulesService.initialise();
+        console.log('loading services');
+        this.authenticationService.initialise()
+
+        this.authenticationService.user.pipe(takeUntil(this.componentDestroyed))
+            .subscribe(user => {
+                if (user) {
+                    this.storeService.initialise(user.uid);
+                    this.storeService.store$.subscribe(stores => {
+                        if (stores) {
+                            stores.forEach(store => {
+                                if (store) {
+                                    console.log(`got a store back from the thing ${store.storeName}`);
+                                }
+                                else {
+                                    console.log('the stores came back but aint no store');
+                                }
+                            });
+                        }
+                        
+                    });
+                }
+            });
+        
     }
 }

@@ -1,6 +1,8 @@
 import { User } from "./user";
 import { IStore } from "./IStore";
 import { StoreAuthLevel } from "./storeAuthLevel";
+import { Shift } from "../shift/shift";
+import { Schedule } from "../schedule/schedule";
 
 export class Store {
     public storeId: string;
@@ -11,6 +13,8 @@ export class Store {
     public userJoinRequests: User[];
 
     constructor(store: IStore, storeId: string) {
+        console.log(`STORE ID ${storeId}`);
+        console.log(`STORE ITSELF ${JSON.stringify(store)}`);
         this.storeId = storeId;
         this.storeName = store.storeName;
         this.description = store.description;

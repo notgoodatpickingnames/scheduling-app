@@ -35,7 +35,7 @@ export class PleaseVerifyYourEmailComponent {
 
     private pollForVerification() {
         PleaseVerifyYourEmailComponent.pollIntervalId = setInterval(() => {
-            console.log('polling for verification of email');
+            // console.log('polling for verification of email');
             this.authenticationService.relog()
                 .then(user => {
                     if (user && user.emailVerified) {
