@@ -30,7 +30,6 @@ export class StoreService extends SubscriptionBase{
                 console.log(`got related store ids ${this.relatedStoreIds}`);
                 this.getStoreListeners();
             });
-        
     }
 
     public create(store: Store): Promise<any> {
@@ -72,7 +71,7 @@ export class StoreService extends SubscriptionBase{
             }
             console.log(storeId);
             firebase.addValueEventListener(onValueEvent, `/${this._path}/${storeId}`);
-            
+
         })
         .pipe(catchError(this.handleErrors));
     }
@@ -84,7 +83,10 @@ export class StoreService extends SubscriptionBase{
     private handleSnapshot(data: any, storeId: string): Store {
         let store: Store;
 
+        []
+
         if (data) {
+            console.log(`data from snapshot ${JSON.stringify(data)}`);
             store = new Store(data, storeId);
         }
 

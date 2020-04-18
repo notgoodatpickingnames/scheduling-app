@@ -10,4 +10,8 @@ export class User {
         this.displayName = displayName;
         this.storeAuthLevel = storeAuthLevel;
     }
+
+    public asInterface() {
+
+    }
 }

@@ -3,13 +3,14 @@ import { IStore } from "./IStore";
 import { StoreAuthLevel } from "./storeAuthLevel";
 import { Shift } from "../shift/shift";
 import { Schedule } from "../schedule/schedule";
+import { UserCollection } from "./userCollection";
 
 export class Store {
     public storeId: string;
     public storeName: string;
     public storeNumber: string;
     public description: string;
-    public users: User[];
+    public userCollection: UserCollection;
     public userJoinRequests: User[];
 
     constructor(store: IStore, storeId: string) {
@@ -18,21 +19,21 @@ export class Store {
         this.storeId = storeId;
         this.storeName = store.storeName;
         this.description = store.description;
-        this.users = store.users !== undefined ? store.users : [];
+        this.userCollection = store.users !== undefined ? new UserCollection(store.users) : new UserCollection([]);
         this.userJoinRequests = store.userJoinRequests !== undefined ? store.userJoinRequests : [];
     }
 
     public setOwnerAsOnlyUser(userId: string, userDisplayName: string) {
         const owner = new User(userId, userDisplayName, StoreAuthLevel.owener);
-        this.users = [owner];
+        this.userCollection.addUser(owner);
     }
 
-    public asInterface(): IStore {
+    public asInterface(): any {
         return {
             storeName: this.storeName,
             storeNumber: this.storeNumber,
             description: this.description,
-            users: this.users,
+            users: this.userCollection.usersAsObjectString,
             userJoinRequests: this.userJoinRequests
         }
     }
