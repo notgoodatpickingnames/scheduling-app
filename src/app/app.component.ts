@@ -6,10 +6,10 @@ import { ShiftsService } from './core/services/shift/shifts.service';
 import { ApplicationEventData, on, resumeEvent } from 'tns-core-modules/application/application';
 import * as app from "tns-core-modules/application";
 import { SchedulesService } from './core/services/schedule/schedules.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { AuthenticationService } from './core/services/authentication/authentication.service';
-import { Page } from 'tns-core-modules/ui/page/page';
-import { takeUntil, skip } from 'rxjs/operators';
+import { Page, Observable } from 'tns-core-modules/ui/page/page';
+import { takeUntil, skip, take } from 'rxjs/operators';
 import { SubscriptionBase } from './core/subscriptionBase';
 import { LoginState } from './core/services/authentication/loginState';
 import { AuthLevel } from './core/services/authentication/authLevel';
@@ -25,6 +25,9 @@ export class AppComponent extends SubscriptionBase{
     public sideDrawerTransition: DrawerTransitionBase;
     public loginState: LoginState;
     public authLevel: AuthLevel;
+
+    private userListener = new Subscription();
+    private loginStateListener = new Subscription();
 
     constructor(
         private router: Router,
@@ -46,10 +49,11 @@ export class AppComponent extends SubscriptionBase{
     }
 
     private onApplicationResume() {
+        console.log('THE APP HAS BEEN RESUMED');
     }
 
     private initialise(): Promise<any> {
-        this.listenForLoginState();
+         this.listenForLoginState();
         return firebase.init({
             onAuthStateChanged: (data) => {
                 this.authenticationService.setUser(data.user);
@@ -61,7 +65,9 @@ export class AppComponent extends SubscriptionBase{
     }
 
     private listenForLoginState(): void {
-        this.authenticationService.loginState
+        this.loginStateListener.unsubscribe();
+
+        this.loginStateListener = this.authenticationService.loginState
             .pipe(takeUntil(this.componentDestroyed))
             .subscribe(loginState => {
                 this.loginState = loginState;
@@ -99,23 +105,12 @@ export class AppComponent extends SubscriptionBase{
         console.log('loading services');
         this.authenticationService.initialise()
 
-        this.authenticationService.user.pipe(takeUntil(this.componentDestroyed))
+        this.userListener.unsubscribe();
+        this.userListener = this.authenticationService.user.pipe(takeUntil(this.componentDestroyed))
             .subscribe(user => {
+                console.log(`The user event fired ${JSON.stringify(user)}`);
                 if (user) {
                     this.storeService.initialise(user.uid);
-                    this.storeService.store$.subscribe(stores => {
-                        if (stores) {
-                            stores.forEach(store => {
-                                if (store) {
-                                    console.log(`got a store back from the thing ${store.storeName}`);
-                                }
-                                else {
-                                    console.log('the stores came back but aint no store');
-                                }
-                            });
-                        }
-                        
-                    });
                 }
             });
         

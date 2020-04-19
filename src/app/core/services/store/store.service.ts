@@ -13,7 +13,8 @@ import { CreateStoreResponse } from './createStoreResponse';
 })
 export class StoreService extends SubscriptionBase{
 
-    private _path: string = "stores"
+    private _storePath: string = "stores";
+    private _userPath: string = "users";
     public store$ = new ReplaySubject<Store[]>(1);
 
     private relatedStoreIds: string[];
@@ -24,21 +25,31 @@ export class StoreService extends SubscriptionBase{
     }
 
     public initialise(userId: string): void {
+        console.log('calling init on the store service.. Ima unsubscribe all the observers.');
+        this.store$.observers.forEach(observer => observer.complete())
         this.getRelatedStoreIds(userId)
             .then(relatedStoreIds => {
-                this.relatedStoreIds = relatedStoreIds;
+                this.relatedStoreIds = relatedStoreIds ? relatedStoreIds : [];
                 console.log(`got related store ids ${this.relatedStoreIds}`);
                 this.getStoreListeners();
             });
     }
 
-    public create(store: Store): Promise<any> {
+    public create(store: Store, userId: string): Promise<any> {
         console.log('pushing new store');
-        return firebase.push(this._path, store.asInterface());
+        return firebase.push(this._storePath, store.asInterface())
+            .then(response => {
+                this.relatedStoreIds.push(response.key);
+                firebase.setValue(`${this._userPath}/${userId}/relatedStores`, this.relatedStoreIds)
+                    .then(() => {
+                        console.log('added the new related store, regetting the store listeners.');
+                        this.getStoreListeners();
+                    });
+            });
     }
 
     private getRelatedStoreIds(userId: string): Promise<string[]> { // Convert this to an event listener.
-        return firebase.getValue(`users/${userId}/relatedStores`)
+        return firebase.getValue(`${this._userPath}/${userId}/relatedStores`)
             .then(relatedStoreIdsResponse => {
                 return (relatedStoreIdsResponse.value as string[]);
             });
@@ -55,7 +66,8 @@ export class StoreService extends SubscriptionBase{
             });
         }
 
-        this.combinedStoreListeners = combineLatest(storeListeners).subscribe(stores => {
+        this.combinedStoreListeners = combineLatest(storeListeners).pipe(takeUntil(this.componentDestroyed)).subscribe(stores => {
+            console.log('emitting the stores');
             this.store$.next(stores);
         });
     }
@@ -70,7 +82,7 @@ export class StoreService extends SubscriptionBase{
                 })
             }
             console.log(storeId);
-            firebase.addValueEventListener(onValueEvent, `/${this._path}/${storeId}`);
+            firebase.addValueEventListener(onValueEvent, `/${this._storePath}/${storeId}`);
 
         })
         .pipe(catchError(this.handleErrors));
@@ -82,8 +94,6 @@ export class StoreService extends SubscriptionBase{
 
     private handleSnapshot(data: any, storeId: string): Store {
         let store: Store;
-
-        []
 
         if (data) {
             console.log(`data from snapshot ${JSON.stringify(data)}`);

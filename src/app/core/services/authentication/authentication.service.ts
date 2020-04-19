@@ -98,13 +98,13 @@ export class AuthenticationService {
             this.setUser(user);
             this.setLoginState(LoginState.loggedInEmailUnVerified);
             this.getUserRecord(user.uid)
-                .then(response => {
-                    if (response.value) {
-                        console.log(`got a value for the user ${response.value}`);
+                .then(getUserResponse => {
+                    if (getUserResponse.value) {
+                        console.log(`got a value for the user ${getUserResponse.value}`);
                     }
                     else {
-                        this.createUserRecord(user.uid)
-                            .then(response => console.log(`Created User Record with ${JSON.stringify(response)}`))
+                        this.createUserRecord(user.uid, 'user.displayName')
+                            .then(userCreatedResposne => console.log(`Created User Record with`))
                             .catch(error => console.log(error));
                     }
                 })
@@ -143,7 +143,7 @@ export class AuthenticationService {
         return firebase.getValue(`users/${userId}`);
     }
 
-    private createUserRecord(userId: string): Promise<any> {
-        return firebase.setValue(`users/${userId}`, {relatedStores: ['1']});
+    private createUserRecord(userId: string, displayName: string): Promise<any> {
+        return firebase.setValue(`users/${userId}`, {displayName: displayName});
     }
 }

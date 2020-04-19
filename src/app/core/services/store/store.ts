@@ -14,8 +14,8 @@ export class Store {
     public userJoinRequests: User[];
 
     constructor(store: IStore, storeId: string) {
-        console.log(`STORE ID ${storeId}`);
-        console.log(`STORE ITSELF ${JSON.stringify(store)}`);
+        // console.log(`STORE ID ${storeId}`);
+        // console.log(`STORE ITSELF ${JSON.stringify(store)}`);
         this.storeId = storeId;
         this.storeName = store.storeName;
         this.description = store.description;
@@ -33,7 +33,7 @@ export class Store {
             storeName: this.storeName,
             storeNumber: this.storeNumber,
             description: this.description,
-            users: this.userCollection.usersAsObjectString,
+            users: this.userCollection.usersAsObject,
             userJoinRequests: this.userJoinRequests
         }
     }

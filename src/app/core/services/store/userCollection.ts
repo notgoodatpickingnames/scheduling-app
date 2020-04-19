@@ -2,7 +2,7 @@ import { User } from "./user";
 
 export class UserCollection {
     public users: User[];
-    public usersAsObjectString: string = '';
+    public usersAsObject: {};
 
     constructor(users: User[]) {
         this.users = users;
@@ -15,12 +15,10 @@ export class UserCollection {
 
     public addUser(user: User) {
         this.users.push(user);
-        this.usersAsObjectString = "'users' : {"
+        this.usersAsObject = {};
 
         this.users.forEach(user => {
-            this.usersAsObjectString += `'${user.userId}' : {"storeAuthLevel" : "${user.storeAuthLevel}"}`;
-        })
-
-        this.usersAsObjectString += "}";
+            this.usersAsObject[user.userId] =  {storeAuthLevel: 'Owner' };
+        });
     }
 }

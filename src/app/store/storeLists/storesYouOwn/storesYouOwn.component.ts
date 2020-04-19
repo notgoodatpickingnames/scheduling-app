@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ns-storesYouOwn',
+  selector: 'ns-stores-you-own',
   templateUrl: './storesYouOwn.component.html',
   styleUrls: ['./storesYouOwn.component.css']
 })
