@@ -1,11 +1,8 @@
 <ns-action-bar [title]="'Stores'" [showBackButton]="false"></ns-action-bar>
 
-<StackLayout>
-    <ScrollView orientation="vertical" class="body">
-        <StackLayout orientation="vertical" width="100%">
-            <ns-stores-you-own>
-                
-            </ns-stores-you-own>
+<StackLayout class="body">
+    <ScrollView orientation="vertical">
+        <StackLayout *ngFor="let store of stores" orientation="vertical" width="100%">
         </StackLayout>
     </ScrollView>
 </StackLayout>

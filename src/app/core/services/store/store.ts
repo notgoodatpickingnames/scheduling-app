@@ -15,16 +15,16 @@ export class Store {
 
     constructor(store: IStore, storeId: string) {
         // console.log(`STORE ID ${storeId}`);
-        // console.log(`STORE ITSELF ${JSON.stringify(store)}`);
+        console.log(`STORE ITSELF ${JSON.stringify(store)}`);
         this.storeId = storeId;
         this.storeName = store.storeName;
         this.description = store.description;
-        this.userCollection = store.users !== undefined ? new UserCollection(store.users) : new UserCollection([]);
+        this.userCollection = store.users !== undefined ? UserCollection.fromFirebase(store.users) : new UserCollection([]);
         this.userJoinRequests = store.userJoinRequests !== undefined ? store.userJoinRequests : [];
     }
 
     public setOwnerAsOnlyUser(userId: string, userDisplayName: string) {
-        const owner = new User(userId, userDisplayName, StoreAuthLevel.owener);
+        const owner = new User(userId, userDisplayName, StoreAuthLevel.owner);
         this.userCollection.addUser(owner);
     }
 

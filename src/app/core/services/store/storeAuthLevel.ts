@@ -1,5 +1,6 @@
 export enum StoreAuthLevel {
-    owener = 'Owner',
+    owner = 'Owner',
     manager = 'Manager',
-    employee = 'Employee'
+    employee = 'Employee',
+    requested = 'Requested'
 }

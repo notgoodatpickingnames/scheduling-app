@@ -4,6 +4,6 @@ export interface IStore {
     storeName: string;
     storeNumber: string;
     description: string;
-    users: User[];
+    users: any;
     userJoinRequests: User[];
 }

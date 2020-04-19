@@ -24,9 +24,7 @@ export class StoreService extends SubscriptionBase{
         super();
     }
 
-    public initialise(userId: string): void {
-        console.log('calling init on the store service.. Ima unsubscribe all the observers.');
-        this.store$.observers.forEach(observer => observer.complete())
+    public startListening(userId: string) {
         this.getRelatedStoreIds(userId)
             .then(relatedStoreIds => {
                 this.relatedStoreIds = relatedStoreIds ? relatedStoreIds : [];
@@ -66,9 +64,14 @@ export class StoreService extends SubscriptionBase{
             });
         }
 
-        this.combinedStoreListeners = combineLatest(storeListeners).pipe(takeUntil(this.componentDestroyed)).subscribe(stores => {
-            console.log('emitting the stores');
-            this.store$.next(stores);
+        this.combinedStoreListeners = combineLatest(storeListeners)
+            .pipe(takeUntil(this.componentDestroyed))
+            .subscribe(stores => {
+                // Because it is possible to get back null if the user has lost permission to
+                // see a store but somehow kept the relationship in their user table, 
+                // I'll filter out the undefineds.
+                const definedStores = stores.filter(store => Boolean(store));
+                this.store$.next(definedStores);
         });
     }
 
@@ -81,7 +84,7 @@ export class StoreService extends SubscriptionBase{
                     observer.next(results);
                 })
             }
-            console.log(storeId);
+            console.log(`HANDLE SNAPSHOT STORE ID ${storeId}`);
             firebase.addValueEventListener(onValueEvent, `/${this._storePath}/${storeId}`);
 
         })
@@ -94,9 +97,8 @@ export class StoreService extends SubscriptionBase{
 
     private handleSnapshot(data: any, storeId: string): Store {
         let store: Store;
-
+        
         if (data) {
-            console.log(`data from snapshot ${JSON.stringify(data)}`);
             store = new Store(data, storeId);
         }
 

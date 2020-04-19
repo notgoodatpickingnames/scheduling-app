@@ -104,10 +104,7 @@ export class AuthenticationService {
 
             this.getUserRecord(user.uid)
                 .then(getUserResponse => {
-                    if (getUserResponse.value) {
-                        console.log(`got a value for the user ${getUserResponse.value}`);
-                    }
-                    else {
+                    if (!getUserResponse.value) {
                         this.createUserRecord(user.uid, 'user.displayName')
                             .then(userCreatedResposne => console.log(`Created User Record with`))
                             .catch(error => console.log(error));

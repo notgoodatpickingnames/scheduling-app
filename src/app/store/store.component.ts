@@ -6,6 +6,11 @@ import { StoreService } from '../core/services/store/store.service';
 import { SubscriptionBase } from '../core/subscriptionBase';
 import { takeUntil } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { User as FireBaseUser } from 'nativescript-plugin-firebase';
+import { AuthenticationService } from '../core/services/authentication/authentication.service';
+import { User } from '../core/services/store/user';
+import { StoreAuthLevel } from '../core/services/store/storeAuthLevel';
+import { Store } from '../core/services/store/store';
 
 @Component({
   selector: 'ns-store',
@@ -15,13 +20,20 @@ import { Subscription } from 'rxjs';
 export class StoreComponent extends SubscriptionBase {
 
     private static storeListener = new Subscription();
+    private static userListener = new Subscription();
+    private user: User;
+
+    public stores: Store[] = [];
 
     constructor(private router: Router,
         private route: ActivatedRoute,
         private storeService: StoreService,
-        public storesTabService: StoresTabService) {
+        private authenticationService: AuthenticationService,
+        public storesTabService: StoresTabService,) {
             super();
-            this.listenForStores();
+
+            console.log('listen for user in stores');
+            this.listenForUser();
     }
 
     public onCreateShiftTap() {
@@ -33,10 +45,24 @@ export class StoreComponent extends SubscriptionBase {
         this.storesTabService.selectedIndex = event.newIndex;
     }
 
-    public listenForStores() {
+    private listenForUser()  {
+        StoreComponent.userListener.unsubscribe();
+        StoreComponent.userListener = this.authenticationService.user
+            .pipe(takeUntil(this.componentDestroyed))
+            .subscribe(user => {
+                console.log(`got a user from listening in the stores ${JSON.stringify(user)}`);
+                if (user) {
+                    this.listenForStores(user.uid); 
+                }
+                
+            });
+    }
+
+    public listenForStores(userId: string) {
+        this.storeService.startListening(userId);
         StoreComponent.storeListener.unsubscribe();
-        StoreComponent.storeListener = this.storeService.store$.pipe(takeUntil(this.componentDestroyed)).subscribe(stores => {
-            stores.forEach(store => console.log(`STORES HAVE BEEN GOT ${store.storeName}`));
-        });
+        StoreComponent.storeListener = this.storeService.store$
+            .pipe(takeUntil(this.componentDestroyed))
+            .subscribe(stores => this.stores = stores.sort());
     }
 }
