@@ -10,12 +10,10 @@ export class UserCollection {
     }
 
     public static fromFirebase(userCollectionFromFirebase: any) {
-        console.log(`userCollection ${JSON.stringify(userCollectionFromFirebase)}`);
         const users: User[] = [];
 
         if (userCollectionFromFirebase) {
             for(const id in userCollectionFromFirebase) {
-                console.log(`id: ${id}, value ${JSON.stringify(userCollectionFromFirebase[id])}`);
                 const userValueAsObject = (userCollectionFromFirebase[id] as {storeAuthLevel: StoreAuthLevel, displayName: string});
                 const userToAdd = new User(id, userValueAsObject.displayName, userValueAsObject.storeAuthLevel);
                 users.push(userToAdd);

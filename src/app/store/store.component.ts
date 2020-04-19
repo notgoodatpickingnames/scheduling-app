@@ -32,7 +32,6 @@ export class StoreComponent extends SubscriptionBase {
         public storesTabService: StoresTabService,) {
             super();
 
-            console.log('listen for user in stores');
             this.listenForUser();
     }
 
@@ -41,7 +40,6 @@ export class StoreComponent extends SubscriptionBase {
     }
 
     public onIndexChanged(event: SelectedIndexChangedEventData) {
-        console.log('set the selected index');
         this.storesTabService.selectedIndex = event.newIndex;
     }
 
@@ -50,11 +48,9 @@ export class StoreComponent extends SubscriptionBase {
         StoreComponent.userListener = this.authenticationService.user
             .pipe(takeUntil(this.componentDestroyed))
             .subscribe(user => {
-                console.log(`got a user from listening in the stores ${JSON.stringify(user)}`);
                 if (user) {
-                    this.listenForStores(user.uid); 
+                    this.listenForStores(user.uid);
                 }
-                
             });
     }
 
@@ -63,6 +59,9 @@ export class StoreComponent extends SubscriptionBase {
         StoreComponent.storeListener.unsubscribe();
         StoreComponent.storeListener = this.storeService.store$
             .pipe(takeUntil(this.componentDestroyed))
-            .subscribe(stores => this.stores = stores.sort());
+            .subscribe(stores => {
+                console.log(`Store 1: ${stores[0].storeName}, Store 2: ${stores[1].storeName}`);
+                this.stores = stores;
+            });
     }
 }

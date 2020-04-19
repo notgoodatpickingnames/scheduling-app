@@ -17,7 +17,7 @@ export class StoreService extends SubscriptionBase{
     private _userPath: string = "users";
     public store$ = new ReplaySubject<Store[]>(1);
 
-    private relatedStoreIds: string[];
+    private relatedStoreIds: string[] = [];
     private combinedStoreListeners = new Subscription;
 
     constructor(private _ngZone: NgZone) {
@@ -27,22 +27,18 @@ export class StoreService extends SubscriptionBase{
     public startListening(userId: string) {
         this.getRelatedStoreIds(userId)
             .then(relatedStoreIds => {
-                this.relatedStoreIds = relatedStoreIds ? relatedStoreIds : [];
-                console.log(`got related store ids ${this.relatedStoreIds}`);
-                this.getStoreListeners();
+                if (relatedStoreIds && this.relatedStoreIds.toString() !== relatedStoreIds.toString()) {
+                    this.relatedStoreIds = relatedStoreIds;
+                    this.getStoreListeners();
+                }
             });
     }
 
     public create(store: Store, userId: string): Promise<any> {
-        console.log('pushing new store');
         return firebase.push(this._storePath, store.asInterface())
             .then(response => {
                 this.relatedStoreIds.push(response.key);
-                firebase.setValue(`${this._userPath}/${userId}/relatedStores`, this.relatedStoreIds)
-                    .then(() => {
-                        console.log('added the new related store, regetting the store listeners.');
-                        this.getStoreListeners();
-                    });
+                this.setRelatedStoreIds(userId);
             });
     }
 
@@ -52,6 +48,13 @@ export class StoreService extends SubscriptionBase{
                 return (relatedStoreIdsResponse.value as string[]);
             });
     };
+
+    private setRelatedStoreIds(userId: string) {
+        firebase.setValue(`${this._userPath}/${userId}/relatedStores`, this.relatedStoreIds)
+            .then(() => {
+                this.getStoreListeners();
+            });
+    }
 
     private getStoreListeners() {
         this.combinedStoreListeners.unsubscribe();
@@ -68,7 +71,7 @@ export class StoreService extends SubscriptionBase{
             .pipe(takeUntil(this.componentDestroyed))
             .subscribe(stores => {
                 // Because it is possible to get back null if the user has lost permission to
-                // see a store but somehow kept the relationship in their user table, 
+                // see a store but somehow kept the relationship in their user table,
                 // I'll filter out the undefineds.
                 const definedStores = stores.filter(store => Boolean(store));
                 this.store$.next(definedStores);
@@ -84,7 +87,6 @@ export class StoreService extends SubscriptionBase{
                     observer.next(results);
                 })
             }
-            console.log(`HANDLE SNAPSHOT STORE ID ${storeId}`);
             firebase.addValueEventListener(onValueEvent, `/${this._storePath}/${storeId}`);
 
         })
@@ -97,7 +99,7 @@ export class StoreService extends SubscriptionBase{
 
     private handleSnapshot(data: any, storeId: string): Store {
         let store: Store;
-        
+
         if (data) {
             store = new Store(data, storeId);
         }

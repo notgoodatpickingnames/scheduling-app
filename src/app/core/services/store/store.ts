@@ -14,8 +14,6 @@ export class Store {
     public userJoinRequests: User[];
 
     constructor(store: IStore, storeId: string) {
-        // console.log(`STORE ID ${storeId}`);
-        console.log(`STORE ITSELF ${JSON.stringify(store)}`);
         this.storeId = storeId;
         this.storeName = store.storeName;
         this.description = store.description;
