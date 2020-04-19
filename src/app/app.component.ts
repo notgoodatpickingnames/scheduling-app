@@ -13,7 +13,7 @@ import { takeUntil, skip, take } from 'rxjs/operators';
 import { SubscriptionBase } from './core/subscriptionBase';
 import { LoginState } from './core/services/authentication/loginState';
 import { AuthLevel } from './core/services/authentication/authLevel';
-import { InitOptions, login } from 'nativescript-plugin-firebase';
+import { InitOptions, login, User } from 'nativescript-plugin-firebase';
 import { StoreService } from './core/services/store/store.service';
 
 @Component({
@@ -28,6 +28,7 @@ export class AppComponent extends SubscriptionBase{
 
     private userListener = new Subscription();
     private loginStateListener = new Subscription();
+    private user: User;
 
     constructor(
         private router: Router,
@@ -57,7 +58,6 @@ export class AppComponent extends SubscriptionBase{
         return firebase.init({
             onAuthStateChanged: (data) => {
                 this.authenticationService.setUser(data.user);
-                this.onFirebaseInit();
             }
         })
         .then(() => this.onFirebaseInit())
@@ -70,24 +70,31 @@ export class AppComponent extends SubscriptionBase{
         this.loginStateListener = this.authenticationService.loginState
             .pipe(takeUntil(this.componentDestroyed))
             .subscribe(loginState => {
-                this.loginState = loginState;
-                if (this.loginState === LoginState.loggedOut || this.loginState === LoginState.loggedInEmailUnVerified || this.loginState === LoginState.noCredentials) {
-                    this.navigateTo('account') // Change this during dev.
-                }
+                if (loginState && this.loginState !== loginState) {    
+                    this.loginState = loginState;
+                    console.log(`Login State Changed To ${loginState}`);
+                    if (this.loginState === LoginState.loggedOut || this.loginState === LoginState.loggedInEmailUnVerified || this.loginState === LoginState.noCredentials) {
+                        console.log('navigating to account because login state changed');
+                        this.navigateTo('account') // TODO - This is the default page when loading up the app.
+                    }
 
-                if (this.loginState === LoginState.loggedInEmailVerified) {
-                    this.navigateTo('stores/create');
+                    if (this.loginState === LoginState.loggedInEmailVerified) {
+                        console.log('navigating to stores because the login state changed to logged in email verified');
+                        this.navigateTo('stores');
+                    }
                 }
             });
     }
 
     private onFirebaseInit(): void {
-        this.loadServices();
+        this.authenticationService.initialise()
+            .then(() => this.listenForLoginState());
     }
 
     private onFirebaseInitError(error: string) {
         if (error === 'Firebase already initialized') {
-            this.loadServices();
+            this.authenticationService.initialise()
+                .then(() => this.listenForLoginState());
         }
     }
 
@@ -99,20 +106,5 @@ export class AppComponent extends SubscriptionBase{
 
     public navigateTo(route: string) {
         this.router.navigate([route], {relativeTo: this.route});
-    }
-
-    private loadServices() {
-        console.log('loading services');
-        this.authenticationService.initialise()
-
-        this.userListener.unsubscribe();
-        this.userListener = this.authenticationService.user.pipe(takeUntil(this.componentDestroyed))
-            .subscribe(user => {
-                console.log(`The user event fired ${JSON.stringify(user)}`);
-                if (user) {
-                    this.storeService.initialise(user.uid);
-                }
-            });
-        
     }
 }

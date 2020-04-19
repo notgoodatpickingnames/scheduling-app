@@ -13,7 +13,7 @@ import { UserAccount } from '../account/userAccount';
 })
 export class AuthenticationService {
     public user = new BehaviorSubject<User>(undefined);
-    public loginState = new BehaviorSubject<LoginState>(LoginState.noCredentials);
+    public loginState = new BehaviorSubject<LoginState>(undefined);
     public authLevel = new BehaviorSubject<AuthLevel>(undefined);
 
     private secureStorage = new SecureStorage();
@@ -25,8 +25,8 @@ export class AuthenticationService {
 
     }
 
-    public initialise() {
-        this.getCredentials()
+    public initialise(): Promise<any> {
+        return this.getCredentials()
             .then((credentials) => {
                 if (!credentials) {
                     this.setLoginState(LoginState.noCredentials);
@@ -37,10 +37,10 @@ export class AuthenticationService {
                     .then(user => {
                         if (user.emailVerified) {
                             this.setLoginState(LoginState.loggedInEmailVerified);
-                            this.storeVerificationState(true);
+                            this.storeEmailVerificationState(true);
                         } else {
                             this.setLoginState(LoginState.loggedInEmailUnVerified);
-                            this.storeVerificationState(false);
+                            this.storeEmailVerificationState(false);
                         }
 
                         this.setUser(user);
@@ -61,7 +61,7 @@ export class AuthenticationService {
 
     public setUser(user: User): void {
         if (user) {
-            this.storeVerificationState(user.emailVerified);
+            this.storeEmailVerificationState(user.emailVerified);
         }
 
         this.user.next(user);
@@ -96,7 +96,12 @@ export class AuthenticationService {
             });
             this.saveCredentials(credentials);
             this.setUser(user);
-            this.setLoginState(LoginState.loggedInEmailUnVerified);
+            if (user.emailVerified) {
+                this.setLoginState(LoginState.loggedInEmailVerified);
+            } else {
+                this.setLoginState(LoginState.loggedInEmailUnVerified);
+            }
+
             this.getUserRecord(user.uid)
                 .then(getUserResponse => {
                     if (getUserResponse.value) {
@@ -130,12 +135,12 @@ export class AuthenticationService {
         this.setUser(undefined);
     }
 
-    public async getVerificationState(): Promise<boolean> {
+    public async getEmailVerificationState(): Promise<boolean> {
         const emailVerifiedAsString = await this.secureStorage.get({ key: this.emailVerifiedKey });
         return emailVerifiedAsString === "1" ? true : false;
     }
 
-    private storeVerificationState(emailVerified: boolean): void {
+    private storeEmailVerificationState(emailVerified: boolean): void {
         this.secureStorage.set({key: this.emailVerifiedKey, value: emailVerified ? "1" : "0"})
     }
 
