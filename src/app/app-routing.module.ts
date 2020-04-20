@@ -9,6 +9,7 @@ import { AccountComponent } from "./account/account.component";
 import { PersonalScheduleComponent } from "./personalSchedule/personalSchedule.component";
 import { StoreComponent } from "./store/store.component";
 import { CreateStoreComponent } from "./store/createStore/createStore.component";
+import { EditStoreComponent } from "./store/editStore/editStore.component";
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
     { path: 'scheduling', component: SchedulingComponent },
     { path: 'stores', component: StoreComponent },
     { path: 'stores/create', component: CreateStoreComponent },
+    { path: 'stores/edit/:id', component: EditStoreComponent },
     { path: 'shifts', component: ShiftsComponent },
     { path: 'shifts/create', component: CreateShiftComponent },
     { path: 'shifts/edit/:id', component: EditShiftComponent },

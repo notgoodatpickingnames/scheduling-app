@@ -12,6 +12,7 @@ export class Store {
     public description: string;
     public userCollection: UserCollection;
     public userJoinRequests: User[];
+    public storeAuthLevelMessage: string;
 
     constructor(store: IStore, storeId: string) {
         this.storeId = storeId;
@@ -44,5 +45,23 @@ export class Store {
             users: [],
             userJoinRequests: []
         }, undefined)
+    }
+
+    public setStoreAuthLevelMessage(userId: string) {
+        if (this.userCollection.isUserOwner(userId)) {
+            this.storeAuthLevelMessage = "You are the Owner."
+        }
+
+        if (this.userCollection.isUserManager(userId)) {
+            this.storeAuthLevelMessage = "You are a Manager."
+        }
+
+        if (this.userCollection.isUserEmployee(userId)) {
+            this.storeAuthLevelMessage = "You are an Employee."
+        }
+
+        if (this.userCollection.isUserARequestedUser(userId)) {
+            this.storeAuthLevelMessage = "You have been requested to join this store."
+        }
     }
 }

@@ -44,7 +44,9 @@ export class EditShiftComponent extends SubscriptionBase implements AfterViewIni
 
   constructor(private shiftsService: ShiftsService,
     private route: ActivatedRoute,
-    private router: Router) {super()}
+    private router: Router) {
+        super();
+    }
 
     public ngAfterViewInit() {
         this.route.params.pipe(takeUntil(this.componentDestroyed)).subscribe(params => {

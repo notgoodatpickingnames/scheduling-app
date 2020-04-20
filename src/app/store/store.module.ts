@@ -4,6 +4,9 @@ import { StoreComponent } from './store.component';
 import { SharedModule } from '../shared.module';
 import { StoresTabService } from './storesTab.service';
 import { CreateStoreComponent } from './createStore/createStore.component';
+import { EditStoreComponent } from './editStore/editStore.component';
+import { StoreDetailComponent } from './editStore/storeDetail/storeDetail.component';
+import { StoreUsersComponent } from './editStore/storeUsers/storeUsers.component';
 
 @NgModule({
     imports: [
@@ -12,7 +15,10 @@ import { CreateStoreComponent } from './createStore/createStore.component';
     ],
     declarations: [
         StoreComponent,
-        CreateStoreComponent
+        CreateStoreComponent,
+        EditStoreComponent,
+        StoreDetailComponent,
+        StoreUsersComponent
     ],
     providers: [
         StoresTabService

@@ -1,0 +1,24 @@
+<ScrollView class="body">
+    <StackLayout orientation="vertical" class="form">
+
+        <ns-text-field
+            label="Store Name"
+            [(value)]="store.storeName">
+        </ns-text-field>
+
+        <ns-text-area
+            label="Description"
+            [(value)]="store.description">
+        </ns-text-area>
+
+        <StackLayout horizontalAlignment="center" class="button-container">
+            <button text="Update Store" (tap)="onSubmit()" class="button"></button>
+        </StackLayout>
+    </StackLayout>
+</ScrollView>
+
+<StackLayout class="button-container">
+    <GridLayout #fabButton class="fab-button" (tap)="onCreateShiftTap()">
+        <Label text="+" class="plus-sign"></Label>
+    </GridLayout>
+</StackLayout>

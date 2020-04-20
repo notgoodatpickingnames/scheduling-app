@@ -1,12 +1,17 @@
 <ns-action-bar [title]="'Stores'" [showBackButton]="false"></ns-action-bar>
 
-<StackLayout class="body">
-    <ScrollView orientation="vertical">
-        <StackLayout *ngFor="let store of stores" orientation="vertical" width="100%" height="200">
-            <Label [text]="store.storeName"></Label>
+
+<ScrollView orientation="vertical" class="body">
+    <StackLayout>
+        <StackLayout *ngFor="let store of stores" orientation="vertical" width="100%">
+            <StackLayout class="store-card" verticalAlignment="center" (tap)="onEditShiftTap(store.storeId)">
+                <Label [text]="store.storeName" class="store-card-text" verticalAlignment="center"></Label>
+                <Label [text]="store.storeAuthLevelMessage" class="store-card-text" verticalAlignment="center"></Label>
+            </StackLayout>
         </StackLayout>
-    </ScrollView>
-</StackLayout>
+    </StackLayout>
+</ScrollView>
+
 
 <StackLayout class="button-container">
     <GridLayout #fabButton class="fab-button" (tap)="onCreateShiftTap()">

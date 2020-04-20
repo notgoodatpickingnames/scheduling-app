@@ -1,20 +1,32 @@
-<ns-action-bar [title]="'New Store'" (back)="onBackAction()"></ns-action-bar>
+<ns-action-bar [title]="store.storeName" (back)="onBackAction()"></ns-action-bar>
 
-<ScrollView class="body">
-    <StackLayout orientation="vertical" class="form">
+<StackLayout>
+    <Tabs #tabs [selectedIndex]="selectedIndex" tabsPosition="bottom">
+        <TabStrip>
+            <TabStripItem class="tab-strip-item">
+                <Label text="Detail" class="tab-strip-label"></Label>
+            </TabStripItem>
 
-        <ns-text-field
-            label="Store Name"
-            [(value)]="store.storeName">
-        </ns-text-field>
+            <TabStripItem class="tab-strip-item">
+                <Label text="Users" class="tab-strip-label"></Label>
+            </TabStripItem>
 
-        <ns-text-area
-            label="Description"
-            [(value)]="store.description">
-        </ns-text-area>
+            <TabStripItem class="tab-strip-item">
+                <Label text="Shifts" class="tab-strip-label"></Label>
+            </TabStripItem>
+        </TabStrip>
 
-        <StackLayout horizontalAlignment="center" class="button-container">
-            <button text="Finish" (tap)="onSubmit()" class="finish-button"></button>
-        </StackLayout>
-    </StackLayout>
-</ScrollView>
+        <TabContentItem>
+            <ns-store-detail [(store)]="store"></ns-store-detail>
+        </TabContentItem>
+
+        <TabContentItem>
+            <ns-store-users [(store)]="store"></ns-store-users>
+        </TabContentItem>
+
+        <TabContentItem>
+            <Label text="Shifts"></Label>
+        </TabContentItem>
+    </Tabs>
+
+</StackLayout>

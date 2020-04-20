@@ -29,7 +29,7 @@ export class StoreComponent extends SubscriptionBase {
         private route: ActivatedRoute,
         private storeService: StoreService,
         private authenticationService: AuthenticationService,
-        public storesTabService: StoresTabService,) {
+        public storesTabService: StoresTabService) {
             super();
 
             this.listenForUser();
@@ -37,6 +37,11 @@ export class StoreComponent extends SubscriptionBase {
 
     public onCreateShiftTap() {
         this.router.navigate(['./create'], {relativeTo: this.route});
+    }
+
+    public onEditShiftTap(storeId: string) {
+        console.log(`going to edit store id ${storeId}`);
+        this.router.navigate([`./edit/${storeId}`], {relativeTo: this.route});
     }
 
     public onIndexChanged(event: SelectedIndexChangedEventData) {
@@ -62,6 +67,7 @@ export class StoreComponent extends SubscriptionBase {
             .subscribe(stores => {
                 console.log(`Store 1: ${stores[0].storeName}, Store 2: ${stores[1].storeName}`);
                 this.stores = stores;
+                this.stores.forEach(store => store.setStoreAuthLevelMessage(userId));
             });
     }
 }

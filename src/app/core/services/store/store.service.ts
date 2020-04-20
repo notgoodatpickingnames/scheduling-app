@@ -42,6 +42,11 @@ export class StoreService extends SubscriptionBase{
             });
     }
 
+    public get(storeId: string): Promise<Store> {
+        return firebase.getValue(`${this._storePath}/${storeId}`)
+            .then(storeFromFirebase => new Store(storeFromFirebase['value'], storeId));
+    }
+
     private getRelatedStoreIds(userId: string): Promise<string[]> { // Convert this to an event listener.
         return firebase.getValue(`${this._userPath}/${userId}/relatedStores`)
             .then(relatedStoreIdsResponse => {
