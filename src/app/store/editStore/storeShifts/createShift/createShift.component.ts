@@ -7,13 +7,16 @@ import { KeyboardType } from '~/app/core/FormComponents/textField/keyboardType';
 import { ValueList } from 'nativescript-drop-down';
 import { Monday, Tuesday, Wednesday, Thursday, Sunday, Saturday, Friday } from '~/app/core/days';
 import { RecurrenceType } from '~/app/core/services/shift/recurrenceType';
+import { Subscription } from 'rxjs';
+import { SubscriptionBase } from '~/app/core/subscriptionBase';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'ns-create-shift',
     templateUrl: './createShift.component.html',
     styleUrls: ['./createShift.component.css']
 })
-export class CreateShiftComponent {
+export class CreateShiftComponent extends SubscriptionBase {
     @ViewChild(NgForm, {read: NgForm, static: false}) public form: NgForm;
 
     public numberKeyboardType = KeyboardType.number;
@@ -38,17 +41,23 @@ export class CreateShiftComponent {
     public recurrenceTypesAsValueList = new ValueList<RecurrenceType>(this.recurrenceTypes);
     public daysOfWeek = new ValueList<string>(this.dayArray);
 
+    private storeId: string;
+
     constructor(private shiftsService: ShiftsService,
         private route: ActivatedRoute,
-        private router: Router) { }
+        private router: Router) {
+            super();
+
+            this.listenForStoreId();
+    }
 
     public onSubmit() {
-        this.shiftsService.push(this.shift);
+        this.shiftsService.push(this.shift, this.storeId);
         this.onBackAction();
     }
 
     public onBackAction() {
-        this.router.navigate(['../'], {relativeTo: this.route});
+        this.router.navigate(['../../'], {relativeTo: this.route});
     }
 
     public get isEveryYear(): boolean {
@@ -65,5 +74,9 @@ export class CreateShiftComponent {
 
     public get isOnce(): boolean {
         return this.shift.recurrenceType === RecurrenceType.OneTime;
+    }
+
+    private listenForStoreId() {
+        this.route.params.pipe(takeUntil(this.componentDestroyed)).subscribe(params => this.storeId = params['storeId']);
     }
 }

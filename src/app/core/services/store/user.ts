@@ -14,4 +14,8 @@ export class User {
     public asInterface() {
 
     }
+
+    public static constructNew() {
+        return new User('', '', StoreAuthLevel.unAuthorized);
+    }
 }

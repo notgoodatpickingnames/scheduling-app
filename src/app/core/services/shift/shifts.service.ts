@@ -11,29 +11,24 @@ import { SubscriptionBase } from "~/app/core/subscriptionBase";
 export class ShiftsService extends SubscriptionBase {
     public shift$ = new ReplaySubject<Shift[]>(1);
 
-    private _path = "shifts";
+    private _storePath = "stores";
+    private _shiftPath = "shifts";
 
     constructor(private _ngZone: NgZone) {super()}
 
-    public initialise(): void {
-        this.load().pipe(takeUntil(this.componentDestroyed)).subscribe(shifts => {
-            this.shift$.next(shifts);
-        });
+    public push(shift: Shift, storeId: string) {
+        firebase.push(`${this._storePath}/${storeId}/${this._shiftPath}`, shift.asInterface());
     }
 
-    public push(shift: Shift) {
-        firebase.push(this._path, shift.asInterface());
+    public update(shift: Shift, storeId: string) {
+        firebase.update(`${this._storePath}/${storeId}/${this._shiftPath}/${shift.shiftId}`, shift.asInterface())
     }
 
-    public update(shift: Shift) {
-        firebase.update(`${this._path}/${shift.shiftId}`, shift.asInterface())
+    public get(storeId: string, shiftId: string): Observable<Shift> {
+        return undefined; // this.shift$.pipe(map(shifts => shifts.find(shift => shift.shiftId === id)));
     }
 
-    public get(id: string): Observable<Shift> {
-        return this.shift$.pipe(map(shifts => shifts.find(shift => shift.shiftId === id)));
-    }
-
-    private load(): Observable<any> {
+    public getShiftListener(storeId: string): Observable<any> {
         return new Observable((observer: any) => {
 
             const onValueEvent =(snapshot: any) => {
@@ -42,7 +37,7 @@ export class ShiftsService extends SubscriptionBase {
                     observer.next(results);
                 })
             }
-            firebase.addValueEventListener(onValueEvent, `/${this._path}`);
+            firebase.addValueEventListener(onValueEvent, `/${this._storePath}/${storeId}/${this._shiftPath}`);
         })
         .pipe(catchError(this.handleErrors));
     }

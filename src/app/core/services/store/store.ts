@@ -63,5 +63,13 @@ export class Store {
         if (this.userCollection.isUserARequestedUser(userId)) {
             this.storeAuthLevelMessage = "You have been requested to join this store."
         }
+
+        if (this.userCollection.isUserUnAuthorized(userId)) {
+            this.storeAuthLevelMessage = "You are not allowed to view this store."
+        }
+    }
+
+    public getUser(userId: string): User {
+        return this.userCollection.users.find(user => user.userId=== userId);
     }
 }

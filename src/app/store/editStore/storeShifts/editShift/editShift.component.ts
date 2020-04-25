@@ -42,6 +42,9 @@ export class EditShiftComponent extends SubscriptionBase implements AfterViewIni
 
   public selectedTypeIndex: number = 0;
 
+  private storeId: string;
+  private shiftId: string;
+
   constructor(private shiftsService: ShiftsService,
     private route: ActivatedRoute,
     private router: Router) {
@@ -50,8 +53,9 @@ export class EditShiftComponent extends SubscriptionBase implements AfterViewIni
 
     public ngAfterViewInit() {
         this.route.params.pipe(takeUntil(this.componentDestroyed)).subscribe(params => {
-            const shiftId = params['id'];
-            this.shiftsService.get(shiftId).pipe(takeUntil(this.componentDestroyed)).subscribe(shift => {
+            this.storeId = params['storeId'];
+            this.shiftId = params['shiftId'];
+            this.shiftsService.get(this.storeId, this.shiftId).pipe(takeUntil(this.componentDestroyed)).subscribe(shift => {
                 setTimeout(() => {
                     this.shift = shift;
                     this.selectedTypeIndex = this.recurrenceTypes.findIndex(type => type.value === this.shift.recurrenceType);

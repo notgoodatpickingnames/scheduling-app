@@ -51,4 +51,9 @@ export class UserCollection {
         return this.users.find(user => user.userId === userId
             && user.storeAuthLevel === StoreAuthLevel.requested) !== undefined;
     }
+
+    public isUserUnAuthorized(userId: string) {
+        return this.users.find(user => user.userId === userId
+            && user.storeAuthLevel === StoreAuthLevel.unAuthorized) !== undefined;
+    }
 }

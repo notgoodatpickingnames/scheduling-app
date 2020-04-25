@@ -5,7 +5,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SubscriptionBase } from '~/app/core/subscriptionBase';
 import { Store } from '~/app/core/services/store/store';
 import { map, takeUntil } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
+import { User } from '~/app/core/services/store/user';
+import { StoreAuthLevel } from '~/app/core/services/store/storeAuthLevel';
 
 @Component({
     selector: 'ns-editStore',
@@ -15,13 +17,13 @@ import { Observable } from 'rxjs';
 export class EditStoreComponent extends SubscriptionBase {
     public store = Store.constructNew();
     public selectedIndex = 0;
+    public user = User.constructNew();
 
     constructor(private storeService: StoreService,
         private authenticationService: AuthenticationService,
         private route: ActivatedRoute,
         private router: Router) {
             super();
-            console.log('editing a store');
             this.getStore();
     }
 
@@ -29,12 +31,25 @@ export class EditStoreComponent extends SubscriptionBase {
         this.router.navigate(['../../'], {relativeTo: this.route});
     }
 
+    public get showShifts(): boolean {
+        return this.user.storeAuthLevel === StoreAuthLevel.owner || this.user.storeAuthLevel === StoreAuthLevel.manager;
+    }
+
+    public get showUsers(): boolean {
+        return this.user.storeAuthLevel === StoreAuthLevel.owner || this.user.storeAuthLevel === StoreAuthLevel.manager;
+    }
+
     private getStore() {
-        this.route.params.pipe(takeUntil(this.componentDestroyed))
-            .subscribe(params => {
-                console.log(`Params ${params['id']}`);
-                this.storeService.get(params['id']).then(store => {
+        combineLatest(this.route.params, this.authenticationService.user)
+            .pipe(takeUntil(this.componentDestroyed))
+            .subscribe(response => {
+                const params = response[0];
+                const user = response[1];
+                const storeId = params['storeId'];
+                const userId = user.uid;
+                this.storeService.get(storeId).then(store => {
                     this.store = store;
+                    this.user = this.store.getUser(userId);
                 })
             })
     }

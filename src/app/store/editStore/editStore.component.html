@@ -7,11 +7,11 @@
                 <Label text="Detail" class="tab-strip-label"></Label>
             </TabStripItem>
 
-            <TabStripItem class="tab-strip-item">
+            <TabStripItem class="tab-strip-item" *ngIf="showUsers">
                 <Label text="Users" class="tab-strip-label"></Label>
             </TabStripItem>
 
-            <TabStripItem class="tab-strip-item">
+            <TabStripItem class="tab-strip-item" *ngIf="showShifts">
                 <Label text="Shifts" class="tab-strip-label"></Label>
             </TabStripItem>
         </TabStrip>
@@ -20,12 +20,12 @@
             <ns-store-detail [(store)]="store"></ns-store-detail>
         </TabContentItem>
 
-        <TabContentItem>
+        <TabContentItem *ngIf="showUsers">
             <ns-store-users [(store)]="store"></ns-store-users>
         </TabContentItem>
 
-        <TabContentItem>
-            <Label text="Shifts"></Label>
+        <TabContentItem *ngIf="showShifts">
+            <ns-store-shifts [userId]="user.userId" [storeId]="store.storeId"></ns-store-shifts>
         </TabContentItem>
     </Tabs>
 

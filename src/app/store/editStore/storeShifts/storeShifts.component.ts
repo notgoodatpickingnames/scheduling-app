@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ShiftsService } from '~/app/core/services/shift/shifts.service';
 import { Shift } from '~/app/core/services/shift/shift';
 import { RecurrenceType } from '~/app/core/services/shift/recurrenceType';
@@ -7,6 +7,7 @@ import { Days } from '~/app/core/days';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SubscriptionBase } from '~/app/core/subscriptionBase';
 import { takeUntil } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'ns-store-shifts',
@@ -14,20 +15,30 @@ import { takeUntil } from 'rxjs/operators';
     styleUrls: ['./storeShifts.component.css']
 })
 export class StoreShiftsComponent extends SubscriptionBase {
+    @Input() set storeId(storeId: string) {
+        this._storeId = storeId;
+        this.listenForShifts(this._storeId);
+    }
     public weeklyShifts: Shift[] = [];
     public everyYearShifts: Shift[] = [];
     public everyMonthShifts: Shift[] = [];
     public oneTimeShifts: Shift[] = [];
 
+    private static shiftsListener = new Subscription();
+    private _storeId: string;
+
     constructor(private shiftService: ShiftsService,
         private router: Router,
         private route: ActivatedRoute) {
             super();
-            this.listenForShifts(shiftService);
     }
 
     public onTap(shiftId: string) {
         this.editShift(shiftId);
+    }
+
+    public onCreateShiftTap() {
+        this.router.navigate(['./shifts/create'], {relativeTo: this.route});
     }
 
     public get hasEveryYearShifts(): boolean {
@@ -46,12 +57,15 @@ export class StoreShiftsComponent extends SubscriptionBase {
         this.router.navigate([`./edit/${shiftId}`], {relativeTo: this.route});
     }
 
-    private listenForShifts(shiftService: ShiftsService) {
-        shiftService.shift$.pipe(takeUntil(this.componentDestroyed)).subscribe(shifts => {
-            this.weeklyShifts = shifts.filter(shift => shift.recurrenceType === RecurrenceType.EveryWeek);
-            this.everyYearShifts = shifts.filter(shift => shift.recurrenceType === RecurrenceType.EveryYear);
-            this.everyMonthShifts = shifts.filter(shift => shift.recurrenceType === RecurrenceType.EveryMonth);
-            this.oneTimeShifts = shifts.filter(shift => shift.recurrenceType === RecurrenceType.OneTime);
-        });
+    private listenForShifts(storeId: string) {
+        StoreShiftsComponent.shiftsListener.unsubscribe();
+        StoreShiftsComponent.shiftsListener = this.shiftService.getShiftListener(storeId)
+            .pipe(takeUntil(this.componentDestroyed))
+            .subscribe(shifts => {
+                this.weeklyShifts = shifts.filter(shift => shift.recurrenceType === RecurrenceType.EveryWeek);
+                this.everyYearShifts = shifts.filter(shift => shift.recurrenceType === RecurrenceType.EveryYear);
+                this.everyMonthShifts = shifts.filter(shift => shift.recurrenceType === RecurrenceType.EveryMonth);
+                this.oneTimeShifts = shifts.filter(shift => shift.recurrenceType === RecurrenceType.OneTime);
+            });
     }
 }
