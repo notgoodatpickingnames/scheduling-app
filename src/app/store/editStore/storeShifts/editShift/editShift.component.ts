@@ -67,7 +67,7 @@ export class EditShiftComponent extends SubscriptionBase implements AfterViewIni
     public onSubmit() {
         // Fire validation on all fields
         // If all fields are valid then pupdate
-        this.shiftsService.update(this.shift);
+        this.shiftsService.update(this.shift, this.storeId);
         this.onBackAction();
     }
 
