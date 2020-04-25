@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { ShiftsComponent } from './shifts.component';
 import { SharedModule } from '../shared.module';
 import { NonWeeklyShiftsComponent } from './shiftLists/nonWeeklyShifts/nonWeeklyShifts.component';
-import { CreateShiftComponent } from './createShift/createShift.component';
-import { WeeklyShiftsComponent } from './shiftLists/weeklyShifts/weeklyShifts.component';
-import { EditShiftComponent } from './editShift/editShift.component';
-import { ShiftsTabService } from './shiftsTab.service';
+import { CreateShiftComponent } from '../store/editStore/storeShifts/createShift/createShift.component';
+//import { WeeklyShiftsComponent } from '../store/editStore/storeShifts/storeShifts.component';
+//import { EditShiftComponent } from '../store/editStore/storeShifts/editShift/editShift.component';
+//import { ShiftsTabService } from './shiftsTab.service';
 import { DateCardComponent } from './shiftLists/shiftCards/dateCard/dateCard.component';
 import { WeekCardComponent } from './shiftLists/shiftCards/weekCard/weekCard.component';
 import { BiWeeklyShiftsComponent } from './shiftLists/biWeeklyShifts/biWeeklyShifts.component';
@@ -20,16 +20,16 @@ import { DayCardComponent } from './shiftLists/shiftCards/dayCard/dayCard.compon
     declarations: [
         ShiftsComponent,
         NonWeeklyShiftsComponent,
-        WeeklyShiftsComponent,
+        //WeeklyShiftsComponent,
         BiWeeklyShiftsComponent,
-        CreateShiftComponent,
-        EditShiftComponent,
+        //CreateShiftComponent,
+        //EditShiftComponent,
         WeekCardComponent,
         DateCardComponent,
         DayCardComponent
     ],
     providers: [
-        ShiftsTabService
+        //ShiftsTabService
     ]
 })
 export class ShiftsModule { }

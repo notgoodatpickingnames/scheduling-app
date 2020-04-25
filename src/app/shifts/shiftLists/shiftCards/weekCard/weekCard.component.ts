@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Shift } from '~/app/core/services/shift/shift';
-import { Day } from '../../weeklyShifts/day';
+import { Day } from '../../../../store/editStore/storeShifts/day';
 import { Days } from '~/app/core/days';
 import { Router, ActivatedRoute } from '@angular/router';
 

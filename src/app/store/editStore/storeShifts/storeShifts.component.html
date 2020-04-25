@@ -1,0 +1,38 @@
+<ScrollView orientation="vertical" class="body">
+    <StackLayout orientation="vertical" width="100%">
+        <ns-week-card [shifts]="weeklyShifts" (onShiftTap)="onTap($event)"></ns-week-card>
+    </StackLayout>
+    <StackLayout orientation="vertical" class="shift" *ngIf="hasEveryYearShifts">
+        <Label
+            class="recurrence-label"
+            text="Every Year">
+        </Label>
+        <StackLayout *ngFor="let shift of everyYearShifts" width="100%" (tap)="onShiftCardTap(shift.shiftId)">
+            <ns-date-card
+                [shift]="shift">
+            </ns-date-card>
+        </StackLayout>
+    </StackLayout>
+    <StackLayout orientation="vertical" class="shift" *ngIf="hasEveryMonthShifts">
+        <Label
+            class="recurrence-label"
+            text="Every Month">
+        </Label>
+        <StackLayout *ngFor="let shift of everyMonthShifts" width="100%" (tap)="onShiftCardTap(shift.shiftId)">
+            <ns-day-card
+                [shift]="shift">
+            </ns-day-card>
+        </StackLayout>
+    </StackLayout>
+    <StackLayout orientation="vertical" class="shift" *ngIf="hasOneTimeShifts">
+        <Label
+            class="recurrence-label"
+            text="One-Time (Will disapear after the date is old)">
+        </Label>
+        <StackLayout *ngFor="let shift of oneTimeShifts" width="100%" (tap)="onShiftCardTap(shift.shiftId)">
+            <ns-date-card
+                [shift]="shift">
+            </ns-date-card>
+        </StackLayout>
+    </StackLayout>
+</ScrollView>

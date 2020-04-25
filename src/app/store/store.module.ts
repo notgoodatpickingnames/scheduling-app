@@ -7,6 +7,9 @@ import { CreateStoreComponent } from './createStore/createStore.component';
 import { EditStoreComponent } from './editStore/editStore.component';
 import { StoreDetailComponent } from './editStore/storeDetail/storeDetail.component';
 import { StoreUsersComponent } from './editStore/storeUsers/storeUsers.component';
+import { StoreShiftsComponent } from './editStore/storeShifts/storeShifts.component';
+import { EditShiftComponent } from './editStore/storeShifts/editShift/editShift.component';
+import { CreateShiftComponent } from './editStore/storeShifts/createShift/createShift.component';
 
 @NgModule({
     imports: [
@@ -18,7 +21,10 @@ import { StoreUsersComponent } from './editStore/storeUsers/storeUsers.component
         CreateStoreComponent,
         EditStoreComponent,
         StoreDetailComponent,
-        StoreUsersComponent
+        StoreUsersComponent,
+        StoreShiftsComponent,
+        CreateShiftComponent,
+        EditShiftComponent
     ],
     providers: [
         StoresTabService
