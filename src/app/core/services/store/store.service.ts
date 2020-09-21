@@ -7,6 +7,8 @@ import { Observable, throwError, ReplaySubject, merge, combineLatest, Subscripti
 import { User } from 'nativescript-plugin-firebase';
 import { CreateStoreRequest } from './createStoreRequest';
 import { CreateStoreResponse } from './createStoreResponse';
+import { HttpClient } from '@angular/common/http';
+import { api } from '~/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -20,8 +22,29 @@ export class StoreService extends SubscriptionBase{
     private relatedStoreIds: string[] = [];
     private combinedStoreListeners = new Subscription;
 
-    constructor(private _ngZone: NgZone) {
+    constructor(private _ngZone: NgZone,
+        private httpClient: HttpClient) {
         super();
+    }
+
+    public list(userId: string): void {
+        this.getRelatedStoreIds(userId)
+            .then(relatedStoreIds => {
+                console.log(`after getting the relatedstoreids ${this.relatedStoreIds}`)
+                if (relatedStoreIds && this.relatedStoreIds.toString() !== relatedStoreIds.toString()) {
+                    this.relatedStoreIds = relatedStoreIds;
+                }
+
+                this.retrieveStores(this.relatedStoreIds);
+            })
+            .catch(error => console.log('SOMETHING WENT WRONG GETTING THE RELATED STORE IDS'));
+    }
+
+    private retrieveStores(relatedStoreIds: string[]) {
+        this.httpClient.put(`${api}/store`, {
+                relatedStoreIds
+            })
+            .subscribe(response => console.log(`response: ${JSON.stringify(response)}`));
     }
 
     public startListening(userId: string) {
@@ -29,7 +52,7 @@ export class StoreService extends SubscriptionBase{
             .then(relatedStoreIds => {
                 if (relatedStoreIds && this.relatedStoreIds.toString() !== relatedStoreIds.toString()) {
                     this.relatedStoreIds = relatedStoreIds;
-                    this.getStoreListeners();
+                    // this.getStoreListeners();
                 }
             });
     }
@@ -47,7 +70,7 @@ export class StoreService extends SubscriptionBase{
             .then(storeFromFirebase => new Store(storeFromFirebase['value'], storeId));
     }
 
-    private getRelatedStoreIds(userId: string): Promise<string[]> { // Convert this to an event listener.
+    private getRelatedStoreIds(userId: string): Promise<string[]> {
         return firebase.getValue(`${this._userPath}/${userId}/relatedStores`)
             .then(relatedStoreIdsResponse => {
                 return (relatedStoreIdsResponse.value as string[]);

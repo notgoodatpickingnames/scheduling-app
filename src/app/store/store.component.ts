@@ -54,7 +54,9 @@ export class StoreComponent extends SubscriptionBase {
             .pipe(takeUntil(this.componentDestroyed))
             .subscribe(user => {
                 if (user) {
-                    this.listenForStores(user.uid);
+                    // this.listenForStores(user.uid);
+                    console.log(`GETTING THE LIST ${user.uid}`);
+                    this.storeService.list(user.uid);
                 }
             });
     }

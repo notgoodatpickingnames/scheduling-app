@@ -20,6 +20,9 @@ import { AuthenticationService } from "./core/services/authentication/authentica
 import { AccountModule } from "./account/account.module";
 import { PersonalScheduleModule } from "./personalSchedule/personalSchedule.module";
 import { StoreModule } from "./store/store.module";
+import { AuthTokenHttpInterceptorProvider } from "./core/authTokenHttpInterceptor";
+import { HttpClient, HttpClientModule, HttpHandler } from "@angular/common/http";
+import { BrowserModule } from "@angular/platform-browser";
 
 @NgModule({
     bootstrap: [
@@ -34,7 +37,8 @@ import { StoreModule } from "./store/store.module";
         AccountModule,
         SharedModule,
         PersonalScheduleModule,
-        StoreModule
+        StoreModule,
+        HttpClientModule
     ],
     declarations: [
         AppComponent
@@ -43,7 +47,9 @@ import { StoreModule } from "./store/store.module";
         AccountService,
         ShiftsService,
         SchedulesService,
-        AuthenticationService
+        AuthenticationService,
+        AuthTokenHttpInterceptorProvider,
+        HttpClient
     ],
     schemas: [
         NO_ERRORS_SCHEMA
