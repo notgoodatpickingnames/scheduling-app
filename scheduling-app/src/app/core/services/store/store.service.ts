@@ -1,5 +1,5 @@
 import { Injectable, NgZone } from '@angular/core';
-import { takeUntil, catchError, combineAll } from 'rxjs/operators';
+import { takeUntil, catchError, combineAll, map } from 'rxjs/operators';
 import { SubscriptionBase } from '../../subscriptionBase';
 import { Store } from './store';
 import * as firebase from 'nativescript-plugin-firebase';
@@ -27,7 +27,7 @@ export class StoreService extends SubscriptionBase{
         super();
     }
 
-    public list(userId: string): void {
+    public list(userId: string): Observable<Store[]> {
         this.getRelatedStoreIds(userId)
             .then(relatedStoreIds => {
                 console.log(`after getting the relatedstoreids ${this.relatedStoreIds}`)
@@ -35,16 +35,17 @@ export class StoreService extends SubscriptionBase{
                     this.relatedStoreIds = relatedStoreIds;
                 }
 
-                this.retrieveStores(this.relatedStoreIds);
+                return this.retrieveStores(this.relatedStoreIds)
+                    .subscribe(response => console.log(`response: ${JSON.stringify(response)}`));;
             })
             .catch(error => console.log('SOMETHING WENT WRONG GETTING THE RELATED STORE IDS'));
     }
 
-    private retrieveStores(relatedStoreIds: string[]) {
-        this.httpClient.put(`${api}/store`, {
+    private retrieveStores(relatedStoreIds: string[]): Observable<Store[]> {
+        return this.httpClient.put<any>(`${api}/store`, {
                 relatedStoreIds
             })
-            .subscribe(response => console.log(`response: ${JSON.stringify(response)}`));
+            .pipe(map(stores => stores.map(store => new Store(store['store'], store['storeId']))));
     }
 
     public startListening(userId: string) {
@@ -70,7 +71,7 @@ export class StoreService extends SubscriptionBase{
             .then(storeFromFirebase => new Store(storeFromFirebase['value'], storeId));
     }
 
-    private getRelatedStoreIds(userId: string): Promise<string[]> {
+    public getRelatedStoreIds(userId: string): Promise<string[]> {
         return firebase.getValue(`${this._userPath}/${userId}/relatedStores`)
             .then(relatedStoreIdsResponse => {
                 return (relatedStoreIdsResponse.value as string[]);

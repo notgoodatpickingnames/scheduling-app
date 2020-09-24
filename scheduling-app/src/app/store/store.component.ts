@@ -56,7 +56,7 @@ export class StoreComponent extends SubscriptionBase {
                 if (user) {
                     // this.listenForStores(user.uid);
                     console.log(`GETTING THE LIST ${user.uid}`);
-                    this.storeService.list(user.uid);
+                    this.storeService.getre(user.uid);
                 }
             });
     }
