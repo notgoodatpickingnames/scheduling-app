@@ -11,6 +11,8 @@ import { AuthenticationService } from '../core/services/authentication/authentic
 import { User } from '../core/services/store/user';
 import { StoreAuthLevel } from '../core/services/store/storeAuthLevel';
 import { Store } from '../core/services/store/store';
+import { StoreRepository } from './store.repository';
+import { UsersService } from '../core/services/user/users.service';
 
 @Component({
   selector: 'ns-store',
@@ -29,7 +31,9 @@ export class StoreComponent extends SubscriptionBase {
         private route: ActivatedRoute,
         private storeService: StoreService,
         private authenticationService: AuthenticationService,
-        public storesTabService: StoresTabService) {
+        private userService: UsersService,
+        public storesTabService: StoresTabService,
+        private storeRepository: StoreRepository) {
             super();
 
             this.listenForUser();
@@ -54,15 +58,13 @@ export class StoreComponent extends SubscriptionBase {
             .pipe(takeUntil(this.componentDestroyed))
             .subscribe(user => {
                 if (user) {
-                    // this.listenForStores(user.uid);
                     console.log(`GETTING THE LIST ${user.uid}`);
-                    this.storeService.getre(user.uid);
+                    this.storeRepository.list(user.uid);
                 }
             });
     }
 
     public listenForStores(userId: string) {
-        this.storeService.startListening(userId);
         StoreComponent.storeListener.unsubscribe();
         StoreComponent.storeListener = this.storeService.store$
             .pipe(takeUntil(this.componentDestroyed))

@@ -10,6 +10,7 @@ import { StoreUsersComponent } from './editStore/storeUsers/storeUsers.component
 import { StoreShiftsComponent } from './editStore/storeShifts/storeShifts.component';
 import { EditShiftComponent } from './editStore/storeShifts/editShift/editShift.component';
 import { CreateShiftComponent } from './editStore/storeShifts/createShift/createShift.component';
+import { StoreRepository } from './store.repository';
 
 @NgModule({
     imports: [
@@ -27,7 +28,8 @@ import { CreateShiftComponent } from './editStore/storeShifts/createShift/create
         EditShiftComponent
     ],
     providers: [
-        StoresTabService
+        StoresTabService,
+        StoreRepository
     ]
 })
 export class StoreModule { }

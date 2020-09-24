@@ -3,7 +3,7 @@ import { takeUntil, catchError, combineAll, map } from 'rxjs/operators';
 import { SubscriptionBase } from '../../subscriptionBase';
 import { Store } from './store';
 import * as firebase from 'nativescript-plugin-firebase';
-import { Observable, throwError, ReplaySubject, merge, combineLatest, Subscription } from 'rxjs';
+import { Observable, throwError, ReplaySubject, merge, combineLatest, Subscription, of } from 'rxjs';
 import { User } from 'nativescript-plugin-firebase';
 import { CreateStoreRequest } from './createStoreRequest';
 import { CreateStoreResponse } from './createStoreResponse';
@@ -27,26 +27,23 @@ export class StoreService extends SubscriptionBase{
         super();
     }
 
-    public list(userId: string): Observable<Store[]> {
-        this.getRelatedStoreIds(userId)
-            .then(relatedStoreIds => {
-                console.log(`after getting the relatedstoreids ${this.relatedStoreIds}`)
-                if (relatedStoreIds && this.relatedStoreIds.toString() !== relatedStoreIds.toString()) {
-                    this.relatedStoreIds = relatedStoreIds;
-                }
+    // public list(userId: string): Observable<Store[]> {
+    //     var t = this.getRelatedStoreIds(userId)
+    //         .then(relatedStoreIds => {
+    //             console.log(`after getting the relatedstoreids ${this.relatedStoreIds}`)
+    //             if (relatedStoreIds && this.relatedStoreIds.toString() !== relatedStoreIds.toString()) {
+    //                 this.relatedStoreIds = relatedStoreIds;
+    //             }
 
-                return this.retrieveStores(this.relatedStoreIds)
-                    .subscribe(response => console.log(`response: ${JSON.stringify(response)}`));;
-            })
-            .catch(error => console.log('SOMETHING WENT WRONG GETTING THE RELATED STORE IDS'));
-    }
+    //             return this.retrieveStores(this.relatedStoreIds);
+    //         })
+    //         .catch(error => {
+    //             console.log('SOMETHING WENT WRONG GETTING THE RELATED STORE IDS');
+    //             return of(Store[0]);
+    //         });
 
-    private retrieveStores(relatedStoreIds: string[]): Observable<Store[]> {
-        return this.httpClient.put<any>(`${api}/store`, {
-                relatedStoreIds
-            })
-            .pipe(map(stores => stores.map(store => new Store(store['store'], store['storeId']))));
-    }
+
+    // }
 
     public startListening(userId: string) {
         this.getRelatedStoreIds(userId)
@@ -78,61 +75,56 @@ export class StoreService extends SubscriptionBase{
             });
     };
 
-    private setRelatedStoreIds(userId: string) {
-        firebase.setValue(`${this._userPath}/${userId}/relatedStores`, this.relatedStoreIds)
-            .then(() => {
-                this.getStoreListeners();
-            });
-    }
 
-    private getStoreListeners() {
-        this.combinedStoreListeners.unsubscribe();
-        const storeListeners: Observable<Store>[] = [];
 
-        if (this.relatedStoreIds) {
-            this.relatedStoreIds.forEach(storeId => {
-                const storeListener = this.getStoreListener(storeId);
-                storeListeners.push(storeListener);
-            });
-        }
+    // private getStoreListeners() {
+    //     this.combinedStoreListeners.unsubscribe();
+    //     const storeListeners: Observable<Store>[] = [];
 
-        this.combinedStoreListeners = combineLatest(storeListeners)
-            .pipe(takeUntil(this.componentDestroyed))
-            .subscribe(stores => {
-                // Because it is possible to get back null if the user has lost permission to
-                // see a store but somehow kept the relationship in their user table,
-                // I'll filter out the undefineds.
-                const definedStores = stores.filter(store => Boolean(store));
-                this.store$.next(definedStores);
-        });
-    }
+    //     if (this.relatedStoreIds) {
+    //         this.relatedStoreIds.forEach(storeId => {
+    //             const storeListener = this.getStoreListener(storeId);
+    //             storeListeners.push(storeListener);
+    //         });
+    //     }
 
-    private getStoreListener(storeId: string): Observable<any> {
-        return new Observable((observer: any) => {
+    //     this.combinedStoreListeners = combineLatest(storeListeners)
+    //         .pipe(takeUntil(this.componentDestroyed))
+    //         .subscribe(stores => {
+    //             // Because it is possible to get back null if the user has lost permission to
+    //             // see a store but somehow kept the relationship in their user table,
+    //             // I'll filter out the undefineds.
+    //             const definedStores = stores.filter(store => Boolean(store));
+    //             this.store$.next(definedStores);
+    //     });
+    // }
 
-            const onValueEvent =(snapshot: any) => {
-                this._ngZone.run(() => {
-                    const results = this.handleSnapshot(snapshot.value, storeId);
-                    observer.next(results);
-                })
-            }
-            firebase.addValueEventListener(onValueEvent, `/${this._storePath}/${storeId}`);
+    // private getStoreListener(storeId: string): Observable<any> {
+    //     return new Observable((observer: any) => {
 
-        })
-        .pipe(catchError(this.handleErrors));
-    }
+    //         const onValueEvent =(snapshot: any) => {
+    //             this._ngZone.run(() => {
+    //                 const results = this.handleSnapshot(snapshot.value, storeId);
+    //                 observer.next(results);
+    //             })
+    //         }
+    //         firebase.addValueEventListener(onValueEvent, `/${this._storePath}/${storeId}`);
 
-    private handleErrors(error: Response): Observable<never> {
-        return throwError(error);
-    }
+    //     })
+    //     .pipe(catchError(this.handleErrors));
+    // }
 
-    private handleSnapshot(data: any, storeId: string): Store {
-        let store: Store;
+    // private handleErrors(error: Response): Observable<never> {
+    //     return throwError(error);
+    // }
 
-        if (data) {
-            store = new Store(data, storeId);
-        }
+    // private handleSnapshot(data: any, storeId: string): Store {
+    //     let store: Store;
 
-        return store;
-    }
+    //     if (data) {
+    //         store = new Store(data, storeId);
+    //     }
+
+    //     return store;
+    // }
 }

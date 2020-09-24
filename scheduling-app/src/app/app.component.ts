@@ -70,7 +70,7 @@ export class AppComponent extends SubscriptionBase{
         this.loginStateListener = this.authenticationService.loginState
             .pipe(takeUntil(this.componentDestroyed))
             .subscribe(loginState => {
-                if (loginState && this.loginState !== loginState) {    
+                if (loginState && this.loginState !== loginState) {
                     this.loginState = loginState;
                     console.log(`Login State Changed To ${loginState}`);
                     if (this.loginState === LoginState.loggedOut || this.loginState === LoginState.loggedInEmailUnVerified || this.loginState === LoginState.noCredentials) {
@@ -86,6 +86,16 @@ export class AppComponent extends SubscriptionBase{
             });
     }
 
+    public onNavigateToTap(route: string) {
+        const sideDrawer = <RadSideDrawer>app.getRootView();
+        this.navigateTo(route);
+        sideDrawer.closeDrawer();
+    }
+
+    public navigateTo(route: string) {
+        this.router.navigate([route], {relativeTo: this.route});
+    }
+
     private onFirebaseInit(): void {
         this.authenticationService.initialise()
             .then(() => this.listenForLoginState());
@@ -98,13 +108,7 @@ export class AppComponent extends SubscriptionBase{
         }
     }
 
-    public onNavigateToTap(route: string) {
-        const sideDrawer = <RadSideDrawer>app.getRootView();
-        this.navigateTo(route);
-        sideDrawer.closeDrawer();
-    }
-
-    public navigateTo(route: string) {
-        this.router.navigate([route], {relativeTo: this.route});
+    private initialiseServices(): void {
+        this.storeService.startListening(userId);
     }
 }
