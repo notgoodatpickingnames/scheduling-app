@@ -55,18 +55,9 @@ export class StoreService extends SubscriptionBase{
             });
     }
 
-    public create(store: Store, userId: string): Promise<any> {
-        return firebase.push(this._storePath, store.asInterface())
-            .then(response => {
-                this.relatedStoreIds.push(response.key);
-                this.setRelatedStoreIds(userId);
-            });
-    }
 
-    public get(storeId: string): Promise<Store> {
-        return firebase.getValue(`${this._storePath}/${storeId}`)
-            .then(storeFromFirebase => new Store(storeFromFirebase['value'], storeId));
-    }
+
+
 
     public getRelatedStoreIds(userId: string): Promise<string[]> {
         return firebase.getValue(`${this._userPath}/${userId}/relatedStores`)

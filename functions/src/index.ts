@@ -9,6 +9,12 @@ import { storeRoutesConfig } from './stores/storeRoutesConfig';
 admin.initializeApp();
 
 const app = express();
+
+var port = process.env.port || 3300
+app.listen(port, () => {
+    console.log("Hi This port is running", port);
+});
+
 app.use(bodyParser.json());
 app.use(cors({ origin: true }));
 storeRoutesConfig(app);
