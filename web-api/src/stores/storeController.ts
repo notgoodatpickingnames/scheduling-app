@@ -2,35 +2,5 @@ import { Request, Response } from "express";
 import { IListRequest } from "./IListRequest";
 
 export async function list(req: Request, res: Response) {
-    try {
-        const listRequest = req.body as IListRequest;
-
-        const promises: Promise<any>[] = [];
-
-        listRequest.relatedStoreIds.forEach(relatedStoreId => {
-            promises.push(getSnapshot(relatedStoreId));
-        })
-
-        return Promise.all(promises)
-            .then(stores => res.status(200).send(stores))
-            .catch(error => {
-                console.log(error);
-                res.status(500).send({message: 'Something Went Horribly Wrong'});
-            })
-
-    } catch (err) {
-        return handleError(res, err)
-    }
+    res.status(200).send({message: 'Correctly Connected'});
 }
-
-function getSnapshot(relatedStoreId: string): Promise<any> {
-    return admin.database().ref(`stores/${relatedStoreId}/`).once('value')
-        .then(snapshot => {
-            return({storeId: relatedStoreId, store: snapshot.val()});
-        })
-        .catch(error => console.log(error));
-}
-
- function handleError(res: Response, err: any) {
-    return res.status(500).send({ message: `${err.code} - ${err.message}` });
- }

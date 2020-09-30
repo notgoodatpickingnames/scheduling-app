@@ -2,9 +2,9 @@ import express from "express";
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import { storeRoutesConfig } from "./stores/storeRoutesConfig";
+import { port } from "../environment";
 
 const app = express();
-const port = 8080; // default port to listen
 
 // define a route handler for the default home page
 app.use(bodyParser.json());
@@ -13,5 +13,5 @@ storeRoutesConfig(app);
 
 // start the Express server
 app.listen(port, () => {
-    console.log(`server started at http://localhost:${port}`);
+    console.log(`server started at fuck http://localhost:${port}`);
 });
