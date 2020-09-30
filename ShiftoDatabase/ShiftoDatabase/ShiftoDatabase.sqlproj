@@ -56,13 +56,23 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
-    <Folder Include="Schemas" />
+    <Folder Include="Stores" />
+    <Folder Include="Stores\Tables" />
+    <Folder Include="Stores\StoredProcedures" />
+    <Folder Include="Users" />
+    <Folder Include="Stores\Schema" />
+    <Folder Include="Users\Schema" />
+    <Folder Include="Users\Tables" />
+    <Folder Include="Users\StoredProcedures" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ToLocal.scmp" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Store.sql" />
-    <Build Include="Schemas\stores.sql" />
+    <Build Include="Stores\Tables\Store.sql" />
+    <Build Include="Stores\Schema\stores.sql" />
+    <Build Include="Users\Schema\users.sql" />
+    <Build Include="Users\Tables\User.sql" />
+    <Build Include="Stores\StoredProcedures\InsertStore.sql" />
   </ItemGroup>
 </Project>
