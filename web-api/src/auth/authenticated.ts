@@ -5,7 +5,7 @@ export async function isAuthenticated(req: Request, res: Response, next: () => a
 
     if (!authorization) {
         console.log('no auth sending 401');
-        return res.status(401).send({ message: 'Unauthorized (like no auth at all)' });
+        return res.status(401).send({ message: 'Unauthorized (like no auth at all) ((also dooly is a gey))' });
     }
 
     if (!authorization.startsWith('Bearer')) {

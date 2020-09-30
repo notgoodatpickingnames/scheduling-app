@@ -5,7 +5,7 @@ const storeController_1 = require("./storeController");
 const authenticated_1 = require("../auth/authenticated");
 // import { isAuthorized } from "../auth/authorized";
 function storeRoutesConfig(app) {
-    app.put('/store', authenticated_1.isAuthenticated, storeController_1.list);
+    app.get('/store', authenticated_1.isAuthenticated, storeController_1.list);
 }
 exports.storeRoutesConfig = storeRoutesConfig;
 //# sourceMappingURL=storeRoutesConfig.js.map

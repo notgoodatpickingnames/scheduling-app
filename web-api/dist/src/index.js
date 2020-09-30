@@ -15,6 +15,6 @@ app.use(cors_1.default({ origin: true }));
 storeRoutesConfig_1.storeRoutesConfig(app);
 // start the Express server
 app.listen(environment_1.port, () => {
-    console.log(`server started at fuck http://localhost:${environment_1.port}`);
+    console.log(`server started at http://localhost:${environment_1.port}`);
 });
 //# sourceMappingURL=index.js.map

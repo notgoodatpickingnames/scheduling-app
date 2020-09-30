@@ -13,5 +13,5 @@ storeRoutesConfig(app);
 
 // start the Express server
 app.listen(port, () => {
-    console.log(`server started at fuck http://localhost:${port}`);
+    console.log(`server started at http://localhost:${port}`);
 });
