@@ -1,1 +1,1 @@
-{"version":3,"file":"storeRoutesConfig.js","sourceRoot":"","sources":["../../../src/stores/storeRoutesConfig.ts"],"names":[],"mappings":";;;AACA,uDAAyC;AACzC,yDAAwD;AACxD,qDAAqD;AAErD,SAAgB,iBAAiB,CAAC,GAAgB;IAC9C,GAAG,CAAC,GAAG,CAAC,QAAQ,EACZ,+BAAe,EACf,sBAAI,CACP,CAAC;AACL,CAAC;AALF,8CAKE"}
+{"version":3,"file":"storeRoutesConfig.js","sourceRoot":"","sources":["../../../src/stores/storeRoutesConfig.ts"],"names":[],"mappings":";;;AACA,uDAAyC;AAEzC,qDAAqD;AAErD,SAAgB,iBAAiB,CAAC,GAAgB;IAC9C,GAAG,CAAC,GAAG,CAAC,QAAQ;IACZ,mBAAmB;IACnB,sBAAI,CACP,CAAC;AACL,CAAC;AALF,8CAKE"}

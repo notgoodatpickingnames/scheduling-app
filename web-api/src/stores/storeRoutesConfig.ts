@@ -5,7 +5,7 @@ import { isAuthenticated } from "../auth/authenticated";
 
 export function storeRoutesConfig(app: Application) {
     app.get('/store',
-        isAuthenticated,
+        // isAuthenticated,
         list
     );
  }
