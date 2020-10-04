@@ -19,5 +19,7 @@ app.listen(environment_1.port, () => {
     console.log(`server started at http://localhost:${environment_1.port}`);
 });
 const database = new database_1.Database();
-database.run();
+database.executeStoredProcedure("stores.usp_InsertStore", { name: 'TEST', description: 'TEST TEST' });
+database.executeStoredProcedure("stores.usp_GetStore", { storeId: '8B9DDE85-DFBB-452F-95BA-497D675C4962' });
+// database.executeStoredProcedureWithResult("stores.usp_InsertStore", {});
 //# sourceMappingURL=index.js.map

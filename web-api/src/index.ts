@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import { storeRoutesConfig } from "./stores/storeRoutesConfig";
 import { port } from "../environment";
 import { Database } from "./core/database/database";
+import { StoreProjection } from "./stores/storeProjection";
 
 const app = express();
 
@@ -18,4 +19,12 @@ app.listen(port, () => {
 });
 
 const database = new Database();
-database.run();
+
+database.executeStoredProcedure("stores.usp_InsertStore", {name: 'TEST', description: 'TEST TEST'});
+const storesPromise = database.executeStoredProcedureWithResult<StoreProjection>(
+        "stores.usp_GetStore", {storeId: '8B9DDE85-DFBB-452F-95BA-497D675C4962'});
+
+storesPromise.then(stores => )
+
+
+// database.executeStoredProcedureWithResult("stores.usp_InsertStore", {});

@@ -1,26 +1,43 @@
 
 import { sqlConnectionString } from "../../../environment";
-import { ConnectionPool, Int, NVarChar, VarChar } from "mssql/msnodesqlv8";
+import { ConnectionPool, Int, IRecordSet, NVarChar, VarChar } from "mssql/msnodesqlv8";
+import { SqlRequestFactory } from "./sqlRequestFactory";
 // import { dbConfig } from "../../environment";
 
 export class Database {
-    public run = async () => {
-        this.executeStoredProcedure("stores.usp_InsertStore", {});
-    }
-
-    public executeStoredProcedure<t>(storedProcedureName: string, params: object): Promise<t> {
+    // Make a withResult and with Results to control typing better.
+    public executeStoredProcedureWithResult<T>(storedProcedureName: string, params: object): Promise<T> | Promise<T[]> {
         return this.connect()
             .then(pool => {
-                return pool.request()
-                    .input('name', NVarChar, 'STORE NAME TEST')
-                    .input('description', NVarChar, 'store description test')
+                    SqlRequestFactory.Create(pool, params)
                     .execute(storedProcedureName)
-                    .then(result => console.log(result))
+                    .then(result => {
+                        console.log(result);
+                        console.table(result.recordset)
+                        const resultsAsProjections = this.convertRecordSetResultToProjection<T>(result.recordset);
+                        return resultsAsProjections;
+                    })
                     .catch(error => console.log(error));
             })
             .catch(error => {
                 console.log(error);
                 return null;
+            })
+    }
+
+    public async executeStoredProcedure(storedProcedureName: string, params: object): Promise<void> {
+        await this.connect()
+            .then(pool => {
+                    SqlRequestFactory.Create(pool, params)
+                    .execute(storedProcedureName)
+                    .then(result => {
+                        console.log(result);
+                        console.table(result.recordset)
+                    })
+                    .catch(error => console.log(error));
+            })
+            .catch(error => {
+                console.log(error);
             })
     }
 
@@ -31,8 +48,32 @@ export class Database {
                 return pool;
             })
             .catch(error => {
-                console.log(error);
-                return null;
+                throw new Error(`Failed To connect To DB ${error}`);
             });
+    }
+
+    private convertRecordSetResultToProjection<T>(resultSet: IRecordSet<any>): T[] | T {
+        const projections: T[] = [];
+
+        resultSet.forEach(result => {
+            projections.push(this.convertToProjection(result));
+        });
+
+        if (projections.length == 1) {
+            return projections[0];
+        }
+
+        return projections;
+    }
+
+    private convertToProjection<T>(object: any): T {
+        const newObject: T = new object;
+
+        Object.keys(object).forEach(key => {
+            const lowerCasedFirstLetterKey = key.charAt(0).toLocaleLowerCase() + key.slice(1);
+            object[lowerCasedFirstLetterKey] = object[key];
+        });
+
+        return newObject;
     }
 }
