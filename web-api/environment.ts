@@ -1,4 +1,2 @@
 export const port = '3300';
-export const sqlU = "";
-export const sqlP = "";
-export const 
+export const sqlConnectionString = "server=localhost\\\SQLEXPRESS;Database=Shifto;Trusted_Connection=Yes;Driver=msnodesqlv8";

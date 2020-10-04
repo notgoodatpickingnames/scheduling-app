@@ -3,6 +3,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import { storeRoutesConfig } from "./stores/storeRoutesConfig";
 import { port } from "../environment";
+import { Database } from "./core/database/database";
 
 const app = express();
 
@@ -15,3 +16,6 @@ storeRoutesConfig(app);
 app.listen(port, () => {
     console.log(`server started at http://localhost:${port}`);
 });
+
+const database = new Database();
+database.run();

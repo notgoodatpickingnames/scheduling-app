@@ -18,12 +18,12 @@ function isAuthenticated(req, res, next) {
             return res.status(401).send({ message: 'Unauthorized (like no auth at all) ((also dooly is a gey))' });
         }
         if (!authorization.startsWith('Bearer')) {
-            console.log('auth has no bearer sending 401');
+            console.log('auth has no bearer sending 401.');
             return res.status(401).send({ message: 'Unauthorized' });
         }
         const split = authorization.split('Bearer ');
         if (split.length !== 2) {
-            console.log('sending 401 because split is not 2??');
+            console.log('sending 401 because bearer token is incorrect.');
             return res.status(401).send({ message: 'Unauthorized' });
         }
         const token = split[1];

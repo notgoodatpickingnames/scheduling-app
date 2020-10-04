@@ -64,3 +64,5 @@ node_modules/
 # dotenv environment variables file
 .env
 functions/src/scheduler-2102b-76f39501aba4.json
+/ShiftoDatabase/ShiftoDatabase/ShiftoDatabase.dbmdl
+/ShiftoDatabase/ShiftoDatabase/ShiftoDatabase.jfm

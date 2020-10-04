@@ -73,6 +73,6 @@
     <Build Include="Stores\Schema\stores.sql" />
     <Build Include="Users\Schema\users.sql" />
     <Build Include="Users\Tables\User.sql" />
-    <Build Include="Stores\StoredProcedures\InsertStore.sql" />
+    <Build Include="Stores\StoredProcedures\usp_InsertStore.sql" />
   </ItemGroup>
 </Project>

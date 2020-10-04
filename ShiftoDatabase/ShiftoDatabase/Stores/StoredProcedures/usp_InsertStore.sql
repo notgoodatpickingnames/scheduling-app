@@ -1,4 +1,4 @@
-﻿create procedure stores.InsertStore
+﻿create procedure stores.usp_InsertStore
 	@name nvarchar(50),
 	@description nvarchar(50)
 as
