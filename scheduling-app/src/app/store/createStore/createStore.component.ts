@@ -36,7 +36,7 @@ export class CreateStoreComponent extends SubscriptionBase {
 
     public onSubmit() {
         if (this.user && this.loginState === LoginState.loggedInEmailVerified) {
-            this.storeService.create(this.store, this.user.uid);
+            //this.storeService.create(this.store, this.user.uid);
         }
     }
 

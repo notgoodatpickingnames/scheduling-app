@@ -109,6 +109,6 @@ export class AppComponent extends SubscriptionBase{
     }
 
     private initialiseServices(): void {
-        this.storeService.startListening(userId);
+        // this.storeService.startListening(userId);
     }
 }

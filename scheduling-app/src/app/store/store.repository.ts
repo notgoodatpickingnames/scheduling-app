@@ -14,19 +14,17 @@ export class StoreRepository {
 
     constructor(private httpClient: HttpClient) {}
 
-    public list(storeIds: string[]): Observable<Store[]> {
-        return this.httpClient.put<IStore[]>(`${api}/store`,
-            {
-                storeIds
-            })
-            .pipe(map(stores => stores.map(store => new Store(store['store'], store['storeId']))));
+    public list(): Observable<Store[]> {
+        return this.httpClient.put<IStore[]>(`${api}store`, {})
+            .pipe(map(stores =>
+                stores.map(store => new Store(store['store'], store['storeId']))));
     }
 
     public insert(store: Store, userId: string): Promise<any> {
         return firebase.push(this._storePath, store.asInterface())
             .then(response => {
-                this.relatedStoreIds.push(response.key);
-                this.setRelatedStoreIds(userId);
+                // this.relatedStoreIds.push(response.key);
+                // this.setRelatedStoreIds(userId);
             });
     }
 

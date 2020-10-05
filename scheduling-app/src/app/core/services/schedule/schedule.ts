@@ -1,5 +1,4 @@
 import { Shift } from "~/app/core/services/shift/shift";
-import { UserAccount } from "~/app/core/services/account/userAccount";
 import { ISchedule } from "./ISchedule";
 
 export class Schedule {

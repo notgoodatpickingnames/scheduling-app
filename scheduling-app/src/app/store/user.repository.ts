@@ -9,7 +9,7 @@ export class UserRepository {
 
     constructor(private httpClient: HttpClient) {}
 
-    public update(userId: string, relatedStoreIds: string): Observable<string> {
-        return firebase.setValue(`${this._userPath}/${userId}/relatedStores`, relatedStoreIds);
-    }
+    // public update(userId: string, relatedStoreIds: string): Observable<string> {
+    //     // return firebase.setValue(`${this._userPath}/${userId}/relatedStores`, relatedStoreIds);
+    // }
 }

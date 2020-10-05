@@ -47,10 +47,10 @@ export class EditStoreComponent extends SubscriptionBase {
                 const user = response[1];
                 const storeId = params['storeId'];
                 const userId = user.uid;
-                this.storeService.get(storeId).then(store => {
-                    this.store = store;
-                    this.user = this.store.getUser(userId);
-                })
+                // this.storeService.get(storeId).then(store => {
+                //     this.store = store;
+                //     this.user = this.store.getUser(userId);
+                // })
             })
     }
 }

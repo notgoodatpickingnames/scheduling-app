@@ -6,7 +6,6 @@ import { SecureStorage } from "nativescript-secure-storage"
 import { Credentials } from './credentials';
 import { LoginState } from './loginState';
 import { AuthLevel } from './authLevel';
-import { UserAccount } from '../account/userAccount';
 
 @Injectable({
     providedIn: 'root'

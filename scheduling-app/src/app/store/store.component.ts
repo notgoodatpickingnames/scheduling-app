@@ -36,7 +36,13 @@ export class StoreComponent extends SubscriptionBase {
         private storeRepository: StoreRepository) {
             super();
 
-            this.listenForUser();
+            console.log('GETTING THE STORES');
+            this.storeRepository.list().subscribe(stores => {
+                stores.forEach(store => {
+                    console.log(`Store ${JSON.stringify(store)}`);
+                });
+            });
+            // this.listenForUser();
     }
 
     public onCreateShiftTap() {
@@ -59,7 +65,7 @@ export class StoreComponent extends SubscriptionBase {
             .subscribe(user => {
                 if (user) {
                     console.log(`GETTING THE LIST ${user.uid}`);
-                    this.storeRepository.list(user.uid);
+                    this.storeRepository.list();
                 }
             });
     }
