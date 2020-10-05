@@ -10,9 +10,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.list = void 0;
+const storeRepository_1 = require("./storeRepository");
 function list(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        res.status(200).send({ message: 'Correctly Connected' });
+        const storeRepository = new storeRepository_1.StoreRepository();
+        const stores = yield storeRepository.list();
+        res.status(200).send({ message: 'Correctly Connected', stores });
     });
 }
 exports.list = list;

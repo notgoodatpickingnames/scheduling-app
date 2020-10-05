@@ -1,79 +1,89 @@
 
 import { sqlConnectionString } from "../../../environment";
-import { ConnectionPool, Int, IRecordSet, NVarChar, VarChar } from "mssql/msnodesqlv8";
+import { ConnectionPool, IRecordSet } from "mssql/msnodesqlv8";
 import { SqlRequestFactory } from "./sqlRequestFactory";
-// import { dbConfig } from "../../environment";
 
 export class Database {
-    // Make a withResult and with Results to control typing better.
-    public executeStoredProcedureWithResult<T>(storedProcedureName: string, params: object): Promise<T> | Promise<T[]> {
-        return this.connect()
-            .then(pool => {
-                    SqlRequestFactory.Create(pool, params)
-                    .execute(storedProcedureName)
-                    .then(result => {
-                        console.log(result);
-                        console.table(result.recordset)
-                        const resultsAsProjections = this.convertRecordSetResultToProjection<T>(result.recordset);
-                        return resultsAsProjections;
-                    })
-                    .catch(error => console.log(error));
-            })
-            .catch(error => {
-                console.log(error);
-                return null;
-            })
+    constructor() {}
+
+    public async executeStoredProcedureWithResult<T>(storedProcedureName: string, params: object): Promise<T> {
+        try {
+            const connectionPool = await this.connect();
+            const request = SqlRequestFactory.Create(connectionPool, params);
+            const requestResult = await request.execute<T>(storedProcedureName);
+            const projection = this.convertRecordSetResultToProjection<T>(requestResult.recordset);
+
+            return projection;
+        } catch(error) {
+            throw new Error(`Failed To Execute Stored Procedure ${error}`);
+        }
+    }
+
+    public async executeStoredProcedureWithResults<T>(storedProcedureName: string, params: object): Promise<T[]> {
+        try {
+            const connectionPool = await this.connect();
+            const request = SqlRequestFactory.Create(connectionPool, params);
+            const requestResult = await request.execute<T>(storedProcedureName);
+            const projections = this.convertRecordSetResultsToProjections<T>(requestResult.recordset);
+
+            return projections;
+        } catch (error) {
+            throw new Error(`Failed To Execute Stored Procedure: ${error}`);
+        }
+
     }
 
     public async executeStoredProcedure(storedProcedureName: string, params: object): Promise<void> {
-        await this.connect()
-            .then(pool => {
-                    SqlRequestFactory.Create(pool, params)
-                    .execute(storedProcedureName)
-                    .then(result => {
-                        console.log(result);
-                        console.table(result.recordset)
-                    })
-                    .catch(error => console.log(error));
-            })
-            .catch(error => {
-                console.log(error);
-            })
+        try {
+            const connectionPool = await this.connect();
+            const request = SqlRequestFactory.Create(connectionPool, params);
+            await request.execute(storedProcedureName);
+        } catch (error) {
+            throw new Error(`Failed To Execute Stored Procedure: ${error}`);
+        }
+
     }
 
-    private connect(): Promise<ConnectionPool> {
+    private async connect(): Promise<ConnectionPool> {
         const pool = new ConnectionPool(sqlConnectionString);
-        return pool.connect()
-            .then(() => {
-                return pool;
-            })
-            .catch(error => {
-                throw new Error(`Failed To connect To DB ${error}`);
-            });
+        try {
+            await pool.connect();
+            return pool;
+        } catch (error) {
+            throw new Error(`Failed To connect To DB ${error}`);
+        }
     }
 
-    private convertRecordSetResultToProjection<T>(resultSet: IRecordSet<any>): T[] | T {
+    private convertRecordSetResultToProjection<T>(resultSet: IRecordSet<any>): T {
+        if (resultSet.length === 1) {
+            return this.convertToProjection(resultSet[0]);
+        }
+
+        if (resultSet.length > 1) {
+            throw new Error('Too many results returned');
+        }
+
+        return undefined;
+    }
+
+    private convertRecordSetResultsToProjections<T>(resultSet: IRecordSet<any>): T[] {
         const projections: T[] = [];
 
         resultSet.forEach(result => {
             projections.push(this.convertToProjection(result));
         });
 
-        if (projections.length == 1) {
-            return projections[0];
-        }
-
         return projections;
     }
 
     private convertToProjection<T>(object: any): T {
-        const newObject: T = new object;
+        const newObject: any = {};
 
         Object.keys(object).forEach(key => {
             const lowerCasedFirstLetterKey = key.charAt(0).toLocaleLowerCase() + key.slice(1);
-            object[lowerCasedFirstLetterKey] = object[key];
+            newObject[lowerCasedFirstLetterKey] = object[key];
         });
 
-        return newObject;
+        return newObject as T;
     }
 }

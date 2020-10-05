@@ -8,7 +8,6 @@ const cors_1 = __importDefault(require("cors"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const storeRoutesConfig_1 = require("./stores/storeRoutesConfig");
 const environment_1 = require("../environment");
-const database_1 = require("./core/database/database");
 const app = express_1.default();
 // define a route handler for the default home page
 app.use(body_parser_1.default.json());
@@ -18,8 +17,4 @@ storeRoutesConfig_1.storeRoutesConfig(app);
 app.listen(environment_1.port, () => {
     console.log(`server started at http://localhost:${environment_1.port}`);
 });
-const database = new database_1.Database();
-database.executeStoredProcedure("stores.usp_InsertStore", { name: 'TEST', description: 'TEST TEST' });
-database.executeStoredProcedure("stores.usp_GetStore", { storeId: '8B9DDE85-DFBB-452F-95BA-497D675C4962' });
-// database.executeStoredProcedureWithResult("stores.usp_InsertStore", {});
 //# sourceMappingURL=index.js.map
