@@ -39,7 +39,7 @@ export class StoreComponent extends SubscriptionBase {
             console.log('GETTING THE STORES');
             this.storeRepository.list().subscribe(stores => {
                 stores.forEach(store => {
-                    console.log(`Store ${JSON.stringify(store)}`);
+                    console.log(`Storeerver ${JSON.stringify(store)}`);
                 });
             });
             // this.listenForUser();

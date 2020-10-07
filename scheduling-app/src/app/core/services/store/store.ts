@@ -14,12 +14,10 @@ export class Store {
     public userJoinRequests: User[];
     public storeAuthLevelMessage: string;
 
-    constructor(store: IStore, storeId: string) {
-        this.storeId = storeId;
-        this.storeName = store.storeName;
+    constructor(store: IStore) {
+        this.storeId = store.storeId;
+        this.storeName = store.name;
         this.description = store.description;
-        this.userCollection = store.users !== undefined ? UserCollection.fromFirebase(store.users) : new UserCollection([]);
-        this.userJoinRequests = store.userJoinRequests !== undefined ? store.userJoinRequests : [];
     }
 
     public setOwnerAsOnlyUser(userId: string, userDisplayName: string) {
@@ -39,12 +37,10 @@ export class Store {
 
     public static constructNew(): Store {
         return new Store({
-            storeName: '',
-            storeNumber: '',
+            storeId: '',
+            name: '',
             description: '',
-            users: [],
-            userJoinRequests: []
-        }, undefined)
+        })
     }
 
     public setStoreAuthLevelMessage(userId: string) {

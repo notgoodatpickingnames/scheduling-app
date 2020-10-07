@@ -15,7 +15,7 @@ function list(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const storeRepository = new storeRepository_1.StoreRepository();
         const stores = yield storeRepository.list();
-        res.status(200).send({ message: 'Correctly Connected', stores });
+        res.status(200).send(stores);
     });
 }
 exports.list = list;
